@@ -5,7 +5,7 @@ nl,write('and answer the questions that follow.').
 
 %Facts
 off_req_intent(murder).
-
+place(place).
 prop_theft(robbery).
 prop_theft(theivery).
 prop_theft(stealing).
@@ -161,10 +161,10 @@ imprisonment(Y,inciting_riot,1,_) :-  rioting(X),incite_riot(Y,X).
 imprisonment(Y,inciting_riot,0.5,_) :-  not(rioting(X)),incite_riot(Y,X).
 imprisonment(X,inciting,3,_) :-  (incite_hatred(X); incite_violence(X)),not(in(Z)),placeOfWorship(Z).
 imprisonment(X,inciting,5,_) :-  (incite_hatred(X); incite_violence(X)),in(Z),placeOfWorship(Z).
-imprisonment(X,being_armed,0.5,2000) :-  armed(X),in(X, Assem).
+imprisonment(X,being_armed,0.5,2000) :-  place(Assem),armed(X),in(X, Assem).
 imprisonment(X,incitehatred,0.25,_) :-  incite_class_hatred(X),not(in(Z)),placeOfWorship(Z).
 imprisonment(X,incite_hatred,5,_) :-  incite_class_hatred(X),in(Z),placeOfWorship(Z).
-imprisonment(X, allow_riot,0,1000) :-  ((unlawful(Assem),in(Assem,Z));(rioting_happened_in(Z),master(X,Z))),intention(X,allow_Assembly).
+imprisonment(X, allow_riot,0,1000) :-  place(Z),((unlawful(Assem),in(Assem,Z));(rioting_happened_in(Z),master(X,Z))),intention(X,allow_Assembly).
 imprisonment(X,harbouring,0.5,_) :-  custody(Y,X),unlawful_Assem_mem(Y,_).
 imprisonment(X,hired_unlawful,0.5,_) :-  person(Y),hired(X, Y, unlawful_Assem),not(armed(X)).
 imprisonment(X,hired_unlawful,2,_) :-  person(Y),hired(X, Y, unlawful_Assem),armed(X).
