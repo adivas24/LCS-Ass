@@ -2,7 +2,7 @@
 start :- write("This program operates in three modes.\nMode 1 will use all laws in the Indian Penal Code Sections 4-8.\nMode 2 will allow you to choose specific sections.\nMode 3 allows you to select specifc laws in the range 76-160(inclusive), to use.\nWhich mode would you like to use?\n"),
 read(X),checkmode(X).
 
-checkmode(1) :- write("You have selected Mode One.\n"),assert(modeis(1)).
+checkmode(1) :- write("You have selected Mode One.\n"),assert(modeis(1)),outcome([]).
 checkmode(2) :- write("You have selected Mode Two.\n"),assert(modeis(2)),starttwo.
 checkmode(3) :- write("You have selected Mode Three.\n"),assert(modeis(3)),startthree.
 checkmode(_) :- write("Please choose a correct mode.\n\n"),start.
@@ -33,7 +33,7 @@ write('**Note: Inputs need to end with a fullstop'),nl,nl,
 read(X),nl,(((X>75),(X<161),morethree([X|List]));((X is 0),write(List),outcome(List));
 write('Invalid input. Exiting. Execute start. to restart the program.'),!).
 
-outcome(List) :- assert(thelistis(List)).
+outcome(List) :- assert(thelistis(List)),get_data.
 
 lawmustbechecked(A,B) :- modeis(1);modeis(2),thelistis(X),member(A,X);modeis(3),thelistis(X),member(B,X).
 
@@ -47,8 +47,11 @@ arson(arson).
 person(anyone).
 %Rules
 
+get_data :- write('What is the name of the suspect?\n'),read(X),write('\nWhat is the crime?\n'),read(Y),determine_punishment(X,Y).
+
 determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),nl.
-determine_punishment(X,Y):- offence(X,Y).
+determine_punishment(X,Y):- imprisonment(W,X,Y,Z),write('The punishment for '),write(W),write(', for the crime, '),
+write(X),write('\nis a prison sentence of upto '),write(Y),write(' years, or a fine of Rs. '),write(Z),write(', or both.').
 
 provide_option :- nl,write('Press y for yes anything else for no.'),nl,get(Y),nl,((Y is 89);(Y is 121)).
 mistake_of_fact(_) :- write('Is this a case of mistaken fact?'),provide_option.
@@ -129,7 +132,6 @@ cond_for_no_private_defense(X,Y) :- not(harms(X,Y));(public_servant(X),believes_
 
 %Rules
 
-
 abetment(X,Y,_) :- instigates(X);conspires(X,Y);not(unknowing(X)).
 abetment(X,K,Z) :- criminal_conspiracy(X,Z), death_penalty(K,Z).
 abetment(X,_,Z) :- abetment(Y,_,Z), abetment(X,Y,_).
@@ -204,6 +206,12 @@ imprisonment(X,hired_unlawful,0.5,_) :-  person(Y),hired(X, Y, unlawful_Assem),n
 imprisonment(X,hired_unlawful,2,_) :-  person(Y),hired(X, Y, unlawful_Assem),armed(X).
 imprisonment(X,affray,0.08333,100) :-  person(Y),affray(X,Y).
 imprisonment(Y,affray,0.08333,100) :-  person(X),affray(X,Y).
+
+imprisonment(X, Z, 777, 0) :- half_imprisonment(X,Z,_).
+imprisonment(X, Z, 888, 0) :- quart_imprisonment(X,Z,_).
+imprisonment(X, Z, 999, 0) :- eighth_imprisonment(X,Z,_).
+imprisonment(X, Z, 15, 0) :- offence(X,Z).
+imprisonment(X, Z, 1111, 0) :- death_penalty(X,Z).
 
 death_penalty(X,war) :- abetment(X,_,war) ; success_crime(war).
 death_penalty(_,Z) :- write('Is this offence, '),write(Z),write(' punishable by death?'),provide_option.
