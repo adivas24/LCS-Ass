@@ -105,7 +105,7 @@ receive_plundered_property(X) :- write('Has '), write(X), write(' recieved any p
 escapes(Y) :- write('Has '), write(Y), write(' escaped from custody?'),provide_option.
 custody(X,Y) :- write('Did '),write(X),write(' have '),write(Y), write(" in custody, or harbour "),write(Y),write("?"),provide_option.
 
-no_offence(X,_) :- mistake_of_fact(X), (believes_bound_by_law(X); believes_justified_by_law(X)).
+no_offence(X,_) :- lawmustbechecked(4,76),mistake_of_fact(X), (believes_bound_by_law(X); believes_justified_by_law(X)).
 no_offence(X,_) :- judge(X), believes_justified_by_law(X).
 no_offence(X,_) :- following_judgement(X).
 no_offence(X,_) :- (accident(X); misfortune(X)), not(intention(X,_)).
