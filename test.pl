@@ -1,5 +1,9 @@
 
-start :- ['db'],write("This program operates in three modes.\nMode 1 will use all laws in the Indian Penal Code Sections 4-8.\nMode 2 will allow you to choose specific sections.\nMode 3 allows you to select specifc laws in the range 76-160(inclusive), to use.\nWhich mode would you like to use?\n"),
+start :- ['db'],write("This program operates in three modes.\nMode 1 will use all
+ laws in the Indian Penal Code Sections 4-8.\nMode 2 will allow you to choose
+ specific sections.\nMode 3 allows you to select specifc laws in the range 76-160(inclusive),
+  to use.\nWhich mode would you like to use?\n Please remember to put a full-stop
+  at the end of your selection.\n"),
 read(X),checkmode(X).
 
 checkmode(1) :- write("You have selected Mode One.\n"),assert(modeis(1)),outcome([]).
@@ -37,14 +41,14 @@ outcome(List) :- assert(thelistis(List)),get_data.
 
 lawmustbechecked(A,B) :- modeis(1);(modeis(2),thelistis(X),member(A,X));(modeis(3),thelistis(X),member(B,X)).
 
-get_data :- write('What is the name of the suspect?\nDO NOT USE UPPER CASE\n'),
-read(X),write('\nWhat is the crime?\nDO NOT USE UPPER CASE\n'),read(Y),
+get_data :- write('What is the name of the suspect?\nDO NOT USE UPPER CASE\nRemember to put a full-stop at the end.\n'),
+read(X),write('\nWhat is the crime?\nDO NOT USE UPPER CASE\nRemember to put a full-stop at the end.\n'),read(Y),
 ['laws'],determine_punishment(X,Y).
 
 
 determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),endprogram,nl.
-determine_punishment(X,Y):- imprisonment(X,Y,A,B),write('The punishment for '),write(X),write(', for the crime, '),
-write(Y),write('\nis a prison sentence of upto '),write(A),write(' years, or a fine of Rs. '),write(B),write(', or both.'),endprogram,nl.
+determine_punishment(X,Y):- imprisonment(X,Y,A,B),write('The punishment for '),write(X),write(', for the crime, '),write(Y),
+((A is 777),write('is half of the usual prison sentence');(write('\nis a prison sentence of upto '),write(A))),write(' years, or a fine of Rs. '),write(B),write(', or both.'),endprogram,nl.
 determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not be defined in current scope.\nExiting.').
 
 :- dynamic mist_of_fact/1.
