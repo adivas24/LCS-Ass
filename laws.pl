@@ -261,6 +261,15 @@ incite_class_hatred(X) :-  publishes_class_traitor(X);publishes_class_inhuman(X)
 affray(X,Y) :-  afry(X);(fight(X,Y),in(X,Z),in(Y,Z),public_place(Z),disturb_the_peace(X,Y),assert(afry(X))).
 afry(X) :- always_false(X).
 
+checkeddeath :- false.
+death_penalty(Z) :- (death_pen(Z));(not(checkeddeath)),(write('Is this offence, '),write(Z),write(' punishable by death?'),(provide_option;assert(checkeddeath)),assert(death_pen(Z))).
+death_pen(X) :- always_false(X).
+
+checkedabet :- false.
+didabet(X,Y) :- (didab(X,Y));(not(checkedabet)),(write('Did '),write(X),write(' abet '),write(Y),write('?'),(provide_option;assert(checkedabet)),assert(didab(X,Y))).
+didab(X,_) :- always_false(X).
+
+
 no_offence(X,_) :- lawmustbechecked(4,76),mistake_of_fact(X),((lawmustbechecked(4,76),believes_bound_by_law(X));
 (lawmustbechecked(4,79),believes_justified_by_law(X))).
 no_offence(X,_) :- lawmustbechecked(4,77),judge(X), believes_justified_by_law(X).
@@ -282,13 +291,13 @@ no_offence(X,_) :- lawmustbechecked(4,96),person(Y),private_def(X,Y).
 private_def(Y,X) :- lawmustbechecked(4,97),(harms(X,Y);didoffence(X,robbery)),not(cond_for_no_private_defense(X,Y)).
 private_def(Y,X) :- lawmustbechecked(4,98),not(didoffence(X)),(under12(X);immature(X);crazy(X);intoxicated(X);mistake_of_fact(X)),not(cond_for_no_private_defense(X,Y)).
 private_def(Y,X) :- lawmustbechecked(4,101),murder(Y,X),cond1(X,Y).
-private_def(Y,X) :- lawmustbechecked(4,104),not(murder(Y,X)),offense(X,Y,Z),prop_theft(Z).
+private_def(Y,X) :- lawmustbechecked(4,104),not(murder(Y,X)),didoffence(X,Z),prop_theft(Z).
 
-cond1(X,Y) :- lawmustbechecked(4,100),death_threat(Y);rape(X,Y);kidnapping(X,Y);confinement(X,Y);acid(X,Y);(offense(X,Y,Z),(prop_theft(Z);lawmustbechecked(4,103),arson(Z))).
+cond1(X,Y) :- ((lawmustbechecked(4,100),(death_threat(Y);rape(X,Y);kidnapping(X,Y);confinement(X,Y);acid(X,Y);(didoffence(X,robbery)))); (lawmustbechecked(4,103),arson(Y))).
 cond_for_no_private_defense(X,Y) :- not(harms(X,Y));(lawmustbechecked(4,99),public_servant(X),believes_justified_by_law(X));following_judgement(X);(lawmustbechecked(4,106),murder(Y,X),not(cond1(X,Y))).
 
 abetment(X,Y,_) :- lawmustbechecked(5,107),instigates(X);(person(Y),conspires(X,Y));not(unknowing(X)).
-abetment(X,K,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(Z).
+abetment(X,_,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(Z).
 abetment(X,_,Z) :- lawmustbechecked(5,108),abetment(Y,_,Z), abetment(X,Y,_).
 abetment(X,Y,Z) :- write('Did '),write(X),write(' abet '),write(Y),write(' in commiting the crime '),write(Z),write("?"),provide_option.
 
@@ -370,5 +379,4 @@ imprisonment(X, Z, 1111, 0) :- death_penalty(X,Z).
 
 death_penalty(X,war) :- lawmustbechecked(6,121),abetment(X,_,war) ; success_crime(war).
 death_penalty(X,mutiny) :- lawmustbechecked(7,132),abetment(X,Y, mutiny),soldier(Y),success_crime(mutiny),not(soldier(X)).
-death_penalty(Z) :- death_pen(Z);(write('Is this offence, '),write(Z),write(' punishable by death?'),provide_option,assert(death_pen(Z))).
-death_pen(X) :- always_false(X).
+
