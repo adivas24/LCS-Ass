@@ -315,7 +315,7 @@ imprisonment(X,assault, 7, 0) :- lawmustbechecked(6,124),assault(X, vip), intent
 imprisonment(X,sedition, 200, 0) :- lawmustbechecked(6,124),spread_hatred(X).
 imprisonment(X,abetment , 200, 0) :- lawmustbechecked(6,125),(abetment(X,_, war1).
 imprisonment(_, war2, 7, 0) :- lawmustbechecked(6,126),success_crime(war2).
-imprisonment(X, _, 7, 0) :- lawmustbechecked(6,127),receive_plundered_property(X).
+imprisonment(X, Z, 7, 0) :- lawmustbechecked(6,127),receive_plundered_property(X), isRobbery(Z).
 imprisonment(X, _, 200, 0) :- lawmustbechecked(6,128),public_servant(X), custody(X, Y), escapes(Y), intention(X, escape).
 imprisonment(X, _, 3, 0) :- lawmustbechecked(6,129),public_servant(X), custody(X, Y), escapes(Y), not(intention(X, escape)).
 imprisonment(X, _, 200, 0) :- lawmustbechecked(6,130),prisoner(Y), (escapes(Y) ; concealment(X,Y)), intention(X, escape).

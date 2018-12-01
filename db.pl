@@ -8,7 +8,10 @@ prop_theft(theivery).
 prop_theft(stealing).
 arson(arson).
 person(anyone).
-
+isRobbery(stealing).
+isRobbery(robbery).
+isRobbery(theft).
+isRobbery(loot).
 
 endprogram :-
 retractall(thelistis(_)),
