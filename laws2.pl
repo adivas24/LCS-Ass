@@ -221,8 +221,8 @@ checked_fight :- false.
 fight(X,Y) :- fig(X,Y);(not(checked_fight),(write('Were '),write(X),write(" and "),write(Y),write(' fighting?'),((provide_option,assert(fig(X,Y)));(assert(checked_fight),false)))).
 fig(X,Y) :- always_false(X),always_false(Y).
 
-checked_in :- false.
-in(X) :- ni(X);(not(checked_in),(write('Did this event take place in '),write(X),write('?'),((provide_option,assert(ni(X)));(assert(checked_in),false)))).
+checked_in1 :- false.
+in(X) :- ni(X);(not(checked_in1),(write('Did this event take place in '),write(X),write('?'),((provide_option,assert(ni(X)));(assert(checked_in1),false)))).
 ni(X) :- always_false(X).
 
 checked_in :- false.
@@ -261,8 +261,8 @@ checked_owner :- false.
 owner(X,Y) :- onr(X,Y);(not(checked_owner),(write('Is '),write(X),write('the owner of '),write(Y),write("?"),((provide_option,assert(onr(X,Y)));(assert(checked_owner),false)))).
 onr(X,Y) :- always_false(X),always_false(Y).
 
-checked_unknowing :- false.
-unknowing(X,Y) :- unkn(X,Y);(not(checked_unknowing),(write('Was '),write(X),write('unknowing of '),write(Y),write("?"),((provide_option,assert(unkn(X,Y)));(assert(checked_unknowing),false)))).
+checked_unknowing1 :- false.
+unknowing(X,Y) :- unkn(X,Y);(not(checked_unknowing1),(write('Was '),write(X),write('unknowing of '),write(Y),write("?"),((provide_option,assert(unkn(X,Y)));(assert(checked_unknowing1),false)))).
 unkn(X,Y) :- always_false(X),always_false(Y).
 
 checked_wears_military_token :- false.
@@ -313,8 +313,8 @@ checked_didoffence :- false.
 didoffence(X,Y) :-  didof(X,Y);(not(checked_didoffence),(write('Did '),write(X),write(' commit an '),write(Y),write("?"),((provide_option,assert(didof(X,Y)));(assert(checked_didoffence),false)))).
 didof(X,_) :- always_false(X).
 
-checked_didoffence :- false.
-didoffence(X) :-  didof(X);(not(checked_didoffence),(write('Did '),write(X),write(' commit an offence?'),((provide_option,assert(didof(X)));(assert(checked_didoffence),false)))).
+checked_didoffence1 :- false.
+didoffence(X) :-  didof(X);(not(checked_didoffence1),(write('Did '),write(X),write(' commit an offence?'),((provide_option,assert(didof(X)));(assert(checked_didoffence1),false)))).
 didof(X) :- always_false(X).
 
 checked_death_penalty :- false.

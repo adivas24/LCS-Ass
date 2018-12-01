@@ -19,6 +19,11 @@ Our assignment submission contains the following:
 3. Laws (laws.pl)
 4. Database (db.pl)
 
+The 'test.pl' file contains the starter code and is where the main program runs. It contains the commands to load the other files.
+The 'laws.pl' file contains most of the predicates pertaining to the IPC. In case new laws need to be added, they can be added to this file.
+The 'db.pl' file contains a few facts and an *endprogram* predicate, which clears the facts asserted during the execution of the program. As of now, the facts are very rudimentary. However, this section can be expanded to modify definitions of predicates.
+The separation of these files is purely to make the code more compartmentalized and readable, they can technically all be in a single file.
+
 ##Description of Program:
 
 The program aims to interpret the laws and determine the punishment for a certain offence.
@@ -108,10 +113,9 @@ The punishment for jay, for the crime, murder
 is a prison sentence of up to 15 years or suitable fine
 true .
 
-==END
 
-Improper termination of the program will result in an unstable state. Please re-run prolog to retry the program.
-As a good practice, it is advisable to restart (reload) the program after every execution of the program.
+Improper termination of the program can result in an unstable state. Please re-run prolog to retry the program.
+It is advisable to restart (reload) the program after every execution, for optimum performance.
 
 This program was tested on:
 - Ubuntu 16.04 (64-bit), SWI Prolog version 7.2.3

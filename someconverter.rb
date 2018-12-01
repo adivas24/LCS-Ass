@@ -12,17 +12,21 @@ file.each_slice(3) do |set|
   theparttoreplace += ";"
   newline2 = line1.sub(theparttoreplace,"#{theparttoreplace}(not(#{checkedvar}),")
   newline2 = newline2.sub(".",").")
-  newline2.sub!("provide_option","(provide_option;assert(#{checkedvar}))")
+  thething = "provide_option,assert(#{theparttoreplace[0..-2]}"
+  newline2.sub!(thething,"((#{thething}));(assert(#{checkedvar}),false)")
 
   newline1 = "#{checkedvar} :- false."
 
 #   puts ":- dynamic #{checkedvar}/0."
-   puts "retractall(#{checkedvar}),"
-#  puts newline1
-#  puts newline2
-#  puts line2
-#  puts
+#   puts "retractall(#{checkedvar}),"
+  puts newline1
+  puts newline2
+  puts line2
+  puts
 end
+
+#violent(X) :- vio(X);(not(checked_violent),(write('Was '),write(X),write(' violent?'),((provide_option,assert(vio(X)));(assert(checked_violent),false)))).
+
 
 =begin
 believes_justified_by_law(X) :- bjbl(X);(write('Did '),write(X),write(' believe that he/she was justified by law to do so?'),provide_option,assert(bjbl(X))).
