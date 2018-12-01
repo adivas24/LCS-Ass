@@ -320,7 +320,7 @@ imprisonment(X,war, 10, 0) :- lawmustbechecked(6,123),intention(Y, war), conceal
 imprisonment(X,assault, 7, 0) :- lawmustbechecked(6,124),assault(X, vip), intention(X, restrain).
 imprisonment(X,sedition, 200, 0) :- lawmustbechecked(6,124),spread_hatred(X).
 imprisonment(X,abetment , 200, 0) :- lawmustbechecked(6,125),abetment(X,_, war_with_asiatic_country).
-imprisonment(_, war_with_friend_country, 7, 0) :- lawmustbechecked(6,126),success_crime(war_with_friend_country).
+imprisonment(_,war_with_friend_country, 7, 0) :- lawmustbechecked(6,126),success_crime(war_with_friend_country).
 imprisonment(X, Z, 7, 0) :- lawmustbechecked(6,127),receive_plundered_property(X), isRobbery(Z).
 imprisonment(X, abetment, 200, 0) :- lawmustbechecked(6,128),public_servant(X), custody(X, Y), escapes(Y), intention(X, escape).
 imprisonment(X, negligence, 3, 0) :- lawmustbechecked(6,129),public_servant(X), custody(X, Y), escapes(Y), not(intention(X, escape)).
@@ -330,10 +330,10 @@ imprisonment(X,mutiny,200,0) :- lawmustbechecked(7,131),(abetment(X,Y, mutiny);s
 imprisonment(X,abetment,3,0) :-  lawmustbechecked(7,133),abetment(X,Y, assault),soldier(Y),assaults(Y,Z),superior(Z,Y),not(success_crime(assault)),not(soldier(X)).
 imprisonment(X,abetment,7,0) :-  lawmustbechecked(7,134),abetment(X,Y, assault),soldier(Y),assaults(Y,Z),superior(Z,Y),success_crime(assault),not(soldier(X)).
 imprisonment(X,abetment,2,0) :-  lawmustbechecked(7,135),abetment(X,Y, desertion),soldier(Y),not(soldier(X)).
-imprisonment(X,harbor,2,0) :-  lawmustbechecked(7,136),soldier(Y),deserted(Y),custody(Y,X),not(husband(X,Y)),not(soldier(X)).
+imprisonment(X,harboring,2,0) :-  lawmustbechecked(7,136),soldier(Y),deserted(Y),custody(Y,X),not(husband(X,Y)),not(soldier(X)).
 imprisonment(X,negligance,0,500) :-  lawmustbechecked(7,137),is_ship(V),owner(X, V),in(Y,V),soldier(Y),deserted(Y),unknowing(X,Y),not(soldier(X)).
 imprisonment(X,insubordination,0.5,0) :-  lawmustbechecked(7,138),abetment(X,Y, insubordination),soldier(Y),success_crime(insubordination),not(soldier(X)).
-imprisonment(X,wearingmilitarytoken,0.25,500) :-  lawmustbechecked(8,140),not(soldier(X)),wears_military_token(X).
+imprisonment(X,wearing_military_token,0.25,500) :-  lawmustbechecked(8,140),not(soldier(X)),wears_military_token(X).
 imprisonment(X,assembling,0.5,0) :-  lawmustbechecked(8,143),is_assem(Assem),unlawful_Assem_mem(X,Assem),not(armed(X)).
 imprisonment(X,assembling,2,0)  :-  lawmustbechecked(8,144),is_assem(Assem),unlawful_Assem_mem(X,Assem),armed(X).
 imprisonment(X,assembling,2,0) :-  lawmustbechecked(8,145),is_assem(Assem),unlawful_Assem_mem(X,Assem),commanded_to_disperse(Assem).
@@ -343,16 +343,16 @@ imprisonment(X,assembling,0.5,0) :-  lawmustbechecked(8,151),is_assem(Assem),com
 imprisonment(X,assembling,3,0) :-  lawmustbechecked(8,152),(assaults(X,Y);threatens_to_assault(X,Y)),public_servant(Y),tried_to_suppress_riot(Y).
 imprisonment(Y,inciting_riot,1,0) :-  lawmustbechecked(8,153),rioting(X),incite_riot(Y,X).
 imprisonment(Y,inciting_riot,0.5,0) :-  lawmustbechecked(8,153),not(rioting(X)),incite_riot(Y,X).
-imprisonment(X,inciting,3,0) :-  lawmustbechecked(8,153),(incite_hatred(X); incite_violence(X)),not(in(Z)),placeOfWorship(Z).
-imprisonment(X,inciting,5,0) :-  lawmustbechecked(8,153),(incite_hatred(X); incite_violence(X)),in(Z),placeOfWorship(Z).
+imprisonment(X,inciting_hatred,3,0) :-  lawmustbechecked(8,153),(incite_hatred(X); incite_violence(X)),not(in(Z)),placeOfWorship(Z).
+imprisonment(X,inciting_hatred,5,0) :-  lawmustbechecked(8,153),(incite_hatred(X); incite_violence(X)),in(Z),placeOfWorship(Z).
 imprisonment(X,being_armed,0.5,2000) :-  lawmustbechecked(8,153),armed(X),is_assem(Assem),memberof(X, Assem).
-imprisonment(X,incite_hatred,0.25,0) :-  lawmustbechecked(8,153),incite_class_hatred(X),not(in(Z)),placeOfWorship(Z).
-imprisonment(X,incite_hatred,5,0) :-  lawmustbechecked(8,153),incite_class_hatred(X),in(Z),placeOfWorship(Z).
-imprisonment(X, allow_riot,0,1000) :-  lawmustbechecked(8,154),place(Z),((is_assem(Assem),unlawful(Assem),in(Assem,Z));lawmustbechecked(7,155),(rioting_happened_in(Z),master(X,Z))),intention(X,allow_Assembly).
-imprisonment(Y, allow_riot,0,1000) :- lawmustbechecked(8,156),is_assem(Assem),unlawful(Assem),in(Assem,Z),master(X,Z),intention(X,allow_assembly),agent_of(Y,X),not(unknowing(Y,Assem)).
+imprisonment(X,inciting_hatred,0.25,0) :-  lawmustbechecked(8,153),incite_class_hatred(X),not(in(Z)),placeOfWorship(Z).
+imprisonment(X,inciting_hatred,5,0) :-  lawmustbechecked(8,153),incite_class_hatred(X),in(Z),placeOfWorship(Z).
+imprisonment(X,allow_riot,0,1000) :-  lawmustbechecked(8,154),place(Z),((is_assem(Assem),unlawful(Assem),in(Assem,Z));lawmustbechecked(7,155),(rioting_happened_in(Z),master(X,Z))),intention(X,allow_Assembly).
+imprisonment(Y,allow_riot,0,1000) :- lawmustbechecked(8,156),is_assem(Assem),unlawful(Assem),in(Assem,Z),master(X,Z),intention(X,allow_assembly),agent_of(Y,X),not(unknowing(Y,Assem)).
 imprisonment(X,harbouring,0.5,0) :-  lawmustbechecked(8,158),custody(Y,X),is_assem(Assem),unlawful_Assem_mem(Y,Assem).
-imprisonment(X,hired_unlawful,0.5,0) :-  lawmustbechecked(8,159),person(Y),hired(X, Y, unlawful_Assem),not(armed(X)).
-imprisonment(X,hired_unlawful,2,0) :-  lawmustbechecked(8,159),person(Y),hired(X, Y, unlawful_Assem),armed(X).
+imprisonment(X,hiring_unlawful,0.5,0) :-  lawmustbechecked(8,159),person(Y),hired(X, Y, unlawful_Assem),not(armed(X)).
+imprisonment(X,hiring_unlawful,2,0) :-  lawmustbechecked(8,159),person(Y),hired(X, Y, unlawful_Assem),armed(X).
 imprisonment(X,affray,0.08333,100) :-  lawmustbechecked(8,160),person(Y),affray(X,Y).
 imprisonment(Y,affray,0.08333,100) :-  lawmustbechecked(8,160),person(X),affray(X,Y).
 imprisonment(X, Z, 777, 0) :- half_imprisonment(X,Z).
