@@ -46,8 +46,11 @@ imm(X) :- always_false(X).
 harms(X,Y) :- har(X,Y);(write('Did '),write(X),write(' harm '),write(Y),write('?'),provide_option,assert(har(X,Y))).
 har(X,Y) :- always_false(X),always_false(Y).
 
-crazy(X) :- insa(X);(write('Is '),write(X),write(' clinically insane?'),provide_option,assert(insa(X))).
+
+checkedinsa :- false.
+crazy(X) :- (insa(X));(not(checkedinsa),(write('Is '),write(X),write(' clinically insane?'),(provide_option;assert(checkedinsa)),assert(insa(X)))).
 insa(X) :- always_false(X).
+
 
 unknowing(X) :- unkn(X);(write('Was '),write(X),write(' unanware of the consequences?'),provide_option,assert(unkn(X))).
 unkn(X) :- always_false(X).
@@ -260,9 +263,9 @@ no_offence(X,Y) :- lawmustbechecked(4,85),intoxicated_against_will(X), (off_req_
 no_offence(X,Z) :- lawmustbechecked(4,87),not(intention(X,Z)), harms(X,Y), consent(Y), not(under18(Y)), not(offence_ind_of_harm(Z)).
 no_offence(X,Z) :- lawmustbechecked(4,88),not(intention(X, murder)),consent(Y),benefit(Y), not(offence_ind_of_harm(Z)).
 no_offence(X,Z) :- lawmustbechecked(4,89),person(Y),benefit(Y),(under12(X);crazy(X)),consent(Z),guardian(Z,Y),not(intention(X, murder);not(unknowing(X));abetment(X,Y,_),not(save_life(Y))), not(offense_ind_of_harm(Z)).
-no_offence(X,Z) :- lawmustbechecked(4,92),benefit(Y),(consent(Y);imp_consent(Y)),not(intention(X, murder)),(unknowing(X);save_life(Y)),not(abetment(_,_,Z)).
-no_offence(X,_) :- lawmustbechecked(4,93),communicate(X,Y),benefit(Y).
-no_offence(X,Z) :- lawmustbechecked(4,94),not(murder(Z)),not(death_penalty(Z)),death_threat(X),not(intention(X,Z)).
+no_offence(X,Z) :- lawmustbechecked(4,92),person(Y),benefit(Y),(consent(Y);imp_consent(Y)),not(intention(X, murder)),(unknowing(X);save_life(Y)),not(abetment(_,_,Z)).
+no_offence(X,_) :- lawmustbechecked(4,93),person(Y),communicate(X,Y),benefit(Y).
+no_offence(X,Z) :- lawmustbechecked(4,94),not(isamurder(X)),not(death_penalty(Z)),death_threat(X),not(intention(X,Z)).
 no_offence(X,_) :- lawmustbechecked(4,95),person(Y),not(harms(X,Y)).
 no_offence(X,_) :- lawmustbechecked(4,96),private_def(X).
 
