@@ -60,7 +60,7 @@ inx_a(X) :- always_false(X).
 intoxicated(X) :- inx(X);(write('Was '),write(X),write(' intoxicated?'),provide_option,assert(inx(X))).
 inx(X) :- always_false(X).
 
-fear(Y) :- fer(Y);(write('Was '),write(Y),write(' forced to give consent due to fear?'),provide_option,assert(fer(Y))).
+fear(Y) :- fer(Y);victim(Y),(write('Was '),write(Y),write(' forced to give consent due to fear?'),provide_option,assert(fer(Y))).
 fer(X) :- always_false(X).
 
 consent(Y) :- cons(Y);(lawmustbechecked(4,90),not(fear(Y);mistake_of_fact(Y);under12(Y);crazy(Y);intoxicated(Y)),not(unknowing(Y)),assert(cons(Y))).
