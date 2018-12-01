@@ -8,6 +8,7 @@ prop_theft(theivery).
 prop_theft(stealing).
 arson(arson).
 person(anyone).
+anotherperson(another_person).
 victim(victim).
 
 isRobbery(stealing).

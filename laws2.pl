@@ -337,7 +337,7 @@ affray(X,Y) :-  afry(X);(fight(X,Y),in(X,Z),in(Y,Z),public_place(Z),disturb_the_
 afry(X) :- always_false(X).
 
 instigates(X) :- inst(X);(willful(X),(concealment(X,_);misrepresentation(X)),assert(inst(X))).
-instigates(X) :- inst(X);(lawmustbechecked(4,107),write('Has '),write(X), write(' instigated anyone to commit the crime?'),provide_option,assert(inst(X))).
+instigates(X) :- inst(X);(lawmustbechecked(5,107),write('Has '),write(X), write(' instigated anyone to commit the crime?'),provide_option,assert(inst(X))).
 inst(X) :- always_false(X).
 
 
@@ -369,7 +369,7 @@ cond_for_no_private_defense(X,Y) :- not(harms(X,Y));(lawmustbechecked(4,99),publ
 
 abetment(X,Y,_) :- lawmustbechecked(5,107),instigates(X);(person(Y),conspires(X,Y));not(unknowing(X)).
 abetment(X,_,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(Z).
-abetment(X,_,Z) :- lawmustbechecked(5,108),abetment(Y,_,Z), abetment(X,Y,_).
+abetment(X,Z,_) :- lawmustbechecked(5,108),person(Y),didabet(X,Y),anotherperson(Z),didabet(Y,Z).
 abetment(X,Y,Z) :- write('Did '),write(X),write(' abet '),write(Y),write(' in commiting the crime '),write(Z),write("?"),provide_option.
 
 abettor(X,Z):-   lawmustbechecked(5,108),not(under7(X)), not(crazy(X)), not(immature(X)), abetment(X,_,Z).
