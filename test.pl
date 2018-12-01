@@ -225,7 +225,7 @@ bjbl(X) :- check(X).
 judge(X) :- jud(X);(write('Was '),write(X),write(' a judge of the court?'),provide_option,assert(jud(X))).
 jud(X) :- check(X).
 
-following_judgement(X):- foll_jud;(write('Was '),write(X),write(' following the judgement of a court or public servant?'),provide_option,assert(foll_jud(X))).
+following_judgement(X):- foll_jud(X);(write('Was '),write(X),write(' following the judgement of a court or public servant?'),provide_option,assert(foll_jud(X))).
 foll_jud(X) :- check(X).
 
 accident(X) :- acc(X);(write('Was this an accident?'),provide_option,assert(acc(X))).
