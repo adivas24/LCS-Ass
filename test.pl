@@ -11,37 +11,39 @@ checkmode(2) :- write("\nYou have selected Mode Two.\n"),assert(modeis(2)),start
 checkmode(3) :- write("\nYou have selected Mode Three.\n"),assert(modeis(3)),startthree.
 checkmode(_) :- write("\nPlease choose a correct mode.\n\n"),start.
 
-starttwo :- modeis(2),write('What law sections do you want to check?'),nl,
-write('Please enter a number between 4 and 8 (inclusive)'),nl,
-write('**Note: Inputs need to end with a fullstop'),nl,nl,
+starttwo :- modeis(2),write('What law sections do you want to check?\n'),
+write('Please enter a number between 4 and 8 (inclusive)\n'),
+write('**Note: Inputs need to end with a fullstop\n\n'),
 read(X),nl,(((X>3),(X<9),moretwo([X]));
 write('Invalid law. Please restart program'),!).
 
-moretwo(List) :- write('Do you want to add one more?'),nl,
-write('Please enter a number between 4 and 8 (inclusive)'),nl,
-write('Enter 0 if you have finished choosing.'),nl,
-write('**Note: Inputs need to end with a fullstop'),nl,nl,
-read(X),nl,(((X>3),(X<9),moretwo([X|List]));((X is 0),write(List),outcome(List));
-write('Invalid input. Exiting. Execute start. to restart the program.'),!).
+moretwo(List) :- write('Do you want to add one more?\n'),
+write('Please enter a number between 4 and 8 (inclusive)\n'),
+write('Enter 0 if you have finished choosing.\n'),
+write('**Note: Inputs need to end with a fullstop\n\n'),
+read(X),nl,(((X>3),(X<9),moretwo([X|List]));((X is 0),
+write('You have selected\n'),write(List),outcome(List));
+write('\nInvalid input. Exiting. Execute start. to restart the program.'),!).
 
-startthree :- modeis(3),write('What laws do you want to check?'),nl,
-write('Please enter a number between 76 and 160 (inclusive)'),nl,
-write('**Note: Inputs need to end with a fullstop'),nl,nl,
+startthree :- modeis(3),write('What laws do you want to check?\n'),
+write('Please enter a number between 76 and 160 (inclusive)\n'),
+write('**Note: Inputs need to end with a fullstop\n\n'),
 read(X),nl,(((X>75),(X<161),morethree([X]));
-write('Invalid law. Please restart program'),!).
+write('\nInvalid law. Please restart program'),!).
 
-morethree(List) :- write('Do you want to add one more?'),nl,
-write('Please enter a number between 76 and 160 (inclusive)'),nl,
-write('Enter 0 if you have finished choosing.'),nl,
-write('**Note: Inputs need to end with a fullstop'),nl,nl,
-read(X),nl,(((X>75),(X<161),morethree([X|List]));((X is 0),write(List),outcome(List));
-write('Invalid input. Exiting. Execute start. to restart the program.'),!).
+morethree(List) :- write('Do you want to add one more?\n'),
+write('Please enter a number between 76 and 160 (inclusive)\n'),
+write('Enter 0 if you have finished choosing.\n'),
+write('**Note: Inputs need to end with a fullstop\n\n'),
+read(X),nl,(((X>75),(X<161),morethree([X|List]));((X is 0),
+write('You have selected\n'),write(List),outcome(List));
+write('\nInvalid input. Exiting. Execute start. to restart the program.'),!).
 
 outcome(List) :- assert(thelistis(List)),get_data.
 
 lawmustbechecked(A,B) :- modeis(1);(modeis(2),thelistis(X),member(A,X));(modeis(3),thelistis(X),member(B,X)).
 
-get_data :- write('What is the name of the suspect?\nDO NOT USE UPPER CASE\nRemember to put a full-stop at the end.\n'),
+get_data :- write('\nWhat is the name of the suspect?\nDO NOT USE UPPER CASE\nRemember to put a full-stop at the end.\n'),
 read(X),write('\nWhat is the crime?\nDO NOT USE UPPER CASE\nRemember to put a full-stop at the end.\n'),read(Y),
 ['laws'],determine_punishment(X,Y).
 
