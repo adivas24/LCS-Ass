@@ -35,7 +35,7 @@ write('Invalid input. Exiting. Execute start. to restart the program.'),!).
 
 outcome(List) :- assert(thelistis(List)),get_data.
 
-lawmustbechecked(A,B) :- modeis(1);modeis(2),thelistis(X),member(A,X);modeis(3),thelistis(X),member(B,X).
+lawmustbechecked(A,B) :- modeis(1);(modeis(2),thelistis(X),member(A,X));(modeis(3),thelistis(X),member(B,X)).
 
 %Facts
 check(false).
@@ -125,9 +125,12 @@ person(anyone).
 :- dynamic mast/2.
 :- dynamic hird/3.
 
-get_data :- write('What is the name of the suspect?\nDO NOT USE UPPER CASE\n'),read(X),write('\nWhat is the crime?\nDO NOT USE UPPER CASE\n'),read(Y),determine_punishment(X,Y).
+get_data :- write('What is the name of the suspect?\nDO NOT USE UPPER CASE\n'),
+read(X),write('\nWhat is the crime?\nDO NOT USE UPPER CASE\n'),read(Y),
+determine_punishment(X,Y).
 
 endprogram :-
+retractall(thelistis(_)),
 retractall(mist_of_fact(_)),
 retractall(bbbl(_)),
 retractall(bjbl(_)),
@@ -209,9 +212,10 @@ retractall(hird(_,_,_)).
 
 determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),endprogram,nl.
 determine_punishment(X,Y):- imprisonment(X,Y,A,B),write('The punishment for '),write(X),write(', for the crime, '),
-write(Y),write('\nis a prison sentence of upto '),write(A),write(' years, or a fine of Rs. '),write(B),write(', or both.').
+write(Y),write('\nis a prison sentence of upto '),write(A),write(' years, or a fine of Rs. '),write(B),write(', or both.'),endprogram,nl.
+determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not be defined in current scope.\nExiting.').
 
-provide_option :- nl,write('Press y for yes anything else for no.'),nl,get(Y),nl,((Y is 89);(Y is 121)).
+provide_option :- write('\nPress y for yes anything else for no.\n'),get(Y),nl,((Y is 89);(Y is 121)).
 
 mistake_of_fact(X) :- mist_of_fact(X);(write('Is this a case of mistaken fact?'),provide_option,assert(mist_of_fact(X))).
 mist_of_fact(X) :- check(X).
