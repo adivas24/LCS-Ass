@@ -113,7 +113,7 @@ determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not b
 :- dynamic checked_publishes_class_inhuman/0.
 :- dynamic checked_publishes_class_disharmony/0.
 :- dynamic checked_fight/0.
-:- dynamic checked_in/0.
+:- dynamic checked_in1/0.
 :- dynamic checked_in/0.
 :- dynamic checked_public_place/0.
 :- dynamic checked_disturb_the_peace/0.
@@ -123,7 +123,7 @@ determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not b
 :- dynamic checked_husband/0.
 :- dynamic checked_is_ship/0.
 :- dynamic checked_owner/0.
-:- dynamic checked_unknowing/0.
+:- dynamic checked_unknowing1/0.
 :- dynamic checked_wears_military_token/0.
 :- dynamic checked_armed/0.
 :- dynamic checked_commanded_to_disperse/0.
@@ -135,7 +135,7 @@ determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not b
 :- dynamic checked_master/0.
 :- dynamic checked_seduce/0.
 :- dynamic checked_hired/0.
-:- dynamic checked_didoffence/0.
+:- dynamic checked_didoffence2/0.
 :- dynamic checked_didoffence/0.
 :- dynamic checked_death_penalty/0.
 :- dynamic checked_didabet/0.

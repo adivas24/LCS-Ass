@@ -66,8 +66,8 @@ checked_crazy :- false.
 crazy(X) :- (insa(X));(not(checked_crazy),((write('Is '),write(X),write(' clinically insane?'),((provide_option;assert(checked_crazy))),assert(insa(X))))).
 insa(X) :- always_false(X).
 
-checked_unknowing :- false.
-unknowing(X) :- unkn(X);(not(checked_unknowing),(write('Was '),write(X),write(' unanware of the consequences?'),(provide_option;assert(checked_unknowing)),assert(unkn(X)))).
+checked_unknowing1 :- false.
+unknowing(X) :- unkn(X);(not(checked_unknowing1),(write('Was '),write(X),write(' unanware of the consequences?'),(provide_option;assert(checked_unknowing1)),assert(unkn(X)))).
 unkn(X) :- always_false(X).
 
 checked_intoxicated_against_will :- false.
@@ -222,8 +222,8 @@ checked_fight :- false.
 fight(X,Y) :- fig(X,Y);(not(checked_fight),(write('Were '),write(X),write(" and "),write(Y),write(' fighting?'),(provide_option;assert(checked_fight)),assert(fig(X,Y)))).
 fig(X,Y) :- always_false(X),always_false(Y).
 
-checked_in :- false.
-in(X) :- ni(X);(not(checked_in),(write('Did this event take place in '),write(X),write('?'),(provide_option;assert(checked_in)),assert(ni(X)))).
+checked_in1 :- false.
+in(X) :- ni(X);(not(checked_in1),(write('Did this event take place in '),write(X),write('?'),(provide_option;assert(checked_in1)),assert(ni(X)))).
 ni(X) :- always_false(X).
 
 checked_in :- false.
@@ -310,8 +310,8 @@ checked_hired :- false.
 hired(X,Y,Assem) :- hird(X,Y,Assem);(not(checked_hired),(write('Did '),write(X),write(' try to hire '),write(Y),write(" for "), write(Assem), write("?"),(provide_option;assert(checked_hired)),assert(hird(X,Y,Assem)))).
 hird(X,Y,Assem) :- always_false(X),always_false(Y),always_false(Assem).
 
-checked_didoffence :- false.
-didoffence(X,Y) :-  didof(X,Y);(not(checked_didoffence),(write('Did '),write(X),write(' commit an '),write(Y),write("?"),(provide_option;assert(checked_didoffence)),assert(didof(X,Y)))).
+checked_didoffence2 :- false.
+didoffence(X,Y) :-  didof(X,Y);(not(checked_didoffence2),(write('Did '),write(X),write(' commit an '),write(Y),write("?"),(provide_option;assert(checked_didoffence2)),assert(didof(X,Y)))).
 didof(X,_) :- always_false(X).
 
 checked_didoffence :- false.
@@ -338,14 +338,6 @@ incite_class_hatred(X) :-  publishes_class_traitor(X);publishes_class_inhuman(X)
 
 affray(X,Y) :-  afry(X);(fight(X,Y),in(X,Z),in(Y,Z),public_place(Z),disturb_the_peace(X,Y),assert(afry(X))).
 afry(X) :- always_false(X).
-
-checkeddeath :- false.
-death_penalty(Z) :- (death_pen(Z));(not(checkeddeath)),(write('Is this offence, '),write(Z),write(' punishable by death?'),(provide_option;assert(checkeddeath)),assert(death_pen(Z))).
-death_pen(X) :- always_false(X).
-
-checkedabet :- false.
-didabet(X,Y) :- (didab(X,Y));(not(checkedabet)),(write('Did '),write(X),write(' abet '),write(Y),write('?'),(provide_option;assert(checkedabet)),assert(didab(X,Y))).
-didab(X,_) :- always_false(X).
 
 instigates(X) :- inst(X);(willful(X),(concealment(X,_);misrepresentation(X)),assert(inst(X))).
 instigates(X) :- inst(X);(lawmustbechecked(4,107),write('Has '),write(X), write(' instigated anyone to commit the crime?'),provide_option,assert(inst(X))).

@@ -7,7 +7,6 @@ prop_theft(robbery).
 prop_theft(theivery).
 prop_theft(stealing).
 arson(arson).
-soldier(soldier).
 person(anyone).
 victim(victim).
 
@@ -35,7 +34,7 @@ retractall(checked_under18),
 retractall(checked_immature),
 retractall(checked_harms),
 retractall(checked_crazy),
-retractall(checked_unknowing),
+retractall(checked_unknowing1),
 retractall(checked_intoxicated_against_will),
 retractall(checked_intoxicated),
 retractall(checked_fear),
@@ -74,7 +73,7 @@ retractall(checked_publishes_class_traitor),
 retractall(checked_publishes_class_inhuman),
 retractall(checked_publishes_class_disharmony),
 retractall(checked_fight),
-retractall(checked_in),
+retractall(checked_in1),
 retractall(checked_in),
 retractall(checked_public_place),
 retractall(checked_disturb_the_peace),
@@ -96,7 +95,7 @@ retractall(checked_rioting_happened_in),
 retractall(checked_master),
 retractall(checked_seduce),
 retractall(checked_hired),
-retractall(checked_didoffence),
+retractall(checked_didoffence2),
 retractall(checked_didoffence),
 retractall(checked_death_penalty),
 retractall(checked_didabet),
