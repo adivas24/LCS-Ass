@@ -66,147 +66,145 @@ provide_option :- nl,write('Press y for yes anything else for no.'),nl,get(Y),nl
 mistake_of_fact(X) :- mist_of_fact(X);(write('Is this a case of mistaken fact?'),provide_option,assert(mist_of_fact(X))).
 mist_of_fact(X) :- check(X).
 
-believes_bound_by_law(X) :- write('Did '),write(X),write(' believe that he/she was bound by law to do so?'),provide_option,assert(bbbl(X)).
+believes_bound_by_law(X) :- bbbl(X);(write('Did '),write(X),write(' believe that he/she was bound by law to do so?'),provide_option,assert(bbbl(X))).
 bbbl(X) :- check(X).
 
-believes_justified_by_law(X) :- write('Did '),write(X),write(' believe that he/she was justified by law to do so?'),provide_option,assert(bjbl(X)).
+believes_justified_by_law(X) :- bjbl(X);(write('Did '),write(X),write(' believe that he/she was justified by law to do so?'),provide_option,assert(bjbl(X))).
 bjbl(X) :- check(X).
 
-judge(X) :- write('Was '),write(X),write(' a judge of the court?'),provide_option,assert(jud(X)).
+judge(X) :- jud(X);(write('Was '),write(X),write(' a judge of the court?'),provide_option,assert(jud(X))).
 jud(X) :- check(X).
 
-following_judgement(X):- write('Was '),write(X),write(' following the judgement of a court or public servant?'),provide_option,assert(foll_jud(X)).
+following_judgement(X):- foll_jud;(write('Was '),write(X),write(' following the judgement of a court or public servant?'),provide_option,assert(foll_jud(X))).
 foll_jud(X) :- check(X).
 
-accident(_) :- write('Was this an accident?'),provide_option,assert(acc(X)).
+accident(X) :- acc(X);(write('Was this an accident?'),provide_option,assert(acc(X))).
 acc(X) :- check(X).
 
-misfortune(_) :- write('Would you classify this as a misfortune?'),provide_option.
+misfortune(X) :- misf(X);(write('Would you classify this as a misfortune?'),provide_option,assert(misf(X))).
+misf(X) :- check(X).
 
+intention(X,Crime) :- inten(X,Crime);(write('Was it the intention of '),write(X),write(' to perform the crime, '),write(Crime),write("?"),provide_option,assert(inten(X,Crime))).
+inten(X,Crime) :- check(X),check(Crime).
 
-intention(X,Crime) :- write('Was it the intention of '),write(X),write(' to perform the crime, '),write(Crime),write("?"),provide_option.
+prevent_harm(X,Z) :- prev_h(X,Z);(write('Was '),write(X),write(' trying to save '),write(Z),write('?'),provide_option,assert(prev_h(X,Z))).
+prev_h(X,Z) :- check(X),check(Z).
 
+under7(X) :- u7(X);(write('Is '),write(X),write(' under the age of 7?'),provide_option,assert(u7(X))).
+u7(X) :- check(X).
 
-prevent_harm(X,Z) :- write('Was '),write(X),write(' trying to save '),write(Z),write('?'),provide_option.
+under12(X) :- u12(X);(write('Is '),write(X),write(' under the age of 12?'),provide_option,assert(u12(X))).
+u12(X) :- check(X).
 
+under18(X) :- u18(X);(write('Is '),write(X),write(' under the age of 18?'),provide_option,assert(u18(X))).
+u18(X) :- check(X).
 
-under7(X) :- write('Is '),write(X),write(' under the age of 7?'),provide_option.
+immature(X) :- imm(X);(write('Is '),write(X),write(' not mature enough to comprehend his actions?'),provide_option,assert(imm(X))).
+imm(X) :- check(X).
 
+harms(X,Y) :- har(X,Y);(write('Did '),write(X),write(' harm '),write(Y),write('?'),provide_option,assert(har(X,Y))).
+har(X,Y) :- check(X),check(Y).
 
-under12(X) :- write('Is '),write(X),write(' under the age of 12?'),provide_option.
+crazy(X) :- insa(X);(write('Is '),write(X),write(' clinically insane?'),provide_option,assert(insa(X))).
+insa(X) :- check(X).
 
+unknowing(X) :- unkn(X);(write('Was '),write(X),write(' unanware of the consequences?'),provide_option,assert(unkn(X))).
+unkn(X) :- check(X).
 
-under18(X) :- write('Is '),write(X),write(' under the age of 18?'),provide_option.
+intoxicated_against_will(X):- inx_a(X);(write('Was '),write(X),write(' intoxicated against his/her will?'),provide_option,assert(inx_a(X))).
+inx_a(X) :- check(X).
 
+intoxicated(X) :- inx(X);(write('Was '),write(X),write(' intoxicated?'),provide_option,assert(inx(X))).
+inx(X) :- check(X).
 
-immature(X) :- write('Is '),write(X),write(' not mature enough to comprehend his actions?'),provide_option.
+fear(Y) :- fer(Y);(write('Was '),write(Y),write(' forced to give consent due to fear?'),provide_option,assert(fer(Y))).
+fer(X) :- check(X).
 
+consent(Y) :- cons(Y);(lawmustbechecked(4,90),not(fear(Y);mistake_of_fact(Y);under12(Y);crazy(Y);intoxicated(Y)),not(unknowing(Y)),assert(cons(Y))).
+cons(X) :- check(X).
 
-harms(X,Y) :- write('Did '),write(X),write(' harm '),write(Y),write('?'),provide_option.
+offence_ind_of_harm(Y) :- oih(Y);(lawmustbechecked(4,91),write('Is '),write(Y),write(' an offense, irrespective of the harm it causes?'),provide_option,assert(oih(Y))).
+oih(X) :- check(X).
 
+benefit(Y) :- ben(Y);(write('Was the purpose of the act to benefit '),write(Y),write('?'),provide_option,assert(ben(Y))).
+ben(Y) :- check(X).
 
-crazy(X) :- write('Is '),write(X),write(' clinically insane?'),provide_option.
+guardian(X,Y) :- gua(X,Y);(write('Is '),write(X),write(' the guardian of '),write(Y),write('?'),provide_option,assert(gua(X,Y))).
+gua(X,Y) :- check(X),check(Y).
 
+save_life(Y) :- s_l(Y);(write('Was the purpose of the act to save the life of '),write(Y),write('?'),provide_option,assert(s_l(Y))).
+s_l(X) :- check(X).
 
-unknowing(X) :- write('Was '),write(X),write(' unanware of the consequences?'),provide_option.
+imp_consent(Y) :- icons(Y);(write('Was '),write(Y),write(' incapable of giving consent?'),provide_option,assert(icons(Y))).
+icons(X) :- check(X).
 
+communicate(X,Z) :- comm(X,Z);(write('Did '),write(X),write(' communicate some information which harmed '),write(Z),write('?'),provide_option,assert(comm(X,Z))).
+comm(X,Z) :- check(X),check(Z).
 
-intoxicated_against_will(X):- write('Was '),write(X),write(' intoxicated against his/her will?'),provide_option.
+murder(X) :- mur(X);(write('Was '),write(X),write(' killed?'),provide_option,assert(mur(X))).
+mur(X) :- check(X).
 
+death_threat(X) :- d_t(X);(write('Was '),write(X),write(' under threat of death?'),provide_option,assert(d_t(X))).
+d_t(X) :- check(X).
 
-intoxicated(X) :- write('Was '),write(X),write(' intoxicated?'),provide_option.
+public_servant(X) :- pub_s(X);(write('Was/Is '),write(X),write(' a public servant?'),provide_option,assert(pub_s(X))).
+pub_s(X) :- check(X).
 
+rape(X,Y) :- rpe(X,Y);(write('Did '),write(X),write('attempt to rape '),write(Y),write('?'),provide_option,assert(rpe(X,Y))).
+rpe(X,Y) :- check(X),check(Y).
 
-fear(Y) :- write('Was '),write(Y),write(' forced to give consent due to fear?'),provide_option.
+kidnapping(X,Y) :- k_nap(X,Y);(write('Did '),write(X),write('attempt to kidnap/abduct '),write(Y),write('?'),provide_option,assert(k_nap(X,Y))).
+k_nap(X,Y) :- check(X),check(Y).
 
+confinement(X,Y) :- conf(X,Y);(write('Did '),write(X),write('attempt to wrongfully confine '),write(Y),write('?'),provide_option,assert(conf(X,Y))).
+conf(X,Y) :- check(X),check(Y).
 
-consent(Y) :- lawmustbechecked(4,90),not(fear(Y);mistake_of_fact(Y);under12(Y);crazy(Y);intoxicated(Y)),not(unknowing(Y)).
+acid(X,Y) :- acd(X,Y);(write('Did '),write(X),write('attempt to throw acid on '),write(Y),write('?'),provide_option,assert(acd(X,Y))).
+acd(X,Y) :- check(X),check(Y).
 
+instigates(X) :- inst(X);(willful(X),(concealment(X,_);misrepresentation(X)),assert(inst(X))).
+instigates(X) :- inst(X);(lawmustbechecked(4,107),write('Has '),write(X), write(' instigated anyone to commit the crime?'),provide_option,assert(inst(X))).
+inst(X) :- check(X).
 
-offence_ind_of_harm(Y) :- lawmustbechecked(4,91),write('Is '),write(Y),write(' an offense, irrespective of the harm it causes?'),provide_option.
+conspires(X,Y) :- consp(X,Y);(write('Has '),write(X),write(' engaged in a conspiracy with '),write(Y),write(' towards the crime?'),provide_option,assert(consp(X,Y))).
+consp(X,Y) :- check(X),check(Y).
 
+willful(X) :- wful(X);(write('Did '), write(X), write(' perform the act of his own will?'),provide_option,assert(wful(X))).
+wful(X) :- check(X).
 
-benefit(Y) :- write('Was the purpose of the act to benefit '),write(Y),write('?'),provide_option.
+concealment(X,Y) :- conc(X,Y);(write('Did '), write(X), write(' conceal facts related to the case?'),provide_option,assert(conc(X,Y))).
+conc(X,Y) :- check(X),check(Y).
 
+misrepresentation(X) :- misrep(X);(write('Has '), write(X), write(' been involved in misrepresentation?'),provide_option,assert(misrep(X))).
+misrep(X) :- check(X).
 
-guardian(X,Y) :- write('Is '),write(X),write(' the guardian of '),write(Y),write('?'),provide_option.
+is_a_consequence(P,Z) :- consq(P,Z);(write('Is '), write(P), write(' a consequence of '), write(Z), write('?'),provide_option,assert(consq(P,Z))).
+consq(X,Y) :- check(X),check(Y).
 
+isPresent(X) :- pres(X);(write('Was '), write(X), write(' present at the scene at the time?'),provide_option,assert(pres(X))).
+pres(X) :- check(X).
 
-save_life(Y) :- write('Was the purpose of the act to save the life of '),write(Y),write('?'),provide_option.
+success_crime(Z) :- succ_cr(Z);(write('Was the crime '), write(Z), write(' successful?'),provide_option,assert(succ_cr(Z))).
+succ_cr(X) :- check(X).
 
+misleads(X,Y,Z) :- mis(X,Y,Z);(write('Has '), write(X), write(' misled '), write(Y), write(' in regards to '), write(Z),write('?'),provide_option,assert(mis(X,Y,Z))).
+mis(X,Y,Z) :- check(X).
 
-imp_consent(Y) :- write('Was '),write(Y),write(' incapable of giving consent?'),provide_option.
+collect_arms(X, Y) :- coll_arm(X,Y);(write('Has '), write(X), write(' engaged in the collection of arms for the purpose of '), write(Y), write('?'),provide_option,assert(coll_arm(X))).
+coll_arm(X,Y) :- check(X),check(Y).
 
+spread_hatred(X) :- spr_h(X);(write('Has '), write(X), write(' brought or attempted to bring into hatred or contempt, or excited or attempted to
+excite disaffection towards, the Government established by law?'),provide_option,assert(spr_h(X))).
+spr_h(X) :- check(X).
 
-communicate(X,Z) :- write('Did '),write(X),write(' communicate some information which harmed '),write(Z),write('?'),provide_option.
+receive_plundered_property(X) :- rpp(X);(write('Has '), write(X), write(' recieved any plundered property?'),provide_option,assert(rpp(X))).
+rpp(X) :- check(X).
 
+escapes(Y) :- esc(Y);(write('Has '), write(Y), write(' escaped from custody?'),provide_option,assert(esc(Y))).
+esc(X) :- check(X).
 
-murder(X) :- write('Was '),write(X),write(' killed?'),provide_option.
-
-
-death_threat(X) :- write('Was '),write(X),write(' under threat of death?'),provide_option.
-
-
-public_servant(X) :- write('Was/Is '),write(X),write(' a public servant?'),provide_option.
-
-
-rape(X,Y) :- write('Did '),write(X),write('attempt to rape '),write(Y),write('?'),provide_option.
-
-
-kidnapping(X,Y) :- write('Did '),write(X),write('attempt to kidnap/abduct '),write(Y),write('?'),provide_option.
-
-
-confinement(X,Y) :- write('Did '),write(X),write('attempt to wrongfully confine '),write(Y),write('?'),provide_option.
-
-
-acid(X,Y) :- write('Did '),write(X),write('attempt to throw acid on '),write(Y),write('?'),provide_option.
-
-
-instigates(X) :- lawmustbechecked(4,107),write('Has '),write(X), write(' instigated anyone to commit the crime?'),provide_option.
-
-
-instigates(X) :- willful(X),(concealment(X,_);misrepresentation(X)).
-
-
-conspires(X,Y) :- write('Has '),write(X),write(' engaged in a conspiracy with '),write(Y),write(' towards the crime?'),provide_option.
-
-
-willful(X) :- write('Did '), write(X), write(' perform the act of his own will?'),provide_option.
-
-
-concealment(X,_) :- write('Did '), write(X), write(' conceal facts related to the case?'),provide_option.
-
-
-misrepresentation(X) :- write('Has '), write(X), write(' been involved in misrepresentation?'),provide_option.
-
-
-is_a_consequence(P,Z) :- write('Is '), write(P), write(' a consequence of '), write(Z), write('?'),provide_option.
-
-
-isPresent(X) :- write('Was '), write(X), write(' present at the scene at the time?'),provide_option.
-
-
-success_crime(Z) :- write('Was the crime '), write(Z), write(' successful?'),provide_option.
-
-
-misleads(X,Y,Z) :- write('Has '), write(X), write(' misled '), write(Y), write(' in regards to '), write(Z),write('?'),provide_option.
-
-
-collect_arms(X, Y) :- write('Has '), write(X), write(' engaged in the collection of arms for the purpose of '), write(Y), write('?'),provide_option.
-
-
-spread_hatred(X) :- write('Has '), write(X), write(' brought or attempted to bring into hatred or contempt, or excited or attempted to
-excite disaffection towards, the Government established by law?'),provide_option.
-
-
-receive_plundered_property(X) :- write('Has '), write(X), write(' recieved any plundered property?'),provide_option.
-
-
-escapes(Y) :- write('Has '), write(Y), write(' escaped from custody?'),provide_option.
-
-
-custody(X,Y) :- write('Did '),write(X),write(' have '),write(Y), write(" in custody, or harbour "),write(Y),write("?"),provide_option.
-
+custody(X,Y) :- ccust(X,Y);(write('Did '),write(X),write(' have '),write(Y), write(" in custody, or harbour "),write(Y),write("?"),provide_option,assert(cust(X,Y))).
+cust(X,Y) :- check(X),check(Y).
 
 no_offence(X,_) :- lawmustbechecked(4,76),mistake_of_fact(X),((lawmustbechecked(4,76),believes_bound_by_law(X)); (lawmustbechecked(4,79),believes_justified_by_law(X))).
 no_offence(X,_) :- lawmustbechecked(4,77),judge(X), believes_justified_by_law(X).
@@ -221,7 +219,7 @@ no_offence(X,Z) :- lawmustbechecked(4,88),not(intention(X, murder)),consent(Y),b
 no_offence(X,Z) :- lawmustbechecked(4,89),person(Y),benefit(Y),(under12(X);crazy(X)),consent(Z),guardian(Z,Y),not(intention(X, murder);not(unknowing(X));abetment(X,Y,_),not(save_life(Y))), not(offense_ind_of_harm(Z)).
 no_offence(X,Z) :- lawmustbechecked(4,92),benefit(Y),(consent(Y);imp_consent(Y)),not(intention(X, murder)),(unknowing(X);save_life(Y)),not(abetment(_,_,Z)).
 no_offence(X,_) :- lawmustbechecked(4,93),communicate(X,Y),benefit(Y).
-no_offence(X,Z) :- lawmustbechecked(4,94),not(murder(Z)),not(death_penalty(X,Z)),death_threat(X),not(intention(X,Z)).
+no_offence(X,Z) :- lawmustbechecked(4,94),not(murder(Z)),not(death_penalty(Z)),death_threat(X),not(intention(X,Z)).
 no_offence(X,_) :- lawmustbechecked(4,95),person(Y),not(harms(X,Y)).
 no_offence(X,_) :- lawmustbechecked(4,96),private_def(X).
 
@@ -238,7 +236,7 @@ cond_for_no_private_defense(X,Y) :- not(harms(X,Y));(lawmustbechecked(4,99),publ
 %Rules
 
 abetment(X,Y,_) :- lawmustbechecked(5,107),instigates(X);conspires(X,Y);not(unknowing(X)).
-abetment(X,K,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(K,Z).
+abetment(X,K,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(Z).
 abetment(X,_,Z) :- lawmustbechecked(5,108),abetment(Y,_,Z), abetment(X,Y,_).
 abetment(X,Y,Z) :- write('Did '),write(X),write(' abet '),write(Y),write(' in commiting the crime '),write(Z),write("?"),provide_option.
 
@@ -314,7 +312,6 @@ imprisonment(X,hired_unlawful,0.5,_) :-  lawmustbechecked(8,159),person(Y),hired
 imprisonment(X,hired_unlawful,2,_) :-  lawmustbechecked(8,159),person(Y),hired(X, Y, unlawful_Assem),armed(X).
 imprisonment(X,affray,0.08333,100) :-  lawmustbechecked(8,160),person(Y),affray(X,Y).
 imprisonment(Y,affray,0.08333,100) :-  lawmustbechecked(8,160),person(X),affray(X,Y).
-
 imprisonment(X, Z, 777, 0) :- half_imprisonment(X,Z,_).
 imprisonment(X, Z, 888, 0) :- quart_imprisonment(X,Z,_).
 imprisonment(X, Z, 999, 0) :- eighth_imprisonment(X,Z,_).
@@ -322,20 +319,15 @@ imprisonment(X, Z, 15, 0) :- offence(X,Z).
 imprisonment(X, Z, 1111, 0) :- death_penalty(X,Z).
 
 death_penalty(X,war) :- lawmustbechecked(6,121),abetment(X,_,war) ; success_crime(war).
-death_penalty(_,Z) :- write('Is this offence, '),write(Z),write(' punishable by death?'),provide_option.
 death_penalty(X,mutiny) :- lawmustbechecked(7,132),abetment(X,Y, mutiny),soldier(Y),success_crime(mutiny),not(soldier(X)).
+death_penalty(Z) :- death_pen(Z);(write('Is this offence, '),write(Z),write(' punishable by death?'),provide_option,assert(death_pen(Z))).
+death_pen(X) :- check(X).
 
-
-
-%THE_CRIME
 soldier(X) :- lawmustbechecked(7,139),write('Is '),write(X),write(' a soldier?'),provide_option.
 
 
-%SIZE
 size(Assem,Y) :- write('What is the size of the assembly, '),write(Assem),write('?'),read(Y).
 
-
-%THE_CRIME
 
 memberof(X,Assem) :- write('Was '),write(X),write('a member of the assembly'), write(Assem), write("?"),provide_option.
 
