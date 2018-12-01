@@ -52,7 +52,7 @@ person(anyone).
 :- dynamic jud/1.
 :- dynamic foll_jud/1.
 :- dynamic acc/1.
-:- dynamic misf/1
+:- dynamic misf/1.
 :- dynamic inten/2.
 :- dynamic prev_h/2.
 :- dynamic u7/1.
@@ -112,13 +112,13 @@ person(anyone).
 :- dynamic husb/2.
 :- dynamic ishp/1.
 :- dynamic onr/2.
-:- dynamic unkn/12
+:- dynamic unkn/2.
 :- dynamic tok/1.
 :- dynamic armd/1.
 :- dynamic afry/1.
 :- dynamic disp/1.
 :- dynamic supp_r/1.
-:- dynamic inc_r/.
+:- dynamic inc_r/1.
 :- dynamic inc_v/1.
 :- dynamic pow/1.
 :- dynamic rin/1.
@@ -128,6 +128,7 @@ person(anyone).
 %Rules
 
 get_data :- write('What is the name of the suspect?\n'),read(X),write('\nWhat is the crime?\n'),read(Y),determine_punishment(X,Y).
+
 endprogram :-
 retractall(mist_of_fact(_)),
 retractall(bbbl(_)),
@@ -149,10 +150,9 @@ retractall(inx_a(_)),
 retractall(inx(_)),
 retractall(fer(_)),
 retractall(cons(_)),
-retractall(retractall(oih(_)),
+retractall(oih(_)),
 retractall(ben(_)),
 retractall(gua(_,_)),
-retractall(s_l(_)),
 retractall(icons(_)),
 retractall(comm(_,_)),
 retractall(mur(_)),
@@ -207,6 +207,7 @@ retractall(pow(_)),
 retractall(rin(_)),
 retractall(mast(_,_)),
 retractall(hird(_,_,_)).
+
 
 determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),endprogram,nl.
 determine_punishment(X,Y):- imprisonment(W,X,Y,Z),write('The punishment for '),write(W),write(', for the crime, '),
@@ -278,7 +279,7 @@ offence_ind_of_harm(Y) :- oih(Y);(lawmustbechecked(4,91),write('Is '),write(Y),w
 oih(X) :- check(X).
 
 benefit(Y) :- ben(Y);(write('Was the purpose of the act to benefit '),write(Y),write('?'),provide_option,assert(ben(Y))).
-ben(Y) :- check(X).
+ben(X) :- check(X).
 
 guardian(X,Y) :- gua(X,Y);(write('Is '),write(X),write(' the guardian of '),write(Y),write('?'),provide_option,assert(gua(X,Y))).
 gua(X,Y) :- check(X),check(Y).
@@ -339,7 +340,7 @@ success_crime(Z) :- succ_cr(Z);(write('Was the crime '), write(Z), write(' succe
 succ_cr(X) :- check(X).
 
 misleads(X,Y,Z) :- mis(X,Y,Z);(write('Has '), write(X), write(' misled '), write(Y), write(' in regards to '), write(Z),write('?'),provide_option,assert(mis(X,Y,Z))).
-mis(X,Y,Z) :- check(X).
+mis(X,Y,Z) :- check(X),check(Y),check(Z).
 
 collect_arms(X, Y) :- coll_arm(X,Y);(write('Has '), write(X), write(' engaged in the collection of arms for the purpose of '), write(Y), write('?'),provide_option,assert(coll_arm(X))).
 coll_arm(X,Y) :- check(X),check(Y).
@@ -387,7 +388,7 @@ cond_for_no_private_defense(X,Y) :- not(harms(X,Y));(lawmustbechecked(4,99),publ
 %Rules
 
 abetment(X,Y,_) :- lawmustbechecked(5,107),instigates(X);conspires(X,Y);not(unknowing(X)).
-abetment(X,K,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(Z).
+abetment(X,K,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(K,Z).
 abetment(X,_,Z) :- lawmustbechecked(5,108),abetment(Y,_,Z), abetment(X,Y,_).
 abetment(X,Y,Z) :- write('Did '),write(X),write(' abet '),write(Y),write(' in commiting the crime '),write(Z),write("?"),provide_option.
 
@@ -549,7 +550,7 @@ inc_r(X,Y) :- check(X,Y).
 incite_violence(X) :- inc_v(X);(write('Did '),write(X),write('try to incite violence?'),provide_option,assert(inc_v(X))).
 inc_v(X) :- check(X).
 
-placeOfWorship(X) :- pow(X);(write('Is '),write(X),write('a place of worship?'),provide_option,,assert(pow(X))).
+placeOfWorship(X) :- pow(X);(write('Is '),write(X),write('a place of worship?'),provide_option,assert(pow(X))).
 pow(X) :- check(X).
 
 rioting_happened_in(X) :- rin(X);(write('Did rioting happen in '),write(X),write('?'),provide_option,assert(rin(X))).
