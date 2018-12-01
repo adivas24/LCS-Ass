@@ -232,6 +232,9 @@ rin(X) :- always_false(X).
 master(X,Y) :- mast(X,Y);(write('Was '),write(X),write(' the master of '),write(Y),write("?"),provide_option,assert(mast(X,Y))).
 mast(X,Y) :- always_false(X),always_false(Y).
 
+seduce(X,Y) :- sed(X,Y);(write('Did '),write(X),write(' attempt to seduce '),write(Y),write("?"),provide_option,assert(sed(X,Y))).
+sed(X,Y) :- always_false(X),always_false(Y).
+
 hired(X,Y,Assem) :- hird(X,Y,Assem);(write('Did '),write(X),write(' try to hire '),write(Y),write(" for "), write(Assem), write("?"),provide_option,assert(hird(X,Y,Assem))).
 hird(X,Y,Assem) :- always_false(X),always_false(Y),always_false(Assem).
 
@@ -310,7 +313,7 @@ imprisonment(X,war,200,_) :- lawmustbechecked(6,122),collect_arms(X, war), inten
 imprisonment(X, war, 10, _) :- lawmustbechecked(6,123),intention(Y, war), concealment(X,Y).
 imprisonment(X, _, 7, _) :- lawmustbechecked(6,124),assault(X, vip), intention(X, restrain).
 imprisonment(X, _, 200, _) :- lawmustbechecked(6,124),spread_hatred(X).
-imprisonment(X, _, 200, _) :- lawmustbechecked(6,125),abetment(X,_, war1) ; success_crime(war1).
+imprisonment(X, _, 200, _) :- lawmustbechecked(6,125),(abetment(X,_, war1) ; success_crime(war1)).
 imprisonment(_, war2, 7, _) :- lawmustbechecked(6,126),success_crime(war2).
 imprisonment(X, _, 7, _) :- lawmustbechecked(6,127),receive_plundered_property(X).
 imprisonment(X, _, 200, _) :- lawmustbechecked(6,128),public_servant(X), custody(X, Y), escapes(Y), intention(X, escape).
