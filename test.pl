@@ -52,10 +52,161 @@ person(anyone).
 :- dynamic jud/1.
 :- dynamic foll_jud/1.
 :- dynamic acc/1.
+:- dynamic misf/1
+:- dynamic inten/2.
+:- dynamic prev_h/2.
+:- dynamic u7/1.
+:- dynamic u12/1.
+:- dynamic u18/1.
+:- dynamic imm/1.
+:- dynamic har/2.
+:- dynamic insa/1.
+:- dynamic unkn/1.
+:- dynamic inx_a/1.
+:- dynamic inx/1.
+:- dynamic fer/1.
+:- dynamic cons/1.
+:- dynamic oih/1.
+:- dynamic ben/1.
+:- dynamic gua/2.
+:- dynamic s_l/1.
+:- dynamic icons/1.
+:- dynamic comm/2.
+:- dynamic mur/1.
+:- dynamic d_t/1.
+:- dynamic pub_s/1.
+:- dynamic rpe/2.
+:- dynamic k_nap/2.
+:- dynamic conf/2.
+:- dynamic acd/2.
+:- dynamic inst/1.
+:- dynamic consp/2.
+:- dynamic wful/1.
+:- dynamic conc/2.
+:- dynamic misrep/1.
+:- dynamic consq/2.
+:- dynamic pres/1.
+:- dynamic succ_cr/1.
+:- dynamic mis/3.
+:- dynamic coll_arm/2.
+:- dynamic spr_h/1.
+:- dynamic rpp/1.
+:- dynamic esc/1.
+:- dynamic cust/2.
+:- dynamic death_pen/1.
+:- dynamic sold/1.
+:- dynamic sz/2.
+:- dynamic memof/2.
+:- dynamic vio/1.
+:- dynamic pub_tr/1.
+:- dynamic pub_in/1.
+:- dynamic pub_di/1.
+:- dynamic fig/2.
+:- dynamic ni/1.
+:- dynamic ni/2.
+:- dynamic pub_p/1.
+:- dynamic dist_p/2.
+:- dynamic aslt/2.
+:- dynamic supri/2.
+:- dynamic dstd/1.
+:- dynamic husb/2.
+:- dynamic ishp/1.
+:- dynamic onr/2.
+:- dynamic unkn/12
+:- dynamic tok/1.
+:- dynamic armd/1.
+:- dynamic afry/1.
+:- dynamic disp/1.
+:- dynamic supp_r/1.
+:- dynamic inc_r/.
+:- dynamic inc_v/1.
+:- dynamic pow/1.
+:- dynamic rin/1.
+:- dynamic mast/2.
+:- dynamic hird/3.
+
 %Rules
 
 get_data :- write('What is the name of the suspect?\n'),read(X),write('\nWhat is the crime?\n'),read(Y),determine_punishment(X,Y).
-endprogram :- retractall(mist_of_fact(_)),retractall(bbbl(_)),retractall(bjbl(_)),retractall(jud(_)),retractall(foll_jud(_)),retractall(acc(_)).
+endprogram :-
+retractall(mist_of_fact(_)),
+retractall(bbbl(_)),
+retractall(bjbl(_)),
+retractall(jud(_)),
+retractall(foll_jud(_)),
+retractall(acc(_)),
+retractall(misf(_)),
+retractall(inten(_,_)),
+retractall(prev_h(_,_)),
+retractall(u7(_)),
+retractall(u12(_)),
+retractall(u18(_)),
+retractall(imm(_)),
+retractall(har(_,_)),
+retractall(insa(_)),
+retractall(unkn(_)),
+retractall(inx_a(_)),
+retractall(inx(_)),
+retractall(fer(_)),
+retractall(cons(_)),
+retractall(retractall(oih(_)),
+retractall(ben(_)),
+retractall(gua(_,_)),
+retractall(s_l(_)),
+retractall(icons(_)),
+retractall(comm(_,_)),
+retractall(mur(_)),
+retractall(d_t(_)),
+retractall(pub_s(_)),
+retractall(rpe(_,_)),
+retractall(k_nap(_,_)),
+retractall(conf(_,_)),
+retractall(acd(_,_)),
+retractall(inst(_)),
+retractall(consp(_,_)),
+retractall(wful(_)),
+retractall(conc(_,_)),
+retractall(misrep(_)),
+retractall(consq(_,_)),
+retractall(pres(_)),
+retractall(succ_cr(_)),
+retractall(mis(_,_,_)),
+retractall(coll_arm(_,_)),
+retractall(spr_h(_)),
+retractall(rpp(_)),
+retractall(esc(_)),
+retractall(cust(_,_)),
+retractall(death_pen(_)),
+retractall(sold(_)),
+retractall(sz(_,_)),
+retractall(memof(_,_)),
+retractall(vio(_)),
+retractall(pub_tr(_)),
+retractall(pub_in(_)),
+retractall(pub_di(_)),
+retractall(fig(_,_)),
+retractall(ni(_)),
+retractall(ni(_,_)),
+retractall(pub_p(_)),
+retractall(dist_p(_,_)),
+retractall(aslt(_,_)),
+retractall(supri(_,_)),
+retractall(dstd(_)),
+retractall(husb(_,_)),
+retractall(ishp(_)),
+retractall(onr(_,_)),
+retractall(unkn(_,_)),
+retractall(tok(_)),
+retractall(armd(_)),
+retractall(afry(_)),
+retractall(disp(_)),
+retractall(supp_r(_)),
+retractall(inc_r(_,_)),
+retractall(inc_v(_)),
+retractall(pow(_)),
+retractall(rin(_)),
+retractall(mast(_,_)),
+retractall(hird(_,_,_)).
 
 determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),endprogram,nl.
 determine_punishment(X,Y):- imprisonment(W,X,Y,Z),write('The punishment for '),write(W),write(', for the crime, '),
@@ -323,103 +474,100 @@ death_penalty(X,mutiny) :- lawmustbechecked(7,132),abetment(X,Y, mutiny),soldier
 death_penalty(Z) :- death_pen(Z);(write('Is this offence, '),write(Z),write(' punishable by death?'),provide_option,assert(death_pen(Z))).
 death_pen(X) :- check(X).
 
-soldier(X) :- lawmustbechecked(7,139),write('Is '),write(X),write(' a soldier?'),provide_option.
+soldier(X) :- sold(X);(lawmustbechecked(7,139),write('Is '),write(X),write(' a soldier?'),provide_option,assert(sold(X))).
+sold(X) :- check(X).
 
+size(Assem,Y) :- sz(Assem,Y);(write('What is the size of the assembly, '),write(Assem),write('?'),read(Y),assert(sz(Assem,Y))).
+sz(X,Y) :- check(X),check(Y).
 
-size(Assem,Y) :- write('What is the size of the assembly, '),write(Assem),write('?'),read(Y).
+memberof(X,Assem) :- memof(X,Assem);(write('Was '),write(X),write('a member of the assembly'), write(Assem), write("?"),provide_option,assert(memof(X,Assem))).
+memof(X,Assem) :- check(X),check(Assem).
 
+violent(X) :- vio(X);(write('Was '),write(X),write(' violent?'),provide_option,assert(vio(X))).
+vio(X) :- check(X).
 
-memberof(X,Assem) :- write('Was '),write(X),write('a member of the assembly'), write(Assem), write("?"),provide_option.
+publishes_class_traitor(X) :- pub_tr(X);(write('Did '),write(X),write(' publish any imputation that any community of persons cannot bear true faith and allegiance to the Constitution of India or uphold the sovereignty and integrity of India?'),provide_option,assert(pub_tr(X))).
+pub_tr(X) :- check(X).
 
+publishes_class_inhuman(X) :- pub_in(X);(write('Did '),write(X),write(' publish that any community of persons shall be denied or deprived of their rights as citizens of India?'),provide_option,assert(pub_in(X))).
+pub_in(X) :- check(X).
 
-violent(X) :- write('Was '),write(X),write(' violent?'),provide_option.
+publishes_class_disharmony(X) :- pub_di(X);(write('Did '),write(X),write(' publish an assertion, counsel, plea or appeal concerning the obligation of any community of persons that causes or is likely to cause disharmony or feelings of enmity or hatred or ill-will between the community and other persons?'),provide_option,assert(pub_di(X))).
+pub_di(X) :- check(X).
 
+fight(X,Y) :- fig(X,Y);(write('Were '),write(X),write(" and "),write(Y),write(' fighting?'),provide_option,assert(fig(X,Y))).
+fig(X,Y) :- check(X),check(Y).
 
-publishes_class_traitor(X) :- write('Did '),write(X),write(' publish any imputation that any community of persons cannot bear true faith and allegiance to the Constitution of India or uphold the sovereignty and integrity of India?'),provide_option.
+in(X) :- ni(X);(write('Did this event take place in '),write(X),write('?'),provide_option,assert(ni(X))).
+ni(X) :- check(X).
 
+in(X,Y) :- ni(X,Y);(write('Was '),write(X),write(' in '),write(Y),write(' during the incident?'),provide_option,assert(ni(X,Y))).
+ni(X,Y) :- check(X),check(Y).
 
-publishes_class_inhuman(X) :- write('Did '),write(X),write(' publish that any community of persons shall be denied or deprived of their rights as citizens of India?'),provide_option.
+public_place(X) :- pub_p(X);(write('Is '),write(X),write('a public place?'),provide_option,assert(pub_p(X))).
+pub_p(X) :- check(X).
 
+disturb_the_peace(X,Y) :- dist_p(X,Y);(write('Did '),write(X), write("and"), write(Y) ,write(' disturb the peace?'),provide_option,assert(dist_p(X,Y))).
+dist_p(X,Y) :- check(X),check(Y).
 
-publishes_class_disharmony(X) :- write('Did '),write(X),write(' publish an assertion, counsel, plea or appeal concerning the obligation of any community of persons that causes or is likely to cause disharmony or feelings of enmity or hatred or ill-will between the community and other persons?'),provide_option.
+assaults(X,Y) :- aslt(X,Y);(write('Did '),write(X),write(' assault '),write(Y),write("?"),provide_option,assert(aslt(X,Y))).
+aslt(X,Y) :- check(X),check(Y).
 
+superior(X,Y) :- supri(X,Y);(write('Is '),write(X),write(' the superior of '),write(Y),write("?"),provide_option,assert(supri(X,Y))).
+supri(X,Y) :- check(X),check(Y).
 
-fight(X,Y) :- write('Were '),write(X),write(" and "),write(Y),write(' fighting?'),provide_option.
+deserted(X) :- dstd(X);(write('Did '),write(X),write('desert the armed forces?'),provide_option,assert(dstd(X))).
+dstd(X) :- check(X).
 
+husband(X,Y) :- husb(X,Y);(write('Is '),write(X),write(' the husband of '),write(Y),write("?"),provide_option,assert(husb(X,Y))).
+husb(X,Y) :- check(X),check(Y).
 
-in(X) :- write('Did this event take place in '),write(X),write('?'),provide_option.
+is_ship(X) :- ishp(X);(write('Is '),write(X),write('a ship?'),provide_option,assert(ishp(X))).
+ishp(X) :- check(X).
 
+owner(X,Y) :- onr(X,Y);(write('Is '),write(X),write('the owner of '),write(Y),write("?"),provide_option,assert(onr(X,Y))).
+onr(X,Y) :- check(X),check(Y).
 
-in(X,Y) :- write('Was '),write(X),write(' in '),write(Y),write(' during the incident?'),provide_option.
+unknowing(X,Y) :- unkn(X,Y);(write('Was '),write(X),write('unknowing of '),write(Y),write("?"),provide_option,assert(unkn(X,Y))).
+unkn(X,Y) :- check(X),check(Y).
 
+wears_military_token(X) :- tok(X);(write('Did '),write(X),write(' wear a military token?'),provide_option,assert(tok(X))).
+tok(X) :- check(X).
 
-public_place(X) :- write('Is '),write(X),write('a public place?'),provide_option.
+armed(X) :- armd(X);(write('Was '),write(X),write('armed or in possesion of a weapon?'),provide_option,assert(armd(X))).
+armd(X) :- check(X).
 
+commanded_to_disperse(X) :- disp(X);(write('Was '),write(X),write(' commanded to disperse?'),provide_option,assert(disp(X))).
+disp(X) :- check(X).
 
-disturb_the_peace(X,Y) :- write('Did '),write(X), write("and"), write(Y) ,write(' disturb the peace?'),provide_option.
+tried_to_suppress_riot(X) :- supp_r(X);(write('Did '),write(X),write(' try to surpress a riot?'),provide_option,assert(supp_r(X))).
+supp_r(X) :- check(X).
 
+incite_riot(X,Y) :- inc_r(X,Y);(write('Did '),write(X),write('try to incite'),write(Y),write("to riot?"),provide_option,assert(inc_r(X,Y))).
+inc_r(X,Y) :- check(X,Y).
 
-assaults(X,Y) :- write('Did '),write(X),write(' assault '),write(Y),write("?"),provide_option.
+incite_violence(X) :- inc_v(X);(write('Did '),write(X),write('try to incite violence?'),provide_option,assert(inc_v(X))).
+inc_v(X) :- check(X).
 
+placeOfWorship(X) :- pow(X);(write('Is '),write(X),write('a place of worship?'),provide_option,,assert(pow(X))).
+pow(X) :- check(X).
 
-superior(X,Y) :- write('Is '),write(X),write(' the superior of '),write(Y),write("?"),provide_option.
+rioting_happened_in(X) :- rin(X);(write('Did rioting happen in '),write(X),write('?'),provide_option,assert(rin(X))).
+rin(X) :- check(X).
 
+master(X,Y) :- mast(X,Y);(write('Was '),write(X),write(' the master of '),write(Y),write("?"),provide_option,assert(mast(X,Y))).
+mast(X,Y) :- check(X),check(Y).
 
-deserted(X) :- write('Did '),write(X),write('desert the armed forces?'),provide_option.
+hired(X,Y,Assem) :- hird(X,Y,Assem);(write('Did '),write(X),write(' try to hire '),write(Y),write(" for "), write(Assem), write("?"),provide_option,assert(hird(X,Y,Assem))).
+hird(X,Y,Assem) :- check(X),check(Y),check(Assem).
 
-
-husband(X,Y) :- write('Is '),write(X),write(' the husband of '),write(Y),write("?"),provide_option.
-
-
-is_ship(X) :- write('Is '),write(X),write('a ship?'),provide_option.
-
-
-owner(X,Y) :- write('Is '),write(X),write('the owner of '),write(Y),write("?"),provide_option.
-
-
-unknowing(X,Y) :- write('Was '),write(X),write('unknowing of '),write(Y),write("?"),provide_option.
-
-
-wears_military_token(X) :- write('Did '),write(X),write(' wear a military token?'),provide_option.
-
-
-armed(X) :- write('Was '),write(X),write('armed or in possesion of a weapon?'),provide_option.
-
-
-commanded_to_disperse(X) :- write('Was '),write(X),write(' commanded to disperse?'),provide_option.
-
-
-tried_to_suppress_riot(X) :- write('Did '),write(X),write(' try to surpress a riot?'),provide_option.
-
-
-incite_riot(X,Y) :- write('Did '),write(X),write('try to incite'),write(Y),write("to riot?"),provide_option.
-
-
-incite_violence(X) :- write('Did '),write(X),write('try to incite violence?'),provide_option.
-
-
-placeOfWorship(X) :- write('Is '),write(X),write('a place of worship?'),provide_option.
-
-
-rioting_happened_in(X) :- write('Did rioting happen in '),write(X),write('?'),provide_option.
-
-
-master(X,Y) :- write('Was '),write(X),write(' the master of '),write(Y),write("?"),provide_option.
-
-
-hired(X,Y,Assem) :- write('Did '),write(X),write(' try to hire '),write(Y),write(" for "), write(Assem), write("?"),provide_option.
-
-
-unlawful(Assem) :- lawmustbechecked(8,141),size(Assem,Y),Y >= 5, (intention(Assem,assault);intention(Assem,resist_law);intention(Assem,mischief);intention(Assem,robbery);intention(Assem,abet)).
-
+unlawful(Assem) :- lawmustbechecked(8,141),size(Assem,Y),(Y >= 5), (intention(Assem,assault);intention(Assem,resist_law);intention(Assem,mischief);intention(Assem,robbery);intention(Assem,abet)).
 
 unlawful_Assem_mem(X,Assem) :-  lawmustbechecked(8,142),memberof(X, Assem),unlawful(Assem).
 
-
 rioting(X) :-  lawmustbechecked(8,146),violent(Assem),unlawful(Assem),memberof(X,Assem).
-
 
 incite_class_hatred(X) :-  publishes_class_traitor(X);publishes_class_inhuman(X);publishes_class_disharmony(X).
 
-
-affray(X,Y) :-  fight(X,Y),in(X,Z),in(Y,Z),public_place(Z),disturb_the_peace(X,Y).
+affray(X,Y) :-  afry(X);(fight(X,Y),in(X,Z),in(Y,Z),public_place(Z),disturb_the_peace(X,Y),assert(afry(X))).
+afry(X) :- check(X).
