@@ -247,6 +247,9 @@ hird(X,Y,Assem) :- always_false(X),always_false(Y),always_false(Assem).
 didoffence(X,Y) :-  didof(X,Y);(write('Did '),write(X),write(' commit an '),write(Y),write("?"),provide_option,assert(didof(X,Y))).
 didof(X,_) :- always_false(X).
 
+didoffence(X) :-  didof(X);(write('Did '),write(X),write(' commit an offence?'),provide_option,assert(didof(X))).
+didof(X) :- always_false(X).
+
 unlawful(Assem) :- lawmustbechecked(8,141),size(Assem,Y),(Y >= 5), (intention(Assem,assault);intention(Assem,resist_law);intention(Assem,mischief);intention(Assem,robbery);intention(Assem,abet)).
 
 unlawful_Assem_mem(X,Assem) :-  lawmustbechecked(8,142),is_assem(Assem),memberof(X, Assem),unlawful(Assem).
@@ -276,8 +279,8 @@ no_offence(X,Z) :- lawmustbechecked(4,94),not(isamurder(X)),not(death_penalty(Z)
 no_offence(X,_) :- lawmustbechecked(4,95),person(Y),not(harms(X,Y)).
 no_offence(X,_) :- lawmustbechecked(4,96),person(Y),private_def(X,Y).
 
-private_def(Y,X) :- lawmustbechecked(4,97),(offence(X,_),harms(X,Y));offence(X,Z),prop_theft(Z),not(cond_for_no_private_defense(X,Y)).
-private_def(Y,X) :- lawmustbechecked(4,98),not(offence(X)),(under12(X);immature(X);crazy(X);intoxicated(X);mistake_of_fact(X)),not(cond_for_no_private_defense(X,Y)).
+private_def(Y,X) :- lawmustbechecked(4,97),(harms(X,Y);didoffence(X,robbery)),not(cond_for_no_private_defense(X,Y)).
+private_def(Y,X) :- lawmustbechecked(4,98),not(didoffence(X)),(under12(X);immature(X);crazy(X);intoxicated(X);mistake_of_fact(X)),not(cond_for_no_private_defense(X,Y)).
 private_def(Y,X) :- lawmustbechecked(4,101),murder(Y,X),cond1(X,Y).
 private_def(Y,X) :- lawmustbechecked(4,104),not(murder(Y,X)),offense(X,Y,Z),prop_theft(Z).
 
@@ -298,7 +301,7 @@ offence(X,P) :- lawmustbechecked(5,113),abetment(X,Y,Z), didoffence(Y,P),is_a_co
 offence(X,Z) :- lawmustbechecked(5,113),abettor(X,Z), isPresent(X,Z).
 offence(X,Z) :- offence_ind_of_harm(Z),not(no_offense(X,Z)).
 offence(X,Y) :- intoxicated(X), not(intoxicated_against_will(X)), off_req_intent(Y).
-offence(Y,Z) :- lawmustbechecked(8,149),unlawful(Assem),memberof(X,Assem),offence(X,Z),memberof(Y,Assem),intention(Assem,Z).
+offence(Y,Z) :- lawmustbechecked(8,149),unlawful(Assem),memberof(X,Assem),didoffence(X,Z),memberof(Y,Assem),intention(Assem,Z).
 offence(X,Crime) :- write('Did '),write(X),write('commit the crime: '),write(Crime),write("?"),provide_option.
 
 quart_imprisonment(X,Z) :- lawmustbechecked(5,116),abetment(X,Y,Z), not(success_crime(Z)), not(public_servant(X)), not(public_servant(Y)).
