@@ -3,7 +3,7 @@
 always_false(_) :- false.
 
 
-provide_option :- write('\nPress y for yes anything else for no.\n'),get(Y),nl,((Y is 89);(Y is 121)).
+provide_option :- write('\nPress y for yes anything else for no.\nPlease put only one character, no full-stops.\n'),get(Y),nl,((Y is 89);(Y is 121)).
 
 mistake_of_fact(X) :- mist_of_fact(X);(write('Is this a case of mistaken fact?'),provide_option,assert(mist_of_fact(X))).
 mist_of_fact(X) :- always_false(X).
