@@ -288,7 +288,7 @@ cond1(X,Y) :- lawmustbechecked(4,100),death_threat(Y);rape(X,Y);kidnapping(X,Y);
 cond_for_no_private_defense(X,Y) :- not(harms(X,Y));(lawmustbechecked(4,99),public_servant(X),believes_justified_by_law(X));following_judgement(X);(lawmustbechecked(4,106),murder(Y,X),not(cond1(X,Y))).
 
 abetment(X,Y,_) :- lawmustbechecked(5,107),instigates(X);(person(Y),conspires(X,Y));not(unknowing(X)).
-abetment(X,K,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(K,Z).
+abetment(X,K,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(Z).
 abetment(X,_,Z) :- lawmustbechecked(5,108),abetment(Y,_,Z), abetment(X,Y,_).
 abetment(X,Y,Z) :- write('Did '),write(X),write(' abet '),write(Y),write(' in commiting the crime '),write(Z),write("?"),provide_option.
 
@@ -305,22 +305,22 @@ offence(Y,Z) :- lawmustbechecked(8,149),unlawful(Assem),memberof(X,Assem),didoff
 offence(X,Crime) :- write('Did '),write(X),write('commit the crime: '),write(Crime),write("?"),provide_option.
 
 quart_imprisonment(X,Z) :- lawmustbechecked(5,116),abetment(X,Y,Z), not(success_crime(Z)), not(public_servant(X)), not(public_servant(Y)).
-quart_imprisonment(X,Z) :- lawmustbechecked(5,119),person(Y),misleads(X,Y,Z), public_servant(X),not(success_crime(Z)), not(death_penalty(Y,Z)).
-quart_imprisonment(X,Z) :- lawmustbechecked(5,120),person(Y),misleads(X,Y,Z), success_crime(Z), not(death_penalty(Y,Z)).
+quart_imprisonment(X,Z) :- lawmustbechecked(5,119),person(Y),misleads(X,Y,Z), public_servant(X),not(success_crime(Z)), not(death_penalty(Z)).
+quart_imprisonment(X,Z) :- lawmustbechecked(5,120),person(Y),misleads(X,Y,Z), success_crime(Z), not(death_penalty(Z)).
 
-eighth_imprisonment(X,Z) :- lawmustbechecked(5,120),person(Y),misleads(X,Y,Z), not(public_servant(X)), not(success_crime(Z)), not(death_penalty(Y,Z)).
+eighth_imprisonment(X,Z) :- lawmustbechecked(5,120),person(Y),misleads(X,Y,Z), not(public_servant(X)), not(success_crime(Z)), not(death_penalty(Z)).
 
 criminal_conspiracy(X,Z) :- lawmustbechecked(5,120),person(Y),agreement(X,Y,Z), intention(X,Z), intention(Y,Z).
 
 half_imprisonment(X,Z) :- lawmustbechecked(5,116),abetment(X,Y,Z), not(success_crime(Z)), (public_servant(X);public_servant(Y)).
-half_imprisonment(X,Z) :- lawmustbechecked(5,119),person(Y),misleads(X,Y,Z), public_servant(X), success_crime(Z), not(death_penalty(Y,Z)).
+half_imprisonment(X,Z) :- lawmustbechecked(5,119),person(Y),misleads(X,Y,Z), public_servant(X), success_crime(Z), not(death_penalty(Z)).
 
-imprisonment(X,Z,10,0) :- lawmustbechecked(5,113),person(Y),misleads(X,Y,Z), public_servant(X), success_crime(Z), death_penalty(Y,Z).
-imprisonment(X,Z,7,0) :- lawmustbechecked(5,115),abetment(X,Y,Z), death_penalty(Y,Z), not(success_crime(Z)), not(harms(Y,_)).
-imprisonment(X,Z,14,0) :- lawmustbechecked(5,115),abetment(X,Y,Z), death_penalty(Y,Z), not(success_crime(Z)), harms(Y,_).
-imprisonment(X,Z,7,0) :- lawmustbechecked(5,118),person(Y),misleads(X,Y,Z), death_penalty(Y,Z), success_crime(Z).
-imprisonment(X,Z,3,0) :- lawmustbechecked(5,118),person(Y),misleads(X,Y,Z), death_penalty(Y,Z), not(success_crime(Z)).
-imprisonment(X,Z,0.5,0) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), not(death_penalty(X,Z)).
+imprisonment(X,Z,10,0) :- lawmustbechecked(5,113),person(Y),misleads(X,Y,Z), public_servant(X), success_crime(Z), death_penalty(Z).
+imprisonment(X,Z,7,0) :- lawmustbechecked(5,115),abetment(X,Y,Z), death_penalty(Z), not(success_crime(Z)), not(harms(Y,_)).
+imprisonment(X,Z,14,0) :- lawmustbechecked(5,115),abetment(X,Y,Z), death_penalty(Z), not(success_crime(Z)), harms(Y,_).
+imprisonment(X,Z,7,0) :- lawmustbechecked(5,118),person(Y),misleads(X,Y,Z), death_penalty(Z), success_crime(Z).
+imprisonment(X,Z,3,0) :- lawmustbechecked(5,118),person(Y),misleads(X,Y,Z), death_penalty(Z), not(success_crime(Z)).
+imprisonment(X,Z,0.5,0) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), not(death_penalty(Z)).
 imprisonment(X,war,200,0) :- lawmustbechecked(6,121),criminal_conspiracy(X, war).
 imprisonment(X,war,200,0) :- lawmustbechecked(6,122),collect_arms(X, war), intention(X, war).
 imprisonment(X,war, 10, 0) :- lawmustbechecked(6,123),intention(Y, war), concealment(X,Y).
