@@ -53,8 +53,8 @@ determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has
 determine_punishment(X,Y):- imprisonment(X,Y,A,B),write('The punishment for '),write(X),write(', for the crime, '),write(Y),
 (((A is 200),write('is life imprisonment'));((A is 777),write('is half of the usual prison sentence'));((A is 888),
 write('is one-fourth of the usual prison sentence'));((A is 999),write('is one-eighth of the usual prison sentence'));
-((A is 1111),write('is death'));(write('\nis a prison sentence of upto '),write(A),write(' years'))),((A is 1111);
-((B is 0),write('or suitable fine'));(write(', or a fine of Rs. '),write(B),write(', or both.'))),endprogram,nl.
+((A is 1111),write('is death'));(write('\nis a prison sentence of upto '),write(A),write(' years '))),((A is 1111);
+((B is 0),write('or suitable fine'));(write(', or a fine of Rs. '),write(B)),write(', or both.')),endprogram,nl.
 
 determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not be defined in current scope.\nExiting.').
 
