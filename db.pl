@@ -96,4 +96,6 @@ retractall(pow(_)),
 retractall(rin(_)),
 retractall(mast(_,_)),
 retractall(hird(_,_,_)),
-retractall(agrmnt(_,_,_)).
+retractall(agrmnt(_,_,_)),
+retractall(didof(_,_)),
+retractall(didof(_)).
