@@ -143,7 +143,7 @@ spread_hatred(X) :- spr_h(X);(write('Has '), write(X), write(' brought or attemp
 excite disaffection towards, the Government established by law?'),provide_option,assert(spr_h(X))).
 spr_h(X) :- always_false(X).
 
-receive_plundered_property(X) :- rpp(X);(write('Has '), write(X), write(' recieved any plundered property?'),provide_option,assert(rpp(X))).
+receive_plundered_property(X) :- rpp(X);(write('Has '), write(X), write(' received any plundered property?'),provide_option,assert(rpp(X))).
 rpp(X) :- always_false(X).
 
 escapes(Y) :- esc(Y);(write('Has '), write(Y), write(' escaped from custody?'),provide_option,assert(esc(Y))).

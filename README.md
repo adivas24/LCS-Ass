@@ -89,7 +89,7 @@ What is the crime?
 DO NOT USE UPPER CASE
 Remember to put a full-stop at the end.
 |: murder.
-Has jay recieved any plundered property?
+Has jay received any plundered property?
 Enter 1. for yes anything else for no.
 Remember to put a full-stop at the end.
 |: 0.
@@ -107,6 +107,8 @@ Remember to put a full-stop at the end.
 The punishment for jay, for the crime, murder
 is a prison sentence of up to 15 years or suitable fine
 true .
+
+==END
 
 Improper termination of the program will result in an unstable state. Please re-run prolog to retry the program.
 As a good practice, it is advisable to restart (reload) the program after every execution of the program.
