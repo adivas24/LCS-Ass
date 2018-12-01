@@ -60,6 +60,7 @@ determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not b
 
 :- dynamic mist_of_fact/1.
 :- dynamic didof/2.
+:- dynamic didof/1.
 :- dynamic bbbl/1.
 :- dynamic bjbl/1.
 :- dynamic jud/1.
