@@ -1,8 +1,8 @@
 % Database
 
-
+is_assem(assembly).
 off_req_intent(murder).
-place(place).
+place('the place').
 prop_theft(robbery).
 prop_theft(theivery).
 prop_theft(stealing).
