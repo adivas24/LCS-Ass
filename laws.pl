@@ -319,9 +319,9 @@ imprisonment(X,sedition, 200, 0) :- lawmustbechecked(6,124),spread_hatred(X).
 imprisonment(X,abetment , 200, 0) :- lawmustbechecked(6,125),(abetment(X,_, war1).
 imprisonment(_, war2, 7, 0) :- lawmustbechecked(6,126),success_crime(war2).
 imprisonment(X, Z, 7, 0) :- lawmustbechecked(6,127),receive_plundered_property(X), isRobbery(Z).
-imprisonment(X, _, 200, 0) :- lawmustbechecked(6,128),public_servant(X), custody(X, Y), escapes(Y), intention(X, escape).
-imprisonment(X, _, 3, 0) :- lawmustbechecked(6,129),public_servant(X), custody(X, Y), escapes(Y), not(intention(X, escape)).
-imprisonment(X, _, 200, 0) :- lawmustbechecked(6,130),prisoner(Y), (escapes(Y) ; concealment(X,Y)), intention(X, escape).
+imprisonment(X, abetment, 200, 0) :- lawmustbechecked(6,128),public_servant(X), custody(X, Y), escapes(Y), intention(X, escape).
+imprisonment(X, negligence, 3, 0) :- lawmustbechecked(6,129),public_servant(X), custody(X, Y), escapes(Y), not(intention(X, escape)).
+imprisonment(X, abetment, 200, 0) :- lawmustbechecked(6,130),prisoner(Y), (escapes(Y) ; concealment(X,Y)), intention(X, escape).
 imprisonment(X, Z, 3, 0) :- lawmustbechecked(5,117),abetment(X,Assem,Z),size(Assem,Y),(Y>10).
 imprisonment(X,mutiny,200,0) :- lawmustbechecked(7,131),(abetment(X,Y, mutiny);seduce(X,Y)),soldier(Y),not(success_crime(mutiny)),not(soldier(X)).
 imprisonment(X,abetment,3,0) :-  lawmustbechecked(7,133),abetment(X,Y, assault),soldier(Y),assaults(Y,Z),superior(Z,Y),not(success_crime(assault)),not(soldier(X)).
