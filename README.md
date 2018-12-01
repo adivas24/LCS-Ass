@@ -40,6 +40,8 @@ The user will be prompted to enter one of three modes:
 
 *[Note. In mode 2 and 3, all laws that are not selected, will be suppressed. Hence, if a selected law is dependent on one or more of the suppressed laws, then it might fail to execute properly. Thus, it is important to ensure that all relevant laws are included in your selection.  Similarly, if the inputted crime is 'mutiny', and the laws in the user-inputted selection do not pertain to 'mutiny', then the program will fail to give the appropriate punishment. This is an intended feature, not a bug. End of Note]*
 
+*[Note. The laws in section 5 of the IPC are with regard to abetment. Thus, if section 5 is in the user selection, the program will take the trial for **Abetment** of the specified crime, not for the crime itself.]*
+
 After the above selection is complete, the user will be prompted to enter a name of the suspect on trial, and the nature of the crime. Ensure that the inputs begin with a lowercase letter and are followed by a full-stop.
 
 Following this, testing of the selected laws begins.
