@@ -291,11 +291,11 @@ offence(X,Y) :- intoxicated(X), not(intoxicated_against_will(X)), off_req_intent
 offence(Y,Z) :- lawmustbechecked(8,149),unlawful(Assem),memberof(X,Assem),offence(X,Z),memberof(Y,Assem),intention(Assem,Z).
 offence(X,Crime) :- write('Did '),write(X),write('commit the crime: '),write(Crime),write("?"),provide_option.
 
-quart_imprisonment(X,Z,_) :- lawmustbechecked(5,116),abetment(X,Y,Z), not(success_crime(Z)), not(public_servant(X)), not(public_servant(Y)).
-quart_imprisonment(X,Z,_) :- lawmustbechecked(5,119),misleads(X,Y,Z), public_servant(X),not(success_crime(Z)), not(death_penalty(Y,Z)).
-quart_imprisonment(X,Z,_) :- lawmustbechecked(5,120),misleads(X,Y,Z), success_crime(Z), not(death_penalty(Y,Z)).
+quart_imprisonment(X,Z) :- lawmustbechecked(5,116),abetment(X,Y,Z), not(success_crime(Z)), not(public_servant(X)), not(public_servant(Y)).
+quart_imprisonment(X,Z) :- lawmustbechecked(5,119),misleads(X,Y,Z), public_servant(X),not(success_crime(Z)), not(death_penalty(Y,Z)).
+quart_imprisonment(X,Z) :- lawmustbechecked(5,120),misleads(X,Y,Z), success_crime(Z), not(death_penalty(Y,Z)).
 
-eighth_imprisonment(X,Z,_) :- lawmustbechecked(5,120),misleads(X,Y,Z), not(public_servant(X)), not(success_crime(Z)), not(death_penalty(Y,Z)).
+eighth_imprisonment(X,Z) :- lawmustbechecked(5,120),misleads(X,Y,Z), not(public_servant(X)), not(success_crime(Z)), not(death_penalty(Y,Z)).
 
 criminal_conspiracy(X,Z) :- lawmustbechecked(5,120),agreement(X,Y,Z), intention(X,Z), intention(Y,Z).
 
@@ -350,8 +350,8 @@ imprisonment(X,hired_unlawful,2,_) :-  lawmustbechecked(8,159),person(Y),hired(X
 imprisonment(X,affray,0.08333,100) :-  lawmustbechecked(8,160),person(Y),affray(X,Y).
 imprisonment(Y,affray,0.08333,100) :-  lawmustbechecked(8,160),person(X),affray(X,Y).
 imprisonment(X, Z, 777, 0) :- half_imprisonment(X,Z,_).
-imprisonment(X, Z, 888, 0) :- quart_imprisonment(X,Z,_).
-imprisonment(X, Z, 999, 0) :- eighth_imprisonment(X,Z,_).
+imprisonment(X, Z, 888, 0) :- quart_imprisonment(X,Z).
+imprisonment(X, Z, 999, 0) :- eighth_imprisonment(X,Z).
 imprisonment(X, Z, 15, 0) :- offence(X,Z).
 imprisonment(X, Z, 1111, 0) :- death_penalty(X,Z).
 
