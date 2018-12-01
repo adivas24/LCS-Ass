@@ -139,6 +139,7 @@ determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not b
 :- dynamic checked_didoffence/0.
 :- dynamic checked_death_penalty/0.
 :- dynamic checked_didabet/0.
+:- dynamic didab/2.
 :- dynamic mist_of_fact/1.
 :- dynamic checkedabet/0.
 :- dynamic checkeddeath/0.
