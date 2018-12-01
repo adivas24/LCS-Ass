@@ -23,8 +23,11 @@ Our assignment submission contains the following:
 
 The program aims to interpret the laws and determine the punishment for a certain offence.
 It is interactive and will query the user for inputs, to determine the judgement.
-As of now, the program implements the laws described in Chapters IV, V, VA, VI, VII, and VIII
-of the IPC with the exception of the following laws:
+As of now, the program implements the laws described in Chapters IV, V, VA, VI, VII, and VIII of the IPC with the exception of the following laws:
+
+86,102,105,114,150,157
+
+These laws have not been explicitly made into prolog statements, either because they are very similar to previous laws, or because we did not fully understand them.
 
 After loading test.pl (command is '[\'test\']'), (backslashes in the aforementioned command are to be ignored) to begin execution of the program, execute the following command:
 
@@ -35,20 +38,12 @@ The user will be prompted to enter one of three modes:
 2. Selecting a **subset of sections**.
 3. Selecting a **subset of laws**.
 
-*[Note. In mode 2 and 3, all laws that are not selected, will be suppressed. Hence, if a selected law
-is dependent on one or more of the suppressed laws, then it might fail to execute properly.
-Thus, it is important to ensure that all relevant laws are included in your selection. 
-Similarly, if the inputted crime is 'mutiny', and the laws in the user-inputted selection 
-do not pertain to mutiny, then the program will fail to give the appropriate punishment. This
-is an intended feature, not a bug. End of Note]*
+*[Note. In mode 2 and 3, all laws that are not selected, will be suppressed. Hence, if a selected law is dependent on one or more of the suppressed laws, then it might fail to execute properly. Thus, it is important to ensure that all relevant laws are included in your selection.  Similarly, if the inputted crime is 'mutiny', and the laws in the user-inputted selection do not pertain to 'mutiny', then the program will fail to give the appropriate punishment. This is an intended feature, not a bug. End of Note]*
 
-After the above selection is complete, the user will be prompted to enter a name of the suspect
-on trial, and the nature of the crime. Ensure that the inputs begin with a lowercase letter and are followed by a full-stop.
+After the above selection is complete, the user will be prompted to enter a name of the suspect on trial, and the nature of the crime. Ensure that the inputs begin with a lowercase letter and are followed by a full-stop.
 
 Following this, testing of the selected laws begins.
-The program will sequentially go through the list of laws encoded and will query the user for
-relevant information in the form of dichotomous questions. Only one character (and no full-stop)
-needs to be given as input, **else the program will not behave in the expected manner.**
+The program will sequentially go through the list of laws encoded and will query the user for relevant information in the form of dichotomous questions. Only one character (and no full-stop) needs to be given as input, **else the program will not behave in the expected manner.**
 Entering 'y' or 'Y' will be interpreted as an affirmative. **All other inputs will result in negation.**
 
 When the program determines the judgement, it will print it out on the console.  
