@@ -45,7 +45,7 @@ lawmustbechecked(A,B) :- modeis(1);(modeis(2),thelistis(X),member(A,X));(modeis(
 
 get_data :- write('\nWhat is the name of the suspect?\nDO NOT USE UPPER CASE\nRemember to put a full-stop at the end.\n'),
 read(X),write('\nWhat is the crime?\nDO NOT USE UPPER CASE\nRemember to put a full-stop at the end.\n'),read(Y),
-['laws'],determine_punishment(X,Y).
+['laws2'],determine_punishment(X,Y).
 
 
 determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),endprogram,nl.
@@ -58,7 +58,90 @@ write('is one-fourth of the usual prison sentence'));((A is 999),write('is one-e
 
 determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not be defined in current scope.\nExiting.'),endprogram,nl.
 
+:- dynamic checked_mistake_of_fact/0.
+:- dynamic checked_agreement/0.
+:- dynamic checked_believes_bound_by_law/0.
+:- dynamic checked_believes_justified_by_law/0.
+:- dynamic checked_judge/0.
+:- dynamic checked_following_judgement/0.
+:- dynamic checked_accident/0.
+:- dynamic checked_misfortune/0.
+:- dynamic checked_intention/0.
+:- dynamic checked_prevent_harm/0.
+:- dynamic checked_under7/0.
+:- dynamic checked_under12/0.
+:- dynamic checked_under18/0.
+:- dynamic checked_immature/0.
+:- dynamic checked_harms/0.
+:- dynamic checked_crazy/0.
+:- dynamic checked_unknowing/0.
+:- dynamic checked_intoxicated_against_will/0.
+:- dynamic checked_intoxicated/0.
+:- dynamic checked_fear/0.
+:- dynamic checked_consent/0.
+:- dynamic checked_offence_ind_of_harm/0.
+:- dynamic checked_benefit/0.
+:- dynamic checked_guardian/0.
+:- dynamic checked_save_life/0.
+:- dynamic checked_imp_consent/0.
+:- dynamic checked_communicate/0.
+:- dynamic checked_murder/0.
+:- dynamic checked_death_threat/0.
+:- dynamic checked_public_servant/0.
+:- dynamic checked_rape/0.
+:- dynamic checked_kidnapping/0.
+:- dynamic checked_confinement/0.
+:- dynamic checked_acid/0.
+:- dynamic checked_conspires/0.
+:- dynamic checked_willful/0.
+:- dynamic checked_concealment/0.
+:- dynamic checked_misrepresentation/0.
+:- dynamic checked_is_a_consequence/0.
+:- dynamic checked_isPresent/0.
+:- dynamic checked_success_crime/0.
+:- dynamic checked_misleads/0.
+:- dynamic checked_collect_arms/0.
+:- dynamic checked_spread_hatred/0.
+:- dynamic checked_receive_plundered_property/0.
+:- dynamic checked_escapes/0.
+:- dynamic checked_custody/0.
+:- dynamic checked_soldier/0.
+:- dynamic checked_size/0.
+:- dynamic checked_memberof/0.
+:- dynamic checked_violent/0.
+:- dynamic checked_publishes_class_traitor/0.
+:- dynamic checked_publishes_class_inhuman/0.
+:- dynamic checked_publishes_class_disharmony/0.
+:- dynamic checked_fight/0.
+:- dynamic checked_in/0.
+:- dynamic checked_in/0.
+:- dynamic checked_public_place/0.
+:- dynamic checked_disturb_the_peace/0.
+:- dynamic checked_assaults/0.
+:- dynamic checked_superior/0.
+:- dynamic checked_deserted/0.
+:- dynamic checked_husband/0.
+:- dynamic checked_is_ship/0.
+:- dynamic checked_owner/0.
+:- dynamic checked_unknowing/0.
+:- dynamic checked_wears_military_token/0.
+:- dynamic checked_armed/0.
+:- dynamic checked_commanded_to_disperse/0.
+:- dynamic checked_tried_to_suppress_riot/0.
+:- dynamic checked_incite_riot/0.
+:- dynamic checked_incite_violence/0.
+:- dynamic checked_placeOfWorship/0.
+:- dynamic checked_rioting_happened_in/0.
+:- dynamic checked_master/0.
+:- dynamic checked_seduce/0.
+:- dynamic checked_hired/0.
+:- dynamic checked_didoffence/0.
+:- dynamic checked_didoffence/0.
+:- dynamic checked_death_penalty/0.
+:- dynamic checked_didabet/0.
 :- dynamic mist_of_fact/1.
+:- dynamic checkedabet/0.
+:- dynamic checkeddeath/0.
 :- dynamic didof/2.
 :- dynamic didof/1.
 :- dynamic bbbl/1.
