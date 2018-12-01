@@ -208,8 +208,8 @@ retractall(hird(_,_,_)).
 
 
 determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),endprogram,nl.
-determine_punishment(X,Y):- imprisonment(W,X,Y,Z),write('The punishment for '),write(W),write(', for the crime, '),
-write(X),write('\nis a prison sentence of upto '),write(Y),write(' years, or a fine of Rs. '),write(Z),write(', or both.').
+determine_punishment(X,Y):- imprisonment(X,Y,A,B),write('The punishment for '),write(X),write(', for the crime, '),
+write(Y),write('\nis a prison sentence of upto '),write(A),write(' years, or a fine of Rs. '),write(B),write(', or both.').
 
 provide_option :- nl,write('Press y for yes anything else for no.'),nl,get(Y),nl,((Y is 89);(Y is 121)).
 
