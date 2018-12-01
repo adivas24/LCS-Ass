@@ -29,10 +29,10 @@ misfortune(X) :- misf(X);(write('Would you classify this as a misfortune?'),prov
 misf(X) :- always_false(X).
 
 intention(X,Crime) :- inten(X,Crime);(write('Was it the intention of '),write(X),write(' to perform the crime, '),write(Crime),write("?"),provide_option,assert(inten(X,Crime))).
-inten(X,Crime) :- always_false(X),always_false(Crime).
+inten(X,_) :- always_false(X).
 
 prevent_harm(X,Z) :- prev_h(X,Z);(write('Was '),write(X),write(' trying to save '),write(Z),write('?'),provide_option,assert(prev_h(X,Z))).
-prev_h(X,Z) :- always_false(X),always_false(Z).
+prev_h(X,_) :- always_false(X).
 
 under7(X) :- u7(X);(write('Is '),write(X),write(' under the age of 7?'),provide_option,assert(u7(X))).
 u7(X) :- always_false(X).
@@ -47,7 +47,7 @@ immature(X) :- imm(X);(write('Is '),write(X),write(' not mature enough to compre
 imm(X) :- always_false(X).
 
 harms(X,Y) :- har(X,Y);(write('Did '),write(X),write(' harm '),write(Y),write('?'),provide_option,assert(har(X,Y))).
-har(X,Y) :- always_false(X),always_false(Y).
+har(X,_) :- always_false(X).
 
 
 checkedinsa :- false.
@@ -76,7 +76,7 @@ benefit(Y) :- ben(Y);(write('Was the purpose of the act to benefit '),write(Y),w
 ben(X) :- always_false(X).
 
 guardian(X,Y) :- gua(X,Y);(write('Is '),write(X),write(' the guardian of '),write(Y),write('?'),provide_option,assert(gua(X,Y))).
-gua(X,Y) :- always_false(X),always_false(Y).
+gua(X,_) :- always_false(X).
 
 save_life(Y) :- s_l(Y);(write('Was the purpose of the act to save the life of '),write(Y),write('?'),provide_option,assert(s_l(Y))).
 s_l(X) :- always_false(X).
@@ -85,7 +85,7 @@ imp_consent(Y) :- icons(Y);(write('Was '),write(Y),write(' incapable of giving c
 icons(X) :- always_false(X).
 
 communicate(X,Z) :- comm(X,Z);(write('Did '),write(X),write(' communicate some information which harmed '),write(Z),write('?'),provide_option,assert(comm(X,Z))).
-comm(X,Z) :- always_false(X),always_false(Z).
+comm(X,_) :- always_false(X).
 
 murder(X) :- mur(X);(write('Was '),write(X),write(' killed?'),provide_option,assert(mur(X))).
 mur(X) :- always_false(X).
@@ -97,35 +97,35 @@ public_servant(X) :- pub_s(X);(write('Was/Is '),write(X),write(' a public servan
 pub_s(X) :- always_false(X).
 
 rape(X,Y) :- rpe(X,Y);(write('Did '),write(X),write('attempt to rape '),write(Y),write('?'),provide_option,assert(rpe(X,Y))).
-rpe(X,Y) :- always_false(X),always_false(Y).
+rpe(X,_) :- always_false(X).
 
 kidnapping(X,Y) :- k_nap(X,Y);(write('Did '),write(X),write('attempt to kidnap/abduct '),write(Y),write('?'),provide_option,assert(k_nap(X,Y))).
-k_nap(X,Y) :- always_false(X),always_false(Y).
+k_nap(X,_) :- always_false(X).
 
 confinement(X,Y) :- conf(X,Y);(write('Did '),write(X),write('attempt to wrongfully confine '),write(Y),write('?'),provide_option,assert(conf(X,Y))).
-conf(X,Y) :- always_false(X),always_false(Y).
+conf(X,_) :- always_false(X).
 
 acid(X,Y) :- acd(X,Y);(write('Did '),write(X),write('attempt to throw acid on '),write(Y),write('?'),provide_option,assert(acd(X,Y))).
-acd(X,Y) :- always_false(X),always_false(Y).
+acd(X,_) :- always_false(X).
 
 instigates(X) :- inst(X);(willful(X),(concealment(X,_);misrepresentation(X)),assert(inst(X))).
 instigates(X) :- inst(X);(lawmustbechecked(4,107),write('Has '),write(X), write(' instigated anyone to commit the crime?'),provide_option,assert(inst(X))).
 inst(X) :- always_false(X).
 
 conspires(X,Y) :- consp(X,Y);(write('Has '),write(X),write(' engaged in a conspiracy with '),write(Y),write(' towards the crime?'),provide_option,assert(consp(X,Y))).
-consp(X,Y) :- always_false(X),always_false(Y).
+consp(X) :- always_false(X).
 
 willful(X) :- wful(X);(write('Did '), write(X), write(' perform the act of his own will?'),provide_option,assert(wful(X))).
 wful(X) :- always_false(X).
 
 concealment(X,Y) :- conc(X,Y);(write('Did '), write(X), write(' conceal facts related to the case?'),provide_option,assert(conc(X,Y))).
-conc(X,Y) :- always_false(X),always_false(Y).
+conc(X,_) :- always_false(X).
 
 misrepresentation(X) :- misrep(X);(write('Has '), write(X), write(' been involved in misrepresentation?'),provide_option,assert(misrep(X))).
 misrep(X) :- always_false(X).
 
 is_a_consequence(P,Z) :- consq(P,Z);(write('Is '), write(P), write(' a consequence of '), write(Z), write('?'),provide_option,assert(consq(P,Z))).
-consq(X,Y) :- always_false(X),always_false(Y).
+consq(X,_) :- always_false(X).
 
 isPresent(X) :- pres(X);(write('Was '), write(X), write(' present at the scene at the time?'),provide_option,assert(pres(X))).
 pres(X) :- always_false(X).
@@ -134,10 +134,10 @@ success_crime(Z) :- succ_cr(Z);(write('Was the crime '), write(Z), write(' succe
 succ_cr(X) :- always_false(X).
 
 misleads(X,Y,Z) :- mis(X,Y,Z);(write('Has '), write(X), write(' misled '), write(Y), write(' in regards to '), write(Z),write('?'),provide_option,assert(mis(X,Y,Z))).
-mis(X,Y,Z) :- always_false(X),always_false(Y),always_false(Z).
+mis(X,_,_) :- always_false(X).
 
 collect_arms(X, Y) :- coll_arm(X,Y);(write('Has '), write(X), write(' engaged in the collection of arms for the purpose of '), write(Y), write('?'),provide_option,assert(coll_arm(X))).
-coll_arm(X,Y) :- always_false(X),always_false(Y).
+coll_arm(X,_) :- always_false(X).
 
 spread_hatred(X) :- spr_h(X);(write('Has '), write(X), write(' brought or attempted to bring into hatred or contempt, or excited or attempted to
 excite disaffection towards, the Government established by law?'),provide_option,assert(spr_h(X))).
@@ -150,17 +150,17 @@ escapes(Y) :- esc(Y);(write('Has '), write(Y), write(' escaped from custody?'),p
 esc(X) :- always_false(X).
 
 custody(X,Y) :- ccust(X,Y);(write('Did '),write(X),write(' have '),write(Y), write(" in custody, or harbour "),write(Y),write("?"),provide_option,assert(cust(X,Y))).
-cust(X,Y) :- always_false(X),always_false(Y).
+cust(X,_) :- always_false(X).
 
 
 soldier(X) :- sold(X);(lawmustbechecked(7,139),write('Is '),write(X),write(' a soldier?'),provide_option,assert(sold(X))).
 sold(X) :- always_false(X).
 
 size(Assem,Y) :- sz(Assem,Y);(write('What is the size of the assembly, '),write(Assem),write('?'),read(Y),assert(sz(Assem,Y))).
-sz(X,Y) :- always_false(X),always_false(Y).
+sz(X,_) :- always_false(X).
 
 memberof(X,Assem) :- memof(X,Assem);(write('Was '),write(X),write('a member of the assembly'), write(Assem), write("?"),provide_option,assert(memof(X,Assem))).
-memof(X,Assem) :- always_false(X),always_false(Assem).
+memof(X,_) :- always_false(X).
 
 violent(X) :- vio(X);(write('Was '),write(X),write(' violent?'),provide_option,assert(vio(X))).
 vio(X) :- always_false(X).
@@ -175,40 +175,40 @@ publishes_class_disharmony(X) :- pub_di(X);(write('Did '),write(X),write(' publi
 pub_di(X) :- always_false(X).
 
 fight(X,Y) :- fig(X,Y);(write('Were '),write(X),write(" and "),write(Y),write(' fighting?'),provide_option,assert(fig(X,Y))).
-fig(X,Y) :- always_false(X),always_false(Y).
+fig(X,_) :- always_false(X).
 
 in(X) :- ni(X);(write('Did this event take place in '),write(X),write('?'),provide_option,assert(ni(X))).
 ni(X) :- always_false(X).
 
 in(X,Y) :- ni(X,Y);(write('Was '),write(X),write(' in '),write(Y),write(' during the incident?'),provide_option,assert(ni(X,Y))).
-ni(X,Y) :- always_false(X),always_false(Y).
+ni(X,_) :- always_false(X).
 
 public_place(X) :- pub_p(X);(write('Is '),write(X),write('a public place?'),provide_option,assert(pub_p(X))).
 pub_p(X) :- always_false(X).
 
 disturb_the_peace(X,Y) :- dist_p(X,Y);(write('Did '),write(X), write("and"), write(Y) ,write(' disturb the peace?'),provide_option,assert(dist_p(X,Y))).
-dist_p(X,Y) :- always_false(X),always_false(Y).
+dist_p(X,_) :- always_false(X).
 
 assaults(X,Y) :- aslt(X,Y);(write('Did '),write(X),write(' assault '),write(Y),write("?"),provide_option,assert(aslt(X,Y))).
-aslt(X,Y) :- always_false(X),always_false(Y).
+aslt(X,_) :- always_false(X).
 
 superior(X,Y) :- supri(X,Y);(write('Is '),write(X),write(' the superior of '),write(Y),write("?"),provide_option,assert(supri(X,Y))).
-supri(X,Y) :- always_false(X),always_false(Y).
+supri(X,_) :- always_false(X).
 
 deserted(X) :- dstd(X);(write('Did '),write(X),write('desert the armed forces?'),provide_option,assert(dstd(X))).
 dstd(X) :- always_false(X).
 
 husband(X,Y) :- husb(X,Y);(write('Is '),write(X),write(' the husband of '),write(Y),write("?"),provide_option,assert(husb(X,Y))).
-husb(X,Y) :- always_false(X),always_false(Y).
+husb(X,_) :- always_false(X).
 
 is_ship(X) :- ishp(X);(write('Is '),write(X),write('a ship?'),provide_option,assert(ishp(X))).
 ishp(X) :- always_false(X).
 
 owner(X,Y) :- onr(X,Y);(write('Is '),write(X),write('the owner of '),write(Y),write("?"),provide_option,assert(onr(X,Y))).
-onr(X,Y) :- always_false(X),always_false(Y).
+onr(X,_) :- always_false(X).
 
 unknowing(X,Y) :- unkn(X,Y);(write('Was '),write(X),write('unknowing of '),write(Y),write("?"),provide_option,assert(unkn(X,Y))).
-unkn(X,Y) :- always_false(X),always_false(Y).
+unkn(X,_) :- always_false(X).
 
 wears_military_token(X) :- tok(X);(write('Did '),write(X),write(' wear a military token?'),provide_option,assert(tok(X))).
 tok(X) :- always_false(X).
@@ -223,7 +223,7 @@ tried_to_suppress_riot(X) :- supp_r(X);(write('Did '),write(X),write(' try to su
 supp_r(X) :- always_false(X).
 
 incite_riot(X,Y) :- inc_r(X,Y);(write('Did '),write(X),write('try to incite'),write(Y),write("to riot?"),provide_option,assert(inc_r(X,Y))).
-inc_r(X,Y) :- always_false(X,Y).
+inc_r(X,_) :- always_false(X).
 
 incite_violence(X) :- inc_v(X);(write('Did '),write(X),write('try to incite violence?'),provide_option,assert(inc_v(X))).
 inc_v(X) :- always_false(X).
@@ -235,13 +235,13 @@ rioting_happened_in(X) :- rin(X);(write('Did rioting happen in '),write(X),write
 rin(X) :- always_false(X).
 
 master(X,Y) :- mast(X,Y);(write('Was '),write(X),write(' the master of '),write(Y),write("?"),provide_option,assert(mast(X,Y))).
-mast(X,Y) :- always_false(X),always_false(Y).
+mast(X,_) :- always_false(X).
 
 seduce(X,Y) :- sed(X,Y);(write('Did '),write(X),write(' attempt to seduce '),write(Y),write("?"),provide_option,assert(sed(X,Y))).
-sed(X,Y) :- always_false(X),always_false(Y).
+sed(X,_) :- always_false(X).
 
 hired(X,Y,Assem) :- hird(X,Y,Assem);(write('Did '),write(X),write(' try to hire '),write(Y),write(" for "), write(Assem), write("?"),provide_option,assert(hird(X,Y,Assem))).
-hird(X,Y,Assem) :- always_false(X),always_false(Y),always_false(Assem).
+hird(X,_,_) :- always_false(X).
 
 didoffence(X,Y) :-  didof(X,Y);(write('Did '),write(X),write(' commit an '),write(Y),write("?"),provide_option,assert(didof(X,Y))).
 didof(X,_) :- always_false(X).
