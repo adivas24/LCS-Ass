@@ -113,6 +113,7 @@ The punishment for jay, for the crime, murder
 is a prison sentence of up to 15 years or suitable fine
 true .
 
+At the end of judgement, if the decision does not seem correct, it is possible that the relevant laws required for correct judgement may not have been included. Please ensure that all relevant laws are included, when executing, if a specific punishment is expected. It is possible that the values default to pre-determined constants, which act as catch-alls.
 
 Improper termination of the program can result in an unstable state. Please re-run prolog to retry the program.
 It is advisable to restart (reload) the program after every execution, for optimum performance.
