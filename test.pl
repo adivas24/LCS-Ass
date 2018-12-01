@@ -1,7 +1,7 @@
 
 start :- ['db'],write("This program operates in three modes.\nMode 1 will use all
  laws in the Indian Penal Code Sections 4-8.\nMode 2 will allow you to choose
- specific sections.\nMode 3 allows you to select specifc laws in the range 76-160(inclusive),
+ specific sections.\nMode 3 allows you to select specific laws in the range 76-160(inclusive),
   to use.\nWhich mode would you like to use?\n Please remember to put a full-stop
   at the end of your selection.\n"),
 read(X),checkmode(X).
@@ -13,28 +13,28 @@ checkmode(_) :- write("\nPlease choose a correct mode.\n\n"),start.
 
 starttwo :- modeis(2),write('What law sections do you want to check?\n'),
 write('Please enter a number between 4 and 8 (inclusive)\n'),
-write('**Note: Inputs need to end with a fullstop\n\n'),
+write('**Note: Inputs need to end with a full-stop\n\n'),
 read(X),nl,(((X>3),(X<9),moretwo([X]));
 write('Invalid law. Please restart program'),!).
 
 moretwo(List) :- write('Do you want to add one more?\n'),
 write('Please enter a number between 4 and 8 (inclusive)\n'),
 write('Enter 0 if you have finished choosing.\n'),
-write('**Note: Inputs need to end with a fullstop\n\n'),
+write('**Note: Inputs need to end with a full-stop\n\n'),
 read(X),nl,(((X>3),(X<9),moretwo([X|List]));((X is 0),
 write('You have selected\n'),write(List),outcome(List));
 write('\nInvalid input. Exiting. Execute start. to restart the program.'),!).
 
 startthree :- modeis(3),write('What laws do you want to check?\n'),
 write('Please enter a number between 76 and 160 (inclusive)\n'),
-write('**Note: Inputs need to end with a fullstop\n\n'),
+write('**Note: Inputs need to end with a full-stop\n\n'),
 read(X),nl,(((X>75),(X<161),morethree([X]));
 write('\nInvalid law. Please restart program'),!).
 
 morethree(List) :- write('Do you want to add one more?\n'),
 write('Please enter a number between 76 and 160 (inclusive)\n'),
 write('Enter 0 if you have finished choosing.\n'),
-write('**Note: Inputs need to end with a fullstop\n\n'),
+write('**Note: Inputs need to end with a full-stop\n\n'),
 read(X),nl,(((X>75),(X<161),morethree([X|List]));((X is 0),
 write('You have selected\n'),write(List),outcome(List));
 write('\nInvalid input. Exiting. Execute start. to restart the program.'),!).
@@ -53,8 +53,8 @@ determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has
 determine_punishment(X,Y):- imprisonment(X,Y,A,B),write('The punishment for '),write(X),write(', for the crime, '),write(Y),
 (((A is 200),write('is life imprisonment'));((A is 777),write('is half of the usual prison sentence'));((A is 888),
 write('is one-fourth of the usual prison sentence'));((A is 999),write('is one-eighth of the usual prison sentence'));
-((A is 1111),write('is death'));(write('\nis a prison sentence of upto '),write(A),write(' years '))),((A is 1111);
-((B is 0),write('or suitable fine'));(write(', or a fine of Rs. '),write(B)),write(', or both.')),endprogram,nl.
+((A is 1111),write('is death'));(write('\nis a prison sentence of up to '),write(A),write(' years '))),((A is 1111);
+((B is 0),write('or suitable fine'));(write(', or a fine of Rs. '),write(B))),write(', or both.'),endprogram,nl.
 
 determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not be defined in current scope.\nExiting.'),endprogram,nl.
 

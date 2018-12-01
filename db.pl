@@ -7,6 +7,7 @@ prop_theft(robbery).
 prop_theft(theivery).
 prop_theft(stealing).
 arson(arson).
+soldier(soldier).
 person(anyone).
 victim(victim).
 

@@ -2,8 +2,7 @@
 
 always_false(_) :- false.
 
-
-provide_option :- write('\nPress y for yes anything else for no.\nPlease put only one character, no full-stops.\n'),get(Y),nl,((Y is 89);(Y is 121)).
+provide_option :- write('\nEnter 1. for yes anything else for no.\nRemember to put a full-stop at the end.\n'),read(Y),nl,(Y is 1).
 
 mistake_of_fact(X) :- mist_of_fact(X);(write('Is this a case of mistaken fact?'),provide_option,assert(mist_of_fact(X))).
 mist_of_fact(X) :- always_false(X).
@@ -30,10 +29,10 @@ misfortune(X) :- misf(X);(write('Would you classify this as a misfortune?'),prov
 misf(X) :- always_false(X).
 
 intention(X,Crime) :- inten(X,Crime);(write('Was it the intention of '),write(X),write(' to perform the crime, '),write(Crime),write("?"),provide_option,assert(inten(X,Crime))).
-inten(X,Crime) :- always_false(X),always_false(Crime).
+inten(X,_) :- always_false(X).
 
 prevent_harm(X,Z) :- prev_h(X,Z);(write('Was '),write(X),write(' trying to save '),write(Z),write('?'),provide_option,assert(prev_h(X,Z))).
-prev_h(X,Z) :- always_false(X),always_false(Z).
+prev_h(X,_) :- always_false(X).
 
 under7(X) :- u7(X);(write('Is '),write(X),write(' under the age of 7?'),provide_option,assert(u7(X))).
 u7(X) :- always_false(X).
@@ -48,7 +47,7 @@ immature(X) :- imm(X);(write('Is '),write(X),write(' not mature enough to compre
 imm(X) :- always_false(X).
 
 harms(X,Y) :- har(X,Y);(write('Did '),write(X),write(' harm '),write(Y),write('?'),provide_option,assert(har(X,Y))).
-har(X,Y) :- always_false(X),always_false(Y).
+har(X,_) :- always_false(X).
 
 
 checkedinsa :- false.
@@ -77,7 +76,7 @@ benefit(Y) :- ben(Y);(write('Was the purpose of the act to benefit '),write(Y),w
 ben(X) :- always_false(X).
 
 guardian(X,Y) :- gua(X,Y);(write('Is '),write(X),write(' the guardian of '),write(Y),write('?'),provide_option,assert(gua(X,Y))).
-gua(X,Y) :- always_false(X),always_false(Y).
+gua(X,_) :- always_false(X).
 
 save_life(Y) :- s_l(Y);(write('Was the purpose of the act to save the life of '),write(Y),write('?'),provide_option,assert(s_l(Y))).
 s_l(X) :- always_false(X).
@@ -86,7 +85,7 @@ imp_consent(Y) :- icons(Y);(write('Was '),write(Y),write(' incapable of giving c
 icons(X) :- always_false(X).
 
 communicate(X,Z) :- comm(X,Z);(write('Did '),write(X),write(' communicate some information which harmed '),write(Z),write('?'),provide_option,assert(comm(X,Z))).
-comm(X,Z) :- always_false(X),always_false(Z).
+comm(X,_) :- always_false(X).
 
 murder(X) :- mur(X);(write('Was '),write(X),write(' killed?'),provide_option,assert(mur(X))).
 mur(X) :- always_false(X).
@@ -98,35 +97,35 @@ public_servant(X) :- pub_s(X);(write('Was/Is '),write(X),write(' a public servan
 pub_s(X) :- always_false(X).
 
 rape(X,Y) :- rpe(X,Y);(write('Did '),write(X),write('attempt to rape '),write(Y),write('?'),provide_option,assert(rpe(X,Y))).
-rpe(X,Y) :- always_false(X),always_false(Y).
+rpe(X,_) :- always_false(X).
 
 kidnapping(X,Y) :- k_nap(X,Y);(write('Did '),write(X),write('attempt to kidnap/abduct '),write(Y),write('?'),provide_option,assert(k_nap(X,Y))).
-k_nap(X,Y) :- always_false(X),always_false(Y).
+k_nap(X,_) :- always_false(X).
 
 confinement(X,Y) :- conf(X,Y);(write('Did '),write(X),write('attempt to wrongfully confine '),write(Y),write('?'),provide_option,assert(conf(X,Y))).
-conf(X,Y) :- always_false(X),always_false(Y).
+conf(X,_) :- always_false(X).
 
 acid(X,Y) :- acd(X,Y);(write('Did '),write(X),write('attempt to throw acid on '),write(Y),write('?'),provide_option,assert(acd(X,Y))).
-acd(X,Y) :- always_false(X),always_false(Y).
+acd(X,_) :- always_false(X).
 
 instigates(X) :- inst(X);(willful(X),(concealment(X,_);misrepresentation(X)),assert(inst(X))).
 instigates(X) :- inst(X);(lawmustbechecked(4,107),write('Has '),write(X), write(' instigated anyone to commit the crime?'),provide_option,assert(inst(X))).
 inst(X) :- always_false(X).
 
 conspires(X,Y) :- consp(X,Y);(write('Has '),write(X),write(' engaged in a conspiracy with '),write(Y),write(' towards the crime?'),provide_option,assert(consp(X,Y))).
-consp(X,Y) :- always_false(X),always_false(Y).
+consp(X) :- always_false(X).
 
 willful(X) :- wful(X);(write('Did '), write(X), write(' perform the act of his own will?'),provide_option,assert(wful(X))).
 wful(X) :- always_false(X).
 
 concealment(X,Y) :- conc(X,Y);(write('Did '), write(X), write(' conceal facts related to the case?'),provide_option,assert(conc(X,Y))).
-conc(X,Y) :- always_false(X),always_false(Y).
+conc(X,_) :- always_false(X).
 
 misrepresentation(X) :- misrep(X);(write('Has '), write(X), write(' been involved in misrepresentation?'),provide_option,assert(misrep(X))).
 misrep(X) :- always_false(X).
 
 is_a_consequence(P,Z) :- consq(P,Z);(write('Is '), write(P), write(' a consequence of '), write(Z), write('?'),provide_option,assert(consq(P,Z))).
-consq(X,Y) :- always_false(X),always_false(Y).
+consq(X,_) :- always_false(X).
 
 isPresent(X) :- pres(X);(write('Was '), write(X), write(' present at the scene at the time?'),provide_option,assert(pres(X))).
 pres(X) :- always_false(X).
@@ -135,33 +134,33 @@ success_crime(Z) :- succ_cr(Z);(write('Was the crime '), write(Z), write(' succe
 succ_cr(X) :- always_false(X).
 
 misleads(X,Y,Z) :- mis(X,Y,Z);(write('Has '), write(X), write(' misled '), write(Y), write(' in regards to '), write(Z),write('?'),provide_option,assert(mis(X,Y,Z))).
-mis(X,Y,Z) :- always_false(X),always_false(Y),always_false(Z).
+mis(X,_,_) :- always_false(X).
 
 collect_arms(X, Y) :- coll_arm(X,Y);(write('Has '), write(X), write(' engaged in the collection of arms for the purpose of '), write(Y), write('?'),provide_option,assert(coll_arm(X))).
-coll_arm(X,Y) :- always_false(X),always_false(Y).
+coll_arm(X,_) :- always_false(X).
 
 spread_hatred(X) :- spr_h(X);(write('Has '), write(X), write(' brought or attempted to bring into hatred or contempt, or excited or attempted to
 excite disaffection towards, the Government established by law?'),provide_option,assert(spr_h(X))).
 spr_h(X) :- always_false(X).
 
-receive_plundered_property(X) :- rpp(X);(write('Has '), write(X), write(' recieved any plundered property?'),provide_option,assert(rpp(X))).
+receive_plundered_property(X) :- rpp(X);(write('Has '), write(X), write(' received any plundered property?'),provide_option,assert(rpp(X))).
 rpp(X) :- always_false(X).
 
 escapes(Y) :- esc(Y);(write('Has '), write(Y), write(' escaped from custody?'),provide_option,assert(esc(Y))).
 esc(X) :- always_false(X).
 
 custody(X,Y) :- ccust(X,Y);(write('Did '),write(X),write(' have '),write(Y), write(" in custody, or harbour "),write(Y),write("?"),provide_option,assert(cust(X,Y))).
-cust(X,Y) :- always_false(X),always_false(Y).
+cust(X,_) :- always_false(X).
 
 
 soldier(X) :- sold(X);(lawmustbechecked(7,139),write('Is '),write(X),write(' a soldier?'),provide_option,assert(sold(X))).
 sold(X) :- always_false(X).
 
 size(Assem,Y) :- sz(Assem,Y);(write('What is the size of the assembly, '),write(Assem),write('?'),read(Y),assert(sz(Assem,Y))).
-sz(X,Y) :- always_false(X),always_false(Y).
+sz(X,_) :- always_false(X).
 
 memberof(X,Assem) :- memof(X,Assem);(write('Was '),write(X),write('a member of the assembly'), write(Assem), write("?"),provide_option,assert(memof(X,Assem))).
-memof(X,Assem) :- always_false(X),always_false(Assem).
+memof(X,_) :- always_false(X).
 
 violent(X) :- vio(X);(write('Was '),write(X),write(' violent?'),provide_option,assert(vio(X))).
 vio(X) :- always_false(X).
@@ -176,40 +175,40 @@ publishes_class_disharmony(X) :- pub_di(X);(write('Did '),write(X),write(' publi
 pub_di(X) :- always_false(X).
 
 fight(X,Y) :- fig(X,Y);(write('Were '),write(X),write(" and "),write(Y),write(' fighting?'),provide_option,assert(fig(X,Y))).
-fig(X,Y) :- always_false(X),always_false(Y).
+fig(X,_) :- always_false(X).
 
 in(X) :- ni(X);(write('Did this event take place in '),write(X),write('?'),provide_option,assert(ni(X))).
 ni(X) :- always_false(X).
 
 in(X,Y) :- ni(X,Y);(write('Was '),write(X),write(' in '),write(Y),write(' during the incident?'),provide_option,assert(ni(X,Y))).
-ni(X,Y) :- always_false(X),always_false(Y).
+ni(X,_) :- always_false(X).
 
 public_place(X) :- pub_p(X);(write('Is '),write(X),write('a public place?'),provide_option,assert(pub_p(X))).
 pub_p(X) :- always_false(X).
 
 disturb_the_peace(X,Y) :- dist_p(X,Y);(write('Did '),write(X), write("and"), write(Y) ,write(' disturb the peace?'),provide_option,assert(dist_p(X,Y))).
-dist_p(X,Y) :- always_false(X),always_false(Y).
+dist_p(X,_) :- always_false(X).
 
 assaults(X,Y) :- aslt(X,Y);(write('Did '),write(X),write(' assault '),write(Y),write("?"),provide_option,assert(aslt(X,Y))).
-aslt(X,Y) :- always_false(X),always_false(Y).
+aslt(X,_) :- always_false(X).
 
 superior(X,Y) :- supri(X,Y);(write('Is '),write(X),write(' the superior of '),write(Y),write("?"),provide_option,assert(supri(X,Y))).
-supri(X,Y) :- always_false(X),always_false(Y).
+supri(X,_) :- always_false(X).
 
 deserted(X) :- dstd(X);(write('Did '),write(X),write('desert the armed forces?'),provide_option,assert(dstd(X))).
 dstd(X) :- always_false(X).
 
 husband(X,Y) :- husb(X,Y);(write('Is '),write(X),write(' the husband of '),write(Y),write("?"),provide_option,assert(husb(X,Y))).
-husb(X,Y) :- always_false(X),always_false(Y).
+husb(X,_) :- always_false(X).
 
 is_ship(X) :- ishp(X);(write('Is '),write(X),write('a ship?'),provide_option,assert(ishp(X))).
 ishp(X) :- always_false(X).
 
 owner(X,Y) :- onr(X,Y);(write('Is '),write(X),write('the owner of '),write(Y),write("?"),provide_option,assert(onr(X,Y))).
-onr(X,Y) :- always_false(X),always_false(Y).
+onr(X,_) :- always_false(X).
 
 unknowing(X,Y) :- unkn(X,Y);(write('Was '),write(X),write('unknowing of '),write(Y),write("?"),provide_option,assert(unkn(X,Y))).
-unkn(X,Y) :- always_false(X),always_false(Y).
+unkn(X,_) :- always_false(X).
 
 wears_military_token(X) :- tok(X);(write('Did '),write(X),write(' wear a military token?'),provide_option,assert(tok(X))).
 tok(X) :- always_false(X).
@@ -224,7 +223,7 @@ tried_to_suppress_riot(X) :- supp_r(X);(write('Did '),write(X),write(' try to su
 supp_r(X) :- always_false(X).
 
 incite_riot(X,Y) :- inc_r(X,Y);(write('Did '),write(X),write('try to incite'),write(Y),write("to riot?"),provide_option,assert(inc_r(X,Y))).
-inc_r(X,Y) :- always_false(X,Y).
+inc_r(X,_) :- always_false(X).
 
 incite_violence(X) :- inc_v(X);(write('Did '),write(X),write('try to incite violence?'),provide_option,assert(inc_v(X))).
 inc_v(X) :- always_false(X).
@@ -236,13 +235,13 @@ rioting_happened_in(X) :- rin(X);(write('Did rioting happen in '),write(X),write
 rin(X) :- always_false(X).
 
 master(X,Y) :- mast(X,Y);(write('Was '),write(X),write(' the master of '),write(Y),write("?"),provide_option,assert(mast(X,Y))).
-mast(X,Y) :- always_false(X),always_false(Y).
+mast(X,_) :- always_false(X).
 
 seduce(X,Y) :- sed(X,Y);(write('Did '),write(X),write(' attempt to seduce '),write(Y),write("?"),provide_option,assert(sed(X,Y))).
-sed(X,Y) :- always_false(X),always_false(Y).
+sed(X,_) :- always_false(X).
 
 hired(X,Y,Assem) :- hird(X,Y,Assem);(write('Did '),write(X),write(' try to hire '),write(Y),write(" for "), write(Assem), write("?"),provide_option,assert(hird(X,Y,Assem))).
-hird(X,Y,Assem) :- always_false(X),always_false(Y),always_false(Assem).
+hird(X,_,_) :- always_false(X).
 
 didoffence(X,Y) :-  didof(X,Y);(write('Did '),write(X),write(' commit an '),write(Y),write("?"),provide_option,assert(didof(X,Y))).
 didof(X,_) :- always_false(X).
@@ -250,7 +249,7 @@ didof(X,_) :- always_false(X).
 didoffence(X) :-  didof(X);(write('Did '),write(X),write(' commit an offence?'),provide_option,assert(didof(X))).
 didof(X) :- always_false(X).
 
-unlawful(Assem) :- lawmustbechecked(8,141),size(Assem,Y),(Y >= 5), (intention(Assem,assault);intention(Assem,resist_law);intention(Assem,mischief);intention(Assem,robbery);intention(Assem,abet)).
+unlawful(Assem) :- lawmustbechecked(8,141),is_assem(Assem),size(Assem,Y),(Y >= 5), (intention(Assem,assault);intention(Assem,resist_law);intention(Assem,mischief);intention(Assem,robbery);intention(Assem,abet)).
 
 unlawful_Assem_mem(X,Assem) :-  lawmustbechecked(8,142),is_assem(Assem),memberof(X, Assem),unlawful(Assem).
 
@@ -282,7 +281,7 @@ no_offence(X,Y) :- lawmustbechecked(4,85),intoxicated_against_will(X), (off_req_
 no_offence(X,Z) :- lawmustbechecked(4,87),not(intention(X,Z)),victim(Y), harms(X,Y), consent(Y), not(under18(Y)), not(offence_ind_of_harm(Z)).
 no_offence(X,Z) :- lawmustbechecked(4,88),not(intention(X, murder)),consent(Y),benefit(Y), not(offence_ind_of_harm(Z)).
 no_offence(X,Z) :- lawmustbechecked(4,89),person(Y),benefit(Y),(under12(X);crazy(X)),consent(Z),guardian(Z,Y),not(intention(X, murder);not(unknowing(X));abetment(X,Y,_),not(save_life(Y))), not(offense_ind_of_harm(Z)).
-no_offence(X,Z) :- lawmustbechecked(4,92),person(Y),benefit(Y),(consent(Y);imp_consent(Y)),not(intention(X, murder)),(unknowing(X);save_life(Y)),not(abetment(_,_,Z)).
+no_offence(X,Z) :- lawmustbechecked(4,92),person(Y),(consent(Y);imp_consent(Y)),not(intention(X, murder)),(unknowing(X);save_life(Y)),not(abetment(_,_,Z)).
 no_offence(X,_) :- lawmustbechecked(4,93),person(Y),communicate(X,Y),benefit(Y).
 no_offence(X,Z) :- lawmustbechecked(4,94),not(isamurder(X)),not(death_penalty(Z)),death_threat(X),not(intention(X,Z)).
 no_offence(X,_) :- lawmustbechecked(4,95),person(Y),not(harms(X,Y)).
@@ -310,10 +309,10 @@ offence(X,P) :- lawmustbechecked(5,113),abetment(X,Y,Z), didoffence(Y,P),is_a_co
 offence(X,Z) :- lawmustbechecked(5,113),abettor(X,Z), isPresent(X,Z).
 offence(X,Z) :- offence_ind_of_harm(Z),not(no_offense(X,Z)).
 offence(X,Y) :- intoxicated(X), not(intoxicated_against_will(X)), off_req_intent(Y).
-offence(Y,Z) :- lawmustbechecked(8,149),unlawful(Assem),memberof(X,Assem),didoffence(X,Z),memberof(Y,Assem),intention(Assem,Z).
+offence(Y,Z) :- lawmustbechecked(8,149),unlawful(Assem),person(X),memberof(X,Assem),didoffence(X,Z),memberof(Y,Assem),intention(Assem,Z).
 offence(X,Crime) :- write('Did '),write(X),write('commit the crime: '),write(Crime),write("?"),provide_option.
 
-quart_imprisonment(X,Z) :- lawmustbechecked(5,116),abetment(X,Y,Z), not(success_crime(Z)), not(public_servant(X)), not(public_servant(Y)).
+quart_imprisonment(X,Z) :- lawmustbechecked(5,116),person(Y),abetment(X,Y,Z), not(success_crime(Z)), not(public_servant(X)), not(public_servant(Y)).
 quart_imprisonment(X,Z) :- lawmustbechecked(5,119),person(Y),misleads(X,Y,Z), public_servant(X),not(success_crime(Z)), not(death_penalty(Z)).
 quart_imprisonment(X,Z) :- lawmustbechecked(5,120),person(Y),misleads(X,Y,Z), success_crime(Z), not(death_penalty(Z)).
 
@@ -321,12 +320,12 @@ eighth_imprisonment(X,Z) :- lawmustbechecked(5,120),person(Y),misleads(X,Y,Z), n
 
 criminal_conspiracy(X,Z) :- lawmustbechecked(5,120),person(Y),agreement(X,Y,Z), intention(X,Z), intention(Y,Z).
 
-half_imprisonment(X,Z) :- lawmustbechecked(5,116),abetment(X,Y,Z), not(success_crime(Z)), (public_servant(X);public_servant(Y)).
+half_imprisonment(X,Z) :- lawmustbechecked(5,116),victim(Y),abetment(X,Y,Z), not(success_crime(Z)), (public_servant(X);public_servant(Y)).
 half_imprisonment(X,Z) :- lawmustbechecked(5,119),person(Y),misleads(X,Y,Z), public_servant(X), success_crime(Z), not(death_penalty(Z)).
 
 imprisonment(X,Z,10,0) :- lawmustbechecked(5,113),person(Y),misleads(X,Y,Z), public_servant(X), success_crime(Z), death_penalty(Z).
-imprisonment(X,Z,7,0) :- lawmustbechecked(5,115),abetment(X,Y,Z), death_penalty(Z), not(success_crime(Z)), not(harms(Y,_)).
-imprisonment(X,Z,14,0) :- lawmustbechecked(5,115),abetment(X,Y,Z), death_penalty(Z), not(success_crime(Z)), harms(Y,_).
+imprisonment(X,Z,7,0) :- lawmustbechecked(5,115),person(Y),abetment(X,Y,Z), death_penalty(Z), not(success_crime(Z)), not(harms(Y,_)).
+imprisonment(X,Z,14,0) :- lawmustbechecked(5,115),person(Y),abetment(X,Y,Z), death_penalty(Z), not(success_crime(Z)), harms(Y,_).
 imprisonment(X,Z,7,0) :- lawmustbechecked(5,118),person(Y),misleads(X,Y,Z), death_penalty(Z), success_crime(Z).
 imprisonment(X,Z,3,0) :- lawmustbechecked(5,118),person(Y),misleads(X,Y,Z), death_penalty(Z), not(success_crime(Z)).
 imprisonment(X,Z,0.5,0) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), not(death_penalty(Z)).
@@ -338,15 +337,15 @@ imprisonment(X,sedition, 200, 0) :- lawmustbechecked(6,124),spread_hatred(X).
 imprisonment(X,abetment , 200, 0) :- lawmustbechecked(6,125),abetment(X,_, war_with_asiatic_country).
 imprisonment(_,war_with_friend_country, 7, 0) :- lawmustbechecked(6,126),success_crime(war_with_friend_country).
 imprisonment(X, Z, 7, 0) :- lawmustbechecked(6,127),receive_plundered_property(X), isRobbery(Z).
-imprisonment(X, abetment, 200, 0) :- lawmustbechecked(6,128),public_servant(X), custody(X, Y), escapes(Y), intention(X, escape).
-imprisonment(X, negligence, 3, 0) :- lawmustbechecked(6,129),public_servant(X), custody(X, Y), escapes(Y), not(intention(X, escape)).
+imprisonment(X, abetment, 200, 0) :- lawmustbechecked(6,128),prisoner(Y),public_servant(X), custody(X, Y), escapes(Y), intention(X, escape).
+imprisonment(X, negligence, 3, 0) :- lawmustbechecked(6,129),prisoner(Y),public_servant(X), custody(X, Y), escapes(Y), not(intention(X, escape)).
 imprisonment(X, abetment, 200, 0) :- lawmustbechecked(6,130),prisoner(Y), (escapes(Y) ; concealment(X,Y)), intention(X, escape).
 imprisonment(X, Z, 3, 0) :- lawmustbechecked(5,117),is_assem(Assem),abetment(X,Assem,Z),size(Assem,Y),(Y>10).
-imprisonment(X,mutiny,200,0) :- lawmustbechecked(7,131),(abetment(X,Y, mutiny);seduce(X,Y)),soldier(Y),not(success_crime(mutiny)),not(soldier(X)).
-imprisonment(X,abetment,3,0) :-  lawmustbechecked(7,133),abetment(X,Y, assault),soldier(Y),assaults(Y,Z),superior(Z,Y),not(success_crime(assault)),not(soldier(X)).
-imprisonment(X,abetment,7,0) :-  lawmustbechecked(7,134),abetment(X,Y, assault),soldier(Y),assaults(Y,Z),superior(Z,Y),success_crime(assault),not(soldier(X)).
-imprisonment(X,abetment,2,0) :-  lawmustbechecked(7,135),abetment(X,Y, desertion),soldier(Y),not(soldier(X)).
-imprisonment(X,harboring,2,0) :-  lawmustbechecked(7,136),soldier(Y),deserted(Y),custody(Y,X),not(husband(X,Y)),not(soldier(X)).
+imprisonment(X,mutiny,200,0) :- lawmustbechecked(7,131),person(Y),(abetment(X,Y, mutiny);seduce(X,Y)),soldier(Y),not(success_crime(mutiny)),not(soldier(X)).
+imprisonment(X,abetment,3,0) :-  lawmustbechecked(7,133),person(Y),abetment(X,Y, assault),soldier(Y),assaults(Y,Z),superior(Z,Y),not(success_crime(assault)),not(soldier(X)).
+imprisonment(X,abetment,7,0) :-  lawmustbechecked(7,134),person(Y),abetment(X,Y, assault),soldier(Y),assaults(Y,Z),superior(Z,Y),success_crime(assault),not(soldier(X)).
+imprisonment(X,abetment,2,0) :-  lawmustbechecked(7,135),person(Y),abetment(X,Y, desertion),soldier(Y),not(soldier(X)).
+imprisonment(X,harboring,2,0) :-  lawmustbechecked(7,136),person(Y),soldier(Y),deserted(Y),custody(Y,X),not(husband(X,Y)),not(soldier(X)).
 imprisonment(X,negligance,0,500) :-  lawmustbechecked(7,137),is_ship(V),owner(X, V),in(Y,V),soldier(Y),deserted(Y),unknowing(X,Y),not(soldier(X)).
 imprisonment(X,insubordination,0.5,0) :-  lawmustbechecked(7,138),abetment(X,Y, insubordination),soldier(Y),success_crime(insubordination),not(soldier(X)).
 imprisonment(X,wearing_military_token,0.25,500) :-  lawmustbechecked(8,140),not(soldier(X)),wears_military_token(X).
@@ -356,17 +355,17 @@ imprisonment(X,assembling,2,0) :-  lawmustbechecked(8,145),is_assem(Assem),unlaw
 imprisonment(X,assembling,2,0) :-  lawmustbechecked(8,147),rioting(X).
 imprisonment(X,assembling,3,0) :-  lawmustbechecked(8,148),rioting(X),armed(X).
 imprisonment(X,assembling,0.5,0) :-  lawmustbechecked(8,151),is_assem(Assem),commanded_to_disperse(Assem),memberof(X, Assem).
-imprisonment(X,assembling,3,0) :-  lawmustbechecked(8,152),(assaults(X,Y);threatens_to_assault(X,Y)),public_servant(Y),tried_to_suppress_riot(Y).
-imprisonment(Y,inciting_riot,1,0) :-  lawmustbechecked(8,153),rioting(X),incite_riot(Y,X).
-imprisonment(Y,inciting_riot,0.5,0) :-  lawmustbechecked(8,153),not(rioting(X)),incite_riot(Y,X).
-imprisonment(X,inciting_hatred,3,0) :-  lawmustbechecked(8,153),(incite_hatred(X); incite_violence(X)),not(in(Z)),placeOfWorship(Z).
-imprisonment(X,inciting_hatred,5,0) :-  lawmustbechecked(8,153),(incite_hatred(X); incite_violence(X)),in(Z),placeOfWorship(Z).
+imprisonment(X,assembling,3,0) :-  lawmustbechecked(8,152),(person(Y),assaults(X,Y);threatens_to_assault(X,Y)),victim(Y),public_servant(Y),tried_to_suppress_riot(Y).
+imprisonment(Y,inciting_riot,1,0) :-  lawmustbechecked(8,153),rioting(X),person(Y),incite_riot(Y,X).
+imprisonment(Y,inciting_riot,0.5,0) :-  lawmustbechecked(8,153),not(rioting(X)),person(Y),incite_riot(Y,X).
+imprisonment(X,inciting_hatred,3,0) :-  lawmustbechecked(8,153),(incite_hatred(X); incite_violence(X)),placeOfWorship(Z),not(in(Z)).
+imprisonment(X,inciting_hatred,5,0) :-  lawmustbechecked(8,153),(incite_hatred(X); incite_violence(X)),placeOfWorship(Z),in(Z).
 imprisonment(X,being_armed,0.5,2000) :-  lawmustbechecked(8,153),armed(X),is_assem(Assem),memberof(X, Assem).
-imprisonment(X,inciting_hatred,0.25,0) :-  lawmustbechecked(8,153),incite_class_hatred(X),not(in(Z)),placeOfWorship(Z).
-imprisonment(X,inciting_hatred,5,0) :-  lawmustbechecked(8,153),incite_class_hatred(X),in(Z),placeOfWorship(Z).
+imprisonment(X,inciting_hatred,0.25,0) :-  lawmustbechecked(8,153),incite_class_hatred(X),placeOfWorship(Z),not(in(Z)).
+imprisonment(X,inciting_hatred,5,0) :-  lawmustbechecked(8,153),incite_class_hatred(X),placeOfWorship(Z),in(Z).
 imprisonment(X,allow_riot,0,1000) :-  lawmustbechecked(8,154),place(Z),((is_assem(Assem),unlawful(Assem),in(Assem,Z));lawmustbechecked(7,155),(rioting_happened_in(Z),master(X,Z))),intention(X,allow_Assembly).
 imprisonment(Y,allow_riot,0,1000) :- lawmustbechecked(8,156),is_assem(Assem),unlawful(Assem),in(Assem,Z),master(X,Z),intention(X,allow_assembly),agent_of(Y,X),not(unknowing(Y,Assem)).
-imprisonment(X,harbouring,0.5,0) :-  lawmustbechecked(8,158),custody(Y,X),is_assem(Assem),unlawful_Assem_mem(Y,Assem).
+imprisonment(X,harbouring,0.5,0) :-  lawmustbechecked(8,158),person(Y),custody(Y,X),is_assem(Assem),unlawful_Assem_mem(Y,Assem).
 imprisonment(X,hiring_unlawful,0.5,0) :-  lawmustbechecked(8,159),person(Y),hired(X, Y, unlawful_Assem),not(armed(X)).
 imprisonment(X,hiring_unlawful,2,0) :-  lawmustbechecked(8,159),person(Y),hired(X, Y, unlawful_Assem),armed(X).
 imprisonment(X,affray,0.08333,100) :-  lawmustbechecked(8,160),person(Y),affray(X,Y).

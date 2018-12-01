@@ -50,6 +50,66 @@ Entering '1.' will be interpreted as an affirmative. **All other inputs will res
 
 When the program determines the judgement, it will print it out on the console.  
 
+Sample Run:
+?- start.
+This program operates in three modes.
+Mode 1 will use all
+ laws in the Indian Penal Code Sections 4-8.
+Mode 2 will allow you to choose
+ specific sections.
+Mode 3 allows you to select specific laws in the range 76-160(inclusive),
+  to use.
+Which mode would you like to use?
+ Please remember to put a full-stop
+  at the end of your selection.
+|: 2.
+
+You have selected Mode Two.
+What law sections do you want to check?
+Please enter a number between 4 and 8 (inclusive)
+Note: Inputs need to end with a full-stop.
+
+|: 6.
+
+Do you want to add one more?
+Please enter a number between 4 and 8 (inclusive)
+Enter 0 if you have finished choosing.
+Note: Inputs need to end with a full-stop
+
+|: 0.
+
+You have selected
+[6]
+What is the name of the suspect?
+DO NOT USE UPPER CASE
+Remember to put a full-stop at the end.
+|: jay.
+
+What is the crime?
+DO NOT USE UPPER CASE
+Remember to put a full-stop at the end.
+|: murder.
+Has jay received any plundered property?
+Enter 1. for yes anything else for no.
+Remember to put a full-stop at the end.
+|: 0.
+
+Was jay intoxicated?
+Enter 1. for yes anything else for no.
+Remember to put a full-stop at the end.
+|: 1.
+
+Was jay intoxicated against his/her will?
+Enter 1. for yes anything else for no.
+Remember to put a full-stop at the end.
+|: 0.
+
+The punishment for jay, for the crime, murder
+is a prison sentence of up to 15 years or suitable fine
+true .
+
+==END
+
 Improper termination of the program will result in an unstable state. Please re-run prolog to retry the program.
 As a good practice, it is advisable to restart (reload) the program after every execution of the program.
 
