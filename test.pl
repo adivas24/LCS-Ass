@@ -38,6 +38,7 @@ outcome(List) :- assert(thelistis(List)),get_data.
 lawmustbechecked(A,B) :- modeis(1);modeis(2),thelistis(X),member(A,X);modeis(3),thelistis(X),member(B,X).
 
 %Facts
+check(false).
 off_req_intent(murder).
 place(place).
 prop_theft(robbery).
@@ -45,20 +46,35 @@ prop_theft(theivery).
 prop_theft(stealing).
 arson(arson).
 person(anyone).
+:- dynamic mist_of_fact/1.
+:- dynamic bbbl/1.
+:- dynamic bjbl/1.
+:- dynamic jud/1.
 %Rules
 
 get_data :- write('What is the name of the suspect?\n'),read(X),write('\nWhat is the crime?\n'),read(Y),determine_punishment(X,Y).
+endprogram :- retractall(mist_of_fact(_)),retractall(bbbl(_)),retractall(bjbl(_)),retractall(jud(_)).
 
-determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),nl.
+determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),endprogram,nl.
 determine_punishment(X,Y):- imprisonment(W,X,Y,Z),write('The punishment for '),write(W),write(', for the crime, '),
 write(X),write('\nis a prison sentence of upto '),write(Y),write(' years, or a fine of Rs. '),write(Z),write(', or both.').
 
 provide_option :- nl,write('Press y for yes anything else for no.'),nl,get(Y),nl,((Y is 89);(Y is 121)).
-mistake_of_fact(_) :- write('Is this a case of mistaken fact?'),provide_option.
-believes_bound_by_law(X) :- write('Did '),write(X),write(' believe that he/she was bound by law to do so?'),provide_option.
-believes_justified_by_law(X) :- write('Did '),write(X),write(' believe that he/she was justified by law to do so?'),provide_option.
-judge(X) :- write('Was '),write(X),write(' a judge of the court?'),provide_option.
+
+mistake_of_fact(X) :- mist_of_fact(X);(write('Is this a case of mistaken fact?'),provide_option,assert(mist_of_fact(X))).
+mist_of_fact(X) :- check(X).
+
+believes_bound_by_law(X) :- write('Did '),write(X),write(' believe that he/she was bound by law to do so?'),provide_option,assert(bbbl(X)).
+bbbl(X) :- check(X).
+
+believes_justified_by_law(X) :- write('Did '),write(X),write(' believe that he/she was justified by law to do so?'),provide_option,assert(bjbl(X)).
+bjbl(X) :- check(X).
+
+judge(X) :- write('Was '),write(X),write(' a judge of the court?'),provide_option,assert(jud(X)).
+jud(X) :- check(X).
+
 following_judgement(X):- write('Was '),write(X),write(' following the judgement of a court or public servant?'),provide_option.
+
 accident(_) :- write('Was this an accident?'),provide_option.
 misfortune(_) :- write('Would you classify this as a misfortune?'),provide_option.
 intention(X,Crime) :- write('Was it the intention of '),write(X),write(' to perform the crime, '),write(Crime),write("?"),provide_option.
@@ -258,9 +274,6 @@ placeOfWorship(X) :- write('Is '),write(X),write('a place of worship?'),provide_
 rioting_happened_in(X) :- write('Did rioting happen in '),write(X),write('?'),provide_option.
 master(X,Y) :- write('Was '),write(X),write(' the master of '),write(Y),write("?"),provide_option.
 hired(X,Y,Assem) :- write('Did '),write(X),write(' try to hire '),write(Y),write(" for "), write(Assem), write("?"),provide_option.
-
-
-%soldier
 
 unlawful(Assem) :- lawmustbechecked(8,141),size(Assem,Y),Y >= 5, (intention(Assem,assault);intention(Assem,resist_law);intention(Assem,mischief);intention(Assem,robbery);intention(Assem,abet)).
 unlawful_Assem_mem(X,Assem) :-  lawmustbechecked(8,142),memberof(X, Assem),unlawful(Assem).
