@@ -10,6 +10,7 @@ arson(arson).
 person(anyone).
 anotherperson(another_person).
 victim(victim).
+someone(someone).
 
 isRobbery(stealing).
 isRobbery(robbery).
