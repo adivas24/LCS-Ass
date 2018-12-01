@@ -46,11 +46,12 @@ After the above selection is complete, the user will be prompted to enter a name
 
 Following this, testing of the selected laws begins.
 The program will sequentially go through the list of laws encoded and will query the user for relevant information in the form of dichotomous questions. Only one character (and no full-stop) needs to be given as input, **else the program will not behave in the expected manner.**
-Entering 'y' or 'Y' will be interpreted as an affirmative. **All other inputs will result in negation.**
+Entering '1.' will be interpreted as an affirmative. **All other inputs will result in negation.**
 
 When the program determines the judgement, it will print it out on the console.  
 
 Improper termination of the program will result in an unstable state. Please re-run prolog to retry the program.
+As a good practice, it is advisable to restart (reload) the program after every execution of the program.
 
 This program was tested on:
 - Ubuntu 16.04 (64-bit), SWI Prolog version 7.2.3
