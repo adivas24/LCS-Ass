@@ -280,7 +280,7 @@ private_def(Y) :- lawmustbechecked(4,104),not(murder(Y,X)),offense(X,Y,Z),prop_t
 cond1(X,Y) :- lawmustbechecked(4,100),death_threat(Y);rape(X,Y);kidnapping(X,Y);confinement(X,Y);acid(X,Y);(offense(X,Y,Z),(prop_theft(Z);lawmustbechecked(4,103),arson(Z))).
 cond_for_no_private_defense(X,Y) :- not(harms(X,Y));(lawmustbechecked(4,99),public_servant(X),believes_justified_by_law(X));following_judgement(X);(lawmustbechecked(4,106),murder(Y,X),not(cond1(X,Y))).
 
-abetment(X,Y,_) :- lawmustbechecked(5,107),instigates(X);conspires(X,Y);not(unknowing(X)).
+abetment(X,Y,_) :- lawmustbechecked(5,107),instigates(X);(person(Y),conspires(X,Y));not(unknowing(X)).
 abetment(X,K,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(K,Z).
 abetment(X,_,Z) :- lawmustbechecked(5,108),abetment(Y,_,Z), abetment(X,Y,_).
 abetment(X,Y,Z) :- write('Did '),write(X),write(' abet '),write(Y),write(' in commiting the crime '),write(Z),write("?"),provide_option.
