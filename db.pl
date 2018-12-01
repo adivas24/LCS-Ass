@@ -1,8 +1,18 @@
 % Database
 
+
+off_req_intent(murder).
+place(place).
+prop_theft(robbery).
+prop_theft(theivery).
+prop_theft(stealing).
+arson(arson).
+person(anyone).
+
+
 endprogram :-
 retractall(thelistis(_)),
-retractall(mist_of_fact(_)),
+retractall(mist_of_fact(,)),
 retractall(bbbl(_)),
 retractall(bjbl(_)),
 retractall(jud(_)),
