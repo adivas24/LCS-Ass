@@ -2,10 +2,14 @@
 
 always_false(_) :- false.
 
+
 provide_option :- write('\nPress y for yes anything else for no.\n'),get(Y),nl,((Y is 89);(Y is 121)).
 
 mistake_of_fact(X) :- mist_of_fact(X);(write('Is this a case of mistaken fact?'),provide_option,assert(mist_of_fact(X))).
 mist_of_fact(X) :- always_false(X).
+
+agreement(X,Y,Z) :- agrmnt(X,Y,Z);(write('Was there an agreement between '),write(X),write(' and '),write(Y),write(' to commit the crime '),write(Z),write('?'),provide_option,assert(agrmnt(X,Y,Z))).
+agrmnt(X,_,_) :- always_false(X).
 
 believes_bound_by_law(X) :- bbbl(X);(write('Did '),write(X),write(' believe that he/she was bound by law to do so?'),provide_option,assert(bbbl(X))).
 bbbl(X) :- always_false(X).
@@ -60,7 +64,7 @@ inx_a(X) :- always_false(X).
 intoxicated(X) :- inx(X);(write('Was '),write(X),write(' intoxicated?'),provide_option,assert(inx(X))).
 inx(X) :- always_false(X).
 
-fear(Y) :- fer(Y);(write('Was '),write(Y),write(' forced to give consent due to fear?'),provide_option,assert(fer(Y))).
+fear(Y) :- fer(Y);victim(Y),(write('Was '),write(Y),write(' forced to give consent due to fear?'),provide_option,assert(fer(Y))).
 fer(X) :- always_false(X).
 
 consent(Y) :- cons(Y);(lawmustbechecked(4,90),not(fear(Y);mistake_of_fact(Y);under12(Y);crazy(Y);intoxicated(Y)),not(unknowing(Y)),assert(cons(Y))).
