@@ -126,4 +126,4 @@ determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not b
 :- dynamic mast/2.
 :- dynamic hird/3.
 :- dynamic checkedinsa/0.
-:- dynamic agrmnt/3
+:- dynamic agrmnt/3.
