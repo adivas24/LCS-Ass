@@ -252,8 +252,8 @@ afry(X) :- always_false(X).
 no_offence(X,_) :- lawmustbechecked(4,76),mistake_of_fact(X),((lawmustbechecked(4,76),believes_bound_by_law(X)); (lawmustbechecked(4,79),believes_justified_by_law(X))).
 no_offence(X,_) :- lawmustbechecked(4,77),judge(X), believes_justified_by_law(X).
 no_offence(X,_) :- lawmustbechecked(4,78),following_judgement(X).
-no_offence(X,_) :- lawmustbechecked(4,80),(accident(X); misfortune(X)), not(intention(X,_)).
-no_offence(X,_) :- lawmustbechecked(4,81),person(Y),person(Z), harms(X,Y), not(intention(X,_)), prevent_harm(X,Z).
+no_offence(X,K) :- lawmustbechecked(4,80),(accident(X); misfortune(X)), not(intention(X,K)).
+no_offence(X,K) :- lawmustbechecked(4,81),person(Y),person(Z), harms(X,Y), not(intention(X,K)), prevent_harm(X,Z).
 no_offence(X,_) :- (lawmustbechecked(4,82),under7(X));(lawmustbechecked(4,83),(under12(X), immature(X))).
 no_offence(X,_) :- lawmustbechecked(4,84),crazy(X), unknowing(X).
 no_offence(X,Y) :- lawmustbechecked(4,85),intoxicated_against_will(X), (off_req_intent(Y);unknowing(X)).
