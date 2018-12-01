@@ -15,6 +15,7 @@ isRobbery(robbery).
 isRobbery(theft).
 isRobbery(loot).
 isamurder(murder).
+is_offence(offence).
 
 endprogram :-
 retractall(thelistis(_)),

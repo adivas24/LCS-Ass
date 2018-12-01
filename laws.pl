@@ -244,6 +244,9 @@ sed(X,Y) :- always_false(X),always_false(Y).
 hired(X,Y,Assem) :- hird(X,Y,Assem);(write('Did '),write(X),write(' try to hire '),write(Y),write(" for "), write(Assem), write("?"),provide_option,assert(hird(X,Y,Assem))).
 hird(X,Y,Assem) :- always_false(X),always_false(Y),always_false(Assem).
 
+didoffence(X,Y) :-  didof(X,Y);(write('Did '),write(X),write(' commit an '),write(Y),write("?"),provide_option,assert(didof(X,Y))).
+didof(X,_) :- always_false(X).
+
 unlawful(Assem) :- lawmustbechecked(8,141),size(Assem,Y),(Y >= 5), (intention(Assem,assault);intention(Assem,resist_law);intention(Assem,mischief);intention(Assem,robbery);intention(Assem,abet)).
 
 unlawful_Assem_mem(X,Assem) :-  lawmustbechecked(8,142),is_assem(Assem),memberof(X, Assem),unlawful(Assem).
@@ -289,8 +292,8 @@ abettor(X,Z):-   lawmustbechecked(5,108),not(under7(X)), not(crazy(X)), not(imma
 
 offence(X,Z):- lawmustbechecked(5,109),abetment(X,_,Z).
 offence(X,Z) :- lawmustbechecked(5,110),abettor(X,Z).
-offence(X,Z) :- (lawmustbechecked(5,111);lawmustbechecked(5,112)),abetment(X,Y,Z), offence(Y,P), (P \= Z).
-offence(X,P) :- lawmustbechecked(5,113),abetment(X,Y,Z), offence(Y,P),is_a_consequence(P,Z), not(unknowing(X)).
+offence(X,Z) :- (lawmustbechecked(5,111);lawmustbechecked(5,112)),person(Y),abetment(X,Y,Z), is_offence(P),didoffence(Y,P), (P \= Z).
+offence(X,P) :- lawmustbechecked(5,113),abetment(X,Y,Z), didoffence(Y,P),is_a_consequence(P,Z), not(unknowing(X)).
 offence(X,Z) :- lawmustbechecked(5,113),abettor(X,Z), isPresent(X,Z).
 offence(X,Z) :- offence_ind_of_harm(Z),not(no_offense(X,Z)).
 offence(X,Y) :- intoxicated(X), not(intoxicated_against_will(X)), off_req_intent(Y).
@@ -303,7 +306,7 @@ quart_imprisonment(X,Z) :- lawmustbechecked(5,120),person(Y),misleads(X,Y,Z), su
 
 eighth_imprisonment(X,Z) :- lawmustbechecked(5,120),person(Y),misleads(X,Y,Z), not(public_servant(X)), not(success_crime(Z)), not(death_penalty(Y,Z)).
 
-criminal_conspiracy(X,Z) :- lawmustbechecked(5,120),agreement(X,Y,Z), intention(X,Z), intention(Y,Z).
+criminal_conspiracy(X,Z) :- lawmustbechecked(5,120),person(Y),agreement(X,Y,Z), intention(X,Z), intention(Y,Z).
 
 half_imprisonment(X,Z) :- lawmustbechecked(5,116),abetment(X,Y,Z), not(success_crime(Z)), (public_servant(X);public_servant(Y)).
 half_imprisonment(X,Z) :- lawmustbechecked(5,119),person(Y),misleads(X,Y,Z), public_servant(X), success_crime(Z), not(death_penalty(Y,Z)).

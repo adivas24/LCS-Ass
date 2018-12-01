@@ -57,6 +57,7 @@ write('is one-fourth of the usual prison sentence'));((A is 999),write('is one-e
 determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not be defined in current scope.\nExiting.').
 
 :- dynamic mist_of_fact/1.
+:- dynamic didof/2.
 :- dynamic bbbl/1.
 :- dynamic bjbl/1.
 :- dynamic jud/1.
