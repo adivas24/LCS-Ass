@@ -2,8 +2,7 @@
 
 always_false(_) :- false.
 
-
-provide_option :- write('\nPress y for yes anything else for no.\nPlease put only one character, no full-stops.\n'),get(Y),nl,((Y is 89);(Y is 121)).
+provide_option :- write('\nEnter 1. for yes anything else for no.\nRemember to put a full-stop at the end.\n'),read(Y),nl,(Y is 1).
 
 mistake_of_fact(X) :- mist_of_fact(X);(write('Is this a case of mistaken fact?'),provide_option,assert(mist_of_fact(X))).
 mist_of_fact(X) :- always_false(X).
@@ -270,7 +269,7 @@ no_offence(X,Y) :- lawmustbechecked(4,85),intoxicated_against_will(X), (off_req_
 no_offence(X,Z) :- lawmustbechecked(4,87),not(intention(X,Z)),victim(Y), harms(X,Y), consent(Y), not(under18(Y)), not(offence_ind_of_harm(Z)).
 no_offence(X,Z) :- lawmustbechecked(4,88),not(intention(X, murder)),consent(Y),benefit(Y), not(offence_ind_of_harm(Z)).
 no_offence(X,Z) :- lawmustbechecked(4,89),person(Y),benefit(Y),(under12(X);crazy(X)),consent(Z),guardian(Z,Y),not(intention(X, murder);not(unknowing(X));abetment(X,Y,_),not(save_life(Y))), not(offense_ind_of_harm(Z)).
-no_offence(X,Z) :- lawmustbechecked(4,92),person(Y),benefit(Y),(consent(Y);imp_consent(Y)),not(intention(X, murder)),(unknowing(X);save_life(Y)),not(abetment(_,_,Z)).
+no_offence(X,Z) :- lawmustbechecked(4,92),person(Y),(consent(Y);imp_consent(Y)),not(intention(X, murder)),(unknowing(X);save_life(Y)),not(abetment(_,_,Z)).
 no_offence(X,_) :- lawmustbechecked(4,93),person(Y),communicate(X,Y),benefit(Y).
 no_offence(X,Z) :- lawmustbechecked(4,94),not(isamurder(X)),not(death_penalty(Z)),death_threat(X),not(intention(X,Z)).
 no_offence(X,_) :- lawmustbechecked(4,95),person(Y),not(harms(X,Y)).
