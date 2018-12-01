@@ -6,10 +6,10 @@ start :- ['db'],write("This program operates in three modes.\nMode 1 will use al
   at the end of your selection.\n"),
 read(X),checkmode(X).
 
-checkmode(1) :- write("You have selected Mode One.\n"),assert(modeis(1)),outcome([]).
-checkmode(2) :- write("You have selected Mode Two.\n"),assert(modeis(2)),starttwo.
-checkmode(3) :- write("You have selected Mode Three.\n"),assert(modeis(3)),startthree.
-checkmode(_) :- write("Please choose a correct mode.\n\n"),start.
+checkmode(1) :- write("\nYou have selected Mode One.\n"),assert(modeis(1)),outcome([]).
+checkmode(2) :- write("\nYou have selected Mode Two.\n"),assert(modeis(2)),starttwo.
+checkmode(3) :- write("\nYou have selected Mode Three.\n"),assert(modeis(3)),startthree.
+checkmode(_) :- write("\nPlease choose a correct mode.\n\n"),start.
 
 starttwo :- modeis(2),write('What law sections do you want to check?'),nl,
 write('Please enter a number between 4 and 8 (inclusive)'),nl,
@@ -47,8 +47,13 @@ read(X),write('\nWhat is the crime?\nDO NOT USE UPPER CASE\nRemember to put a fu
 
 
 determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),endprogram,nl.
+
 determine_punishment(X,Y):- imprisonment(X,Y,A,B),write('The punishment for '),write(X),write(', for the crime, '),write(Y),
-((A is 777),write('is half of the usual prison sentence');(write('\nis a prison sentence of upto '),write(A))),write(' years, or a fine of Rs. '),write(B),write(', or both.'),endprogram,nl.
+(((A is 200),write('is life imprisonment'));((A is 777),write('is half of the usual prison sentence'));((A is 888),
+write('is one-fourth of the usual prison sentence'));((A is 999),write('is one-eighth of the usual prison sentence'));
+((A is 1111),write('is death'));(write('\nis a prison sentence of upto '),write(A),write(' years'))),((A is 1111);
+((B is 0),write('or suitable fine'));(write(', or a fine of Rs. '),write(B),write(', or both.'))),endprogram,nl.
+
 determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not be defined in current scope.\nExiting.').
 
 :- dynamic mist_of_fact/1.
