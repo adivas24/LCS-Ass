@@ -189,4 +189,6 @@ retractall(mast(_,_)),
 retractall(hird(_,_,_)),
 retractall(agrmnt(_,_,_)),
 retractall(didof(_,_)),
-retractall(didof(_)).
+retractall(didof(_)),
+retractall(mor(_,_)),
+retractall(checked_morder).

@@ -4,288 +4,291 @@ Auxiliary Statements for law evaluation.  In most cases they prompt the user for
 The structure of these statements has been designed so that the program need not prompt the user the same query twice.
 */
 
-always_false(_) :- false.
-
 provide_option :- write('\nPress y for yes anything else for no.\nPlease put only one character, no full-stops.\n'),get(Y),nl,((Y is 89);(Y is 121)).
 checked_mistake_of_fact :- false.
 mistake_of_fact(X) :- mist_of_fact(X);(not(checked_mistake_of_fact),(write('Is this a case of mistaken fact?'),((provide_option,assert(mist_of_fact(X)));(assert(checked_mistake_of_fact),false)))).
-mist_of_fact(X) :- always_false(X).
+mist_of_fact(_) :- false.
 
 checked_agreement :- false.
 agreement(X,Y,Z) :- agrmnt(X,Y,Z);(not(checked_agreement),(write('Was there an agreement between '),write(X),write(' and '),write(Y),write(' to commit the crime '),write(Z),write('?'),((provide_option,assert(agrmnt(X,Y,Z)));(assert(checked_agreement),false)))).
-agrmnt(X,_,_) :- always_false(X).
+agrmnt(_,_,_) :- false.
 
 checked_believes_bound_by_law :- false.
 believes_bound_by_law(X) :- bbbl(X);(not(checked_believes_bound_by_law),(write('Did '),write(X),write(' believe that he/she was bound by law to do so?'),((provide_option,assert(bbbl(X)));(assert(checked_believes_bound_by_law),false)))).
-bbbl(X) :- always_false(X).
+bbbl(_) :- false.
 
 checked_believes_justified_by_law :- false.
 believes_justified_by_law(X) :- bjbl(X);(not(checked_believes_justified_by_law),(write('Did '),write(X),write(' believe that he/she was justified by law to do so?'),((provide_option,assert(bjbl(X)));(assert(checked_believes_justified_by_law),false)))).
-bjbl(X) :- always_false(X).
+bjbl(_) :- false.
 
 checked_judge :- false.
 judge(X) :- jud(X);(not(checked_judge),(write('Was '),write(X),write(' a judge of the court?'),((provide_option,assert(jud(X)));(assert(checked_judge),false)))).
-jud(X) :- always_false(X).
+jud(_) :- false.
 
 checked_following_judgement :- false.
 following_judgement(X):- foll_jud(X);(write('Was '),write(X),write(' following the judgement of a court or public servant?'),provide_option,assert(foll_jud(X))).
-foll_jud(X) :- always_false(X).
+foll_jud(_) :- false.
 
 checked_accident :- false.
 accident(X) :- acc(X);(not(checked_accident),(write('Was this an accident?'),((provide_option,assert(acc(X)));(assert(checked_accident),false)))).
-acc(X) :- always_false(X).
+acc(_) :- false.
 
 checked_misfortune :- false.
 misfortune(X) :- misf(X);(not(checked_misfortune),(write('Would you classify this as a misfortune?'),((provide_option,assert(misf(X)));(assert(checked_misfortune),false)))).
-misf(X) :- always_false(X).
+misf(_) :- false.
 
 checked_intention :- false.
 intention(X,Crime) :- inten(X,Crime);(not(checked_intention),(write('Was it the intention of '),write(X),write(' to perform the crime, '),write(Crime),write("?"),((provide_option,assert(inten(X,Crime)));(assert(checked_intention),false)))).
-inten(X,Crime) :- always_false(X),always_false(Crime).
+inten(_,_) :- false.
 
 checked_prevent_harm :- false.
 prevent_harm(X,Z) :- prev_h(X,Z);(not(checked_prevent_harm),(write('Was '),write(X),write(' trying to save '),write(Z),write('?'),((provide_option,assert(prev_h(X,Z)));(assert(checked_prevent_harm),false)))).
-prev_h(X,Z) :- always_false(X),always_false(Z).
+prev_h(_,_) :- false.
 
 checked_under7 :- false.
 under7(X) :- u7(X);(not(checked_under7),(write('Is '),write(X),write(' under the age of 7?'),((provide_option,assert(u7(X)));(assert(checked_under7),false)))).
-u7(X) :- always_false(X).
+u7(_) :- false.
 
 checked_under12 :- false.
 under12(X) :- u12(X);(not(checked_under12),(write('Is '),write(X),write(' under the age of 12?'),((provide_option,assert(u12(X)));(assert(checked_under12),false)))).
-u12(X) :- always_false(X).
+u12(_) :- false.
 
 checked_under18 :- false.
 under18(X) :- u18(X);(not(checked_under18),(write('Is '),write(X),write(' under the age of 18?'),((provide_option,assert(u18(X)));(assert(checked_under18),false)))).
-u18(X) :- always_false(X).
+u18(_) :- false.
 
 checked_immature :- false.
 immature(X) :- imm(X);(not(checked_immature),(write('Is '),write(X),write(' not mature enough to comprehend his actions?'),((provide_option,assert(imm(X)));(assert(checked_immature),false)))).
-imm(X) :- always_false(X).
+imm(_) :- false.
 
 checked_harms :- false.
 harms(X,Y) :- har(X,Y);(not(checked_harms),(write('Did '),write(X),write(' harm '),write(Y),write('?'),((provide_option,assert(har(X,Y)));(assert(checked_harms),false)))).
-har(X,Y) :- always_false(X),always_false(Y).
+har(_,_) :- false.
 
 checked_crazy :- false.
 crazy(X) :- (insa(X));(not(checked_crazy),((write('Is '),write(X),write(' clinically insane?'),(provide_option),assert(insa(X))))).
-insa(X) :- always_false(X).
+insa(_) :- false.
 
 checked_unknowing :- false.
 unknowing(X) :- unkn(X);(not(checked_unknowing),(write('Was '),write(X),write(' unanware of the consequences?'),((provide_option,assert(unkn(X)));(assert(checked_unknowing),false)))).
-unkn(X) :- always_false(X).
+unkn(_) :- false.
 
 checked_intoxicated_against_will :- false.
 intoxicated_against_will(X):- inx_a(X);(write('Was '),write(X),write(' intoxicated against his/her will?'),provide_option,assert(inx_a(X))).
-inx_a(X) :- always_false(X).
+inx_a(_) :- false.
 
 checked_intoxicated :- false.
 intoxicated(X) :- inx(X);(not(checked_intoxicated),(write('Was '),write(X),write(' intoxicated?'),((provide_option,assert(inx(X)));(assert(checked_intoxicated),false)))).
-inx(X) :- always_false(X).
+inx(_) :- false.
 
 checked_fear :- false.
 fear(Y) :- fer(Y);(not(checked_fear),victim(Y),(write('Was '),write(Y),write(' forced to give consent due to fear?'),((provide_option,assert(fer(Y)));(assert(checked_fear),false)))).
-fer(X) :- always_false(X).
+fer(_) :- false.
 
 checked_consent :- false.
 consent(Y) :- cons(Y);(not(checked_consent),(lawmustbechecked(4,90),not(fear(Y);mistake_of_fact(Y);under12(Y);crazy(Y);intoxicated(Y)),not(unknowing(Y)),assert(cons(Y)))).
-cons(X) :- always_false(X).
+cons(_) :- false.
 
 checked_offence_ind_of_harm :- false.
 offence_ind_of_harm(Y) :- oih(Y);(not(checked_offence_ind_of_harm),(lawmustbechecked(4,91),write('Is '),write(Y),write(' an offense, irrespective of the harm it causes?'),((provide_option,assert(oih(Y)));(assert(checked_offence_ind_of_harm),false)))).
-oih(X) :- always_false(X).
+oih(_) :- false.
 
 checked_benefit :- false.
 benefit(Y) :- ben(Y);(not(checked_benefit),(write('Was the purpose of the act to benefit '),write(Y),write('?'),((provide_option,assert(ben(Y)));(assert(checked_benefit),false)))).
-ben(X) :- always_false(X).
+ben(_) :- false.
 
 checked_guardian :- false.
 guardian(X,Y) :- gua(X,Y);(not(checked_guardian),(write('Is '),write(X),write(' the guardian of '),write(Y),write('?'),((provide_option,assert(gua(X,Y)));(assert(checked_guardian),false)))).
-gua(X,Y) :- always_false(X),always_false(Y).
+gua(_,_) :- false.
 
 checked_save_life :- false.
 save_life(Y) :- s_l(Y);(not(checked_save_life),(write('Was the purpose of the act to save the life of '),write(Y),write('?'),((provide_option,assert(s_l(Y)));(assert(checked_save_life),false)))).
-s_l(X) :- always_false(X).
+s_l(_) :- false.
 
 checked_imp_consent :- false.
 imp_consent(Y) :- icons(Y);(not(checked_imp_consent),(write('Was '),write(Y),write(' incapable of giving consent?'),((provide_option,assert(icons(Y)));(assert(checked_imp_consent),false)))).
-icons(X) :- always_false(X).
+icons(_) :- false.
 
 checked_communicate :- false.
 communicate(X,Z) :- comm(X,Z);(not(checked_communicate),(write('Did '),write(X),write(' communicate some information which harmed '),write(Z),write('?'),((provide_option,assert(comm(X,Z)));(assert(checked_communicate),false)))).
-comm(X,Z) :- always_false(X),always_false(Z).
+comm(_,_) :- false.
 
 checked_murder :- false.
 murder(X) :- mur(X);(not(checked_murder),(write('Was '),write(X),write(' killed?'),((provide_option,assert(mur(X)));(assert(checked_murder),false)))).
-mur(X) :- always_false(X).
+mur(_) :- false.
+
+
+checked_morder :- false.
+murder(X,Y) :- mor(X,Y);(not(checked_morder),(write('Did '),write(X),write(' kill '),write(Y),write('?'),((provide_option,assert(mor(X,Y)));(assert(checked_morder),false)))).
+mor(_,_) :- false.
 
 checked_death_threat :- false.
 death_threat(X) :- d_t(X);(not(checked_death_threat),(write('Was '),write(X),write(' under threat of death?'),((provide_option,assert(d_t(X)));(assert(checked_death_threat),false)))).
-d_t(X) :- always_false(X).
+d_t(_) :- false.
 
 checked_public_servant :- false.
 public_servant(X) :- pub_s(X);(not(checked_public_servant),(write('Was/Is '),write(X),write(' a public servant?'),((provide_option,assert(pub_s(X)));(assert(checked_public_servant),false)))).
-pub_s(X) :- always_false(X).
+pub_s(_) :- false.
 
 checked_rape :- false.
 rape(X,Y) :- rpe(X,Y);(not(checked_rape),(write('Did '),write(X),write('attempt to rape '),write(Y),write('?'),((provide_option,assert(rpe(X,Y)));(assert(checked_rape),false)))).
-rpe(X,Y) :- always_false(X),always_false(Y).
+rpe(_,_) :- false.
 
 checked_kidnapping :- false.
 kidnapping(X,Y) :- k_nap(X,Y);(not(checked_kidnapping),(write('Did '),write(X),write('attempt to kidnap/abduct '),write(Y),write('?'),((provide_option,assert(k_nap(X,Y)));(assert(checked_kidnapping),false)))).
-k_nap(X,Y) :- always_false(X),always_false(Y).
+k_nap(_,_) :- false.
 
 checked_confinement :- false.
 confinement(X,Y) :- conf(X,Y);(not(checked_confinement),(write('Did '),write(X),write('attempt to wrongfully confine '),write(Y),write('?'),((provide_option,assert(conf(X,Y)));(assert(checked_confinement),false)))).
-conf(X,Y) :- always_false(X),always_false(Y).
+conf(_,_) :- false.
 
 checked_acid :- false.
 acid(X,Y) :- acd(X,Y);(not(checked_acid),(write('Did '),write(X),write('attempt to throw acid on '),write(Y),write('?'),((provide_option,assert(acd(X,Y)));(assert(checked_acid),false)))).
-acd(X,Y) :- always_false(X),always_false(Y).
+acd(_,_) :- false.
 
 checked_conspires :- false.
 conspires(X,Y) :- consp(X,Y);(not(checked_conspires),(write('Has '),write(X),write(' engaged in a conspiracy with '),write(Y),write(' towards the crime?'),((provide_option,assert(consp(X,Y)));(assert(checked_conspires),false)))).
-consp(X,Y) :- always_false(X),always_false(Y).
+consp(_,_) :- false.
 
 checked_willful :- false.
 willful(X) :- wful(X);(not(checked_willful),(write('Did '), write(X), write(' perform the act of his own will?'),((provide_option,assert(wful(X)));(assert(checked_willful),false)))).
-wful(X) :- always_false(X).
+wful(_) :- false.
 
 checked_concealment :- false.
 concealment(X,Y) :- conc(X,Y);(not(checked_concealment),(write('Did '), write(X), write(' conceal facts related to the case?'),((provide_option,assert(conc(X,Y)));(assert(checked_concealment),false)))).
-conc(X,Y) :- always_false(X),always_false(Y).
+conc(_,_) :- false.
 
 checked_misrepresentation :- false.
 misrepresentation(X) :- misrep(X);(not(checked_misrepresentation),(write('Has '), write(X), write(' been involved in misrepresentation?'),((provide_option,assert(misrep(X)));(assert(checked_misrepresentation),false)))).
-misrep(X) :- always_false(X).
+misrep(_) :- false.
 
 checked_is_a_consequence :- false.
 is_a_consequence(P,Z) :- consq(P,Z);(not(checked_is_a_consequence),(write('Is '), write(P), write(' a consequence of '), write(Z), write('?'),((provide_option,assert(consq(P,Z)));(assert(checked_is_a_consequence),false)))).
-consq(X,Y) :- always_false(X),always_false(Y).
+consq(_,_) :- false.
 
 checked_isPresent :- false.
 isPresent(X) :- pres(X);(not(checked_isPresent),(write('Was '), write(X), write(' present at the scene at the time?'),((provide_option,assert(pres(X)));(assert(checked_isPresent),false)))).
-pres(X) :- always_false(X).
+pres(_) :- false.
 
 checked_success_crime :- false.
 success_crime(Z) :- succ_cr(Z);(not(checked_success_crime),(write('Was the crime '), write(Z), write(' successful?'),((provide_option,assert(succ_cr(Z)));(assert(checked_success_crime),false)))).
-succ_cr(X) :- always_false(X).
+succ_cr(_) :- false.
 
 checked_misleads :- false.
 misleads(X,Y,Z) :- mis(X,Y,Z);(not(checked_misleads),(write('Has '), write(X), write(' misled '), write(Y), write(' in regards to '), write(Z),write('?'),((provide_option,assert(mis(X,Y,Z)));(assert(checked_misleads),false)))).
-mis(X,Y,Z) :- always_false(X),always_false(Y),always_false(Z).
+mis(_,_,_) :- false.
 
 checked_collect_arms :- false.
 collect_arms(X, Y) :- coll_arm(X,Y);(write('Has '), write(X), write(' engaged in the collection of arms for the purpose of '), write(Y), write('?'),provide_option,assert(coll_arm(X))).
-coll_arm(X,Y) :- always_false(X),always_false(Y).
+coll_arm(_,_) :- false.
 
 checked_spread_hatred :- false.
 spread_hatred(X) :- spr_h(X);(not(checked_spread_hatred),(write('Has '), write(X), write(' brought or attempted to bring into hatred or contempt, or excited or attempted to excite disaffection towards, the Government established by law?'),((provide_option,assert(spr_h(X)));(assert(checked_spread_hatred),false)))).
-spr_h(X) :- always_false(X).
+spr_h(_) :- false.
 
 checked_receive_plundered_property :- false.
 receive_plundered_property(X) :- rpp(X);(not(checked_receive_plundered_property),(write('Has '), write(X), write(' recieved any plundered property?'),((provide_option,assert(rpp(X)));(assert(checked_receive_plundered_property),false)))).
-rpp(X) :- always_false(X).
+rpp(_) :- false.
 
 checked_escapes :- false.
 escapes(Y) :- esc(Y);(not(checked_escapes),(write('Has '), write(Y), write(' escaped from custody?'),((provide_option,assert(esc(Y)));(assert(checked_escapes),false)))).
-esc(X) :- always_false(X).
+esc(_) :- false.
 
 checked_custody :- false.
 custody(X,Y) :- cust(X,Y);(not(checked_custody),(write('Did '),write(X),write(' have '),write(Y), write(" in custody, or harbour "),write(Y),write("?"),provide_option,assert(cust(X,Y)))).
-cust(X,Y) :- always_false(X),always_false(Y).
+cust(_,_) :- false.
 
 checked_soldier :- false.
 soldier(X) :- sold(X);(not(checked_soldier),(lawmustbechecked(7,139),write('Is '),write(X),write(' a soldier?'),((provide_option,assert(sold(X)));(assert(checked_soldier),false)))).
-sold(X) :- always_false(X).
+sold(_) :- false.
 
 checked_size :- false.
 size(Assem,Y) :- sz(Assem,Y);(not(checked_size),(write('What is the size of the assembly, '),write(Assem),write('?'),read(Y),assert(sz(Assem,Y)))).
-sz(X,Y) :- always_false(X),always_false(Y).
+sz(_,_) :- false.
 
 checked_memberof :- false.
 memberof(X,Assem) :- memof(X,Assem);(not(checked_memberof),(write('Was '),write(X),write('a member of the assembly'), write(Assem), write("?"),((provide_option,assert(memof(X,Assem)));(assert(checked_memberof),false)))).
-memof(X,Assem) :- always_false(X),always_false(Assem).
+memof(_,_) :- false.
 
 checked_violent :- false.
 violent(X) :- vio(X);(not(checked_violent),(write('Was '),write(X),write(' violent?'),((provide_option,assert(vio(X)));(assert(checked_violent),false)))).
-vio(X) :- always_false(X).
+vio(_) :- false.
 
 checked_publishes_class_traitor :- false.
 publishes_class_traitor(X) :- pub_tr(X);(not(checked_publishes_class_traitor),(write('Did '),write(X),write(' publish any imputation that any community of persons cannot bear true faith and allegiance to the Constitution of India or uphold the sovereignty and integrity of India?'),((provide_option,assert(pub_tr(X)));(assert(checked_publishes_class_traitor),false)))).
-pub_tr(X) :- always_false(X).
+pub_tr(_) :- false.
 
 checked_publishes_class_inhuman :- false.
 publishes_class_inhuman(X) :- pub_in(X);(not(checked_publishes_class_inhuman),(write('Did '),write(X),write(' publish that any community of persons shall be denied or deprived of their rights as citizens of India?'),((provide_option,assert(pub_in(X)));(assert(checked_publishes_class_inhuman),false)))).
-pub_in(X) :- always_false(X).
+pub_in(_) :- false.
 
 checked_publishes_class_disharmony :- false.
 publishes_class_disharmony(X) :- pub_di(X);(not(checked_publishes_class_disharmony),(write('Did '),write(X),write(' publish an assertion, counsel, plea or appeal concerning the obligation of any community of persons that causes or is likely to cause disharmony or feelings of enmity or hatred or ill-will between the community and other persons?'),((provide_option,assert(pub_di(X)));(assert(checked_publishes_class_disharmony),false)))).
-pub_di(X) :- always_false(X).
+pub_di(_) :- false.
 
 checked_fight :- false.
 fight(X,Y) :- fig(X,Y);(not(checked_fight),(write('Were '),write(X),write(" and "),write(Y),write(' fighting?'),((provide_option,assert(fig(X,Y)));(assert(checked_fight),false)))).
-fig(X,Y) :- always_false(X),always_false(Y).
+fig(_,_) :- false.
 
 checked_in1 :- false.
 in(X) :- ni(X);(not(checked_in1),(write('Did this event take place in '),write(X),write('?'),((provide_option,assert(ni(X)));(assert(checked_in1),false)))).
-ni(X) :- always_false(X).
+ni(_) :- false.
 
 checked_in :- false.
 in(X,Y) :- ni(X,Y);(not(checked_in),(write('Was '),write(X),write(' in '),write(Y),write(' during the incident?'),((provide_option,assert(ni(X,Y)));(assert(checked_in),false)))).
-ni(X,Y) :- always_false(X),always_false(Y).
+ni(_,_) :- false.
 
 checked_public_place :- false.
 public_place(X) :- pub_p(X);(not(checked_public_place),(write('Is '),write(X),write('a public place?'),((provide_option,assert(pub_p(X)));(assert(checked_public_place),false)))).
-pub_p(X) :- always_false(X).
+pub_p(_) :- false.
 
 checked_disturb_the_peace :- false.
 disturb_the_peace(X,Y) :- dist_p(X,Y);(not(checked_disturb_the_peace),(write('Did '),write(X), write("and"), write(Y) ,write(' disturb the peace?'),((provide_option,assert(dist_p(X,Y)));(assert(checked_disturb_the_peace),false)))).
-dist_p(X,Y) :- always_false(X),always_false(Y).
+dist_p(_,_) :- false.
 
 checked_assaults :- false.
 assaults(X,Y) :- aslt(X,Y);(not(checked_assaults),(write('Did '),write(X),write(' assault '),write(Y),write("?"),((provide_option,assert(aslt(X,Y)));(assert(checked_assaults),false)))).
-aslt(X,Y) :- always_false(X),always_false(Y).
+aslt(_,_) :- false.
 
 checked_superior :- false.
 superior(X,Y) :- supri(X,Y);(not(checked_superior),(write('Is '),write(X),write(' the superior of '),write(Y),write("?"),((provide_option,assert(supri(X,Y)));(assert(checked_superior),false)))).
-supri(X,Y) :- always_false(X),always_false(Y).
+supri(_,_) :- false.
 
 checked_deserted :- false.
 deserted(X) :- dstd(X);(not(checked_deserted),(write('Did '),write(X),write('desert the armed forces?'),((provide_option,assert(dstd(X)));(assert(checked_deserted),false)))).
-dstd(X) :- always_false(X).
+dstd(_) :- false.
 
 checked_husband :- false.
 husband(X,Y) :- husb(X,Y);(not(checked_husband),(write('Is '),write(X),write(' the husband of '),write(Y),write("?"),((provide_option,assert(husb(X,Y)));(assert(checked_husband),false)))).
-husb(X,Y) :- always_false(X),always_false(Y).
+husb(_,_) :- false.
 
 checked_is_ship :- false.
 is_ship(X) :- ishp(X);(not(checked_is_ship),(write('Is '),write(X),write('a ship?'),((provide_option,assert(ishp(X)));(assert(checked_is_ship),false)))).
-ishp(X) :- always_false(X).
+ishp(_) :- false.
 
 checked_owner :- false.
 owner(X,Y) :- onr(X,Y);(not(checked_owner),(write('Is '),write(X),write('the owner of '),write(Y),write("?"),((provide_option,assert(onr(X,Y)));(assert(checked_owner),false)))).
-onr(X,Y) :- always_false(X),always_false(Y).
+onr(_,_) :- false.
 
 checked_unknowing1 :- false.
 unknowing(X,Y) :- unkn(X,Y);(not(checked_unknowing1),(write('Was '),write(X),write('unknowing of '),write(Y),write("?"),((provide_option,assert(unkn(X,Y)));(assert(checked_unknowing1),false)))).
-unkn(X,Y) :- always_false(X),always_false(Y).
+unkn(_,_) :- false.
 
 checked_wears_military_token :- false.
 wears_military_token(X) :- tok(X);(not(checked_wears_military_token),(write('Did '),write(X),write(' wear a military token?'),((provide_option,assert(tok(X)));(assert(checked_wears_military_token),false)))).
-tok(X) :- always_false(X).
+tok(_) :- false.
 
 checked_armed :- false.
 armed(X) :- armd(X);(not(checked_armed),(write('Was '),write(X),write('armed or in possesion of a weapon?'),((provide_option,assert(armd(X)));(assert(checked_armed),false)))).
-armd(X) :- always_false(X).
+armd(_) :- false.
 
 checked_commanded_to_disperse :- false.
 commanded_to_disperse(X) :- disp(X);(not(checked_commanded_to_disperse),(write('Was '),write(X),write(' commanded to disperse?'),((provide_option,assert(disp(X)));(assert(checked_commanded_to_disperse),false)))).
-disp(X) :- always_false(X).
+disp(_) :- false.
 
 checked_tried_to_suppress_riot :- false.
 tried_to_suppress_riot(X) :- supp_r(X);(not(checked_tried_to_suppress_riot),(write('Did '),write(X),write(' try to surpress a riot?'),((provide_option,assert(supp_r(X)));(assert(checked_tried_to_suppress_riot),false)))).
-supp_r(X) :- always_false(X).
+supp_r(_) :- false.
 
 checked_incite_riot :- false.
 incite_riot(X,Y) :- inc_r(X,Y);(not(checked_incite_riot),(write('Did '),write(X),write('try to incite'),write(Y),write("to riot?"),((provide_option,assert(inc_r(X,Y)));(assert(checked_incite_riot),false)))).
@@ -293,43 +296,43 @@ inc_r(X,Y) :- always_false(X,Y).
 
 checked_incite_violence :- false.
 incite_violence(X) :- inc_v(X);(not(checked_incite_violence),(write('Did '),write(X),write('try to incite violence?'),((provide_option,assert(inc_v(X)));(assert(checked_incite_violence),false)))).
-inc_v(X) :- always_false(X).
+inc_v(_) :- false.
 
 checked_placeOfWorship :- false.
 placeOfWorship(X) :- pow(X);(not(checked_placeOfWorship),(write('Is '),write(X),write('a place of worship?'),((provide_option,assert(pow(X)));(assert(checked_placeOfWorship),false)))).
-pow(X) :- always_false(X).
+pow(_) :- false.
 
 checked_rioting_happened_in :- false.
 rioting_happened_in(X) :- rin(X);(not(checked_rioting_happened_in),(write('Did rioting happen in '),write(X),write('?'),((provide_option,assert(rin(X)));(assert(checked_rioting_happened_in),false)))).
-rin(X) :- always_false(X).
+rin(_) :- false.
 
 checked_master :- false.
 master(X,Y) :- mast(X,Y);(not(checked_master),(write('Was '),write(X),write(' the master of '),write(Y),write("?"),((provide_option,assert(mast(X,Y)));(assert(checked_master),false)))).
-mast(X,Y) :- always_false(X),always_false(Y).
+mast(_,_) :- false.
 
 checked_seduce :- false.
 seduce(X,Y) :- sed(X,Y);(not(checked_seduce),(write('Did '),write(X),write(' attempt to seduce '),write(Y),write("?"),((provide_option,assert(sed(X,Y)));(assert(checked_seduce),false)))).
-sed(X,Y) :- always_false(X),always_false(Y).
+sed(_,_) :- false.
 
 checked_hired :- false.
 hired(X,Y,Assem) :- hird(X,Y,Assem);(not(checked_hired),(write('Did '),write(X),write(' try to hire '),write(Y),write(" for "), write(Assem), write("?"),((provide_option,assert(hird(X,Y,Assem)));(assert(checked_hired),false)))).
-hird(X,Y,Assem) :- always_false(X),always_false(Y),always_false(Assem).
+hird(_,_,_) :- false.
 
 checked_didoffence :- false.
 didoffence(X,Y) :-  didof(X,Y);(not(checked_didoffence),(write('Did '),write(X),write(' commit an '),write(Y),write("?"),((provide_option,assert(didof(X,Y)));(assert(checked_didoffence),false)))).
-didof(X,_) :- always_false(X).
+didof(_,_) :- false.
 
 checked_didoffence1 :- false.
 didoffence(X) :-  didof(X);(not(checked_didoffence1),(write('Did '),write(X),write(' commit an offence?'),((provide_option,assert(didof(X)));(assert(checked_didoffence1),false)))).
-didof(X) :- always_false(X).
+didof(_) :- false.
 
 checked_death_penalty :- false.
 death_penalty(Z) :- death_pen(Z);(not(checked_death_penalty),(write('Is this offence, '),write(Z),write(' punishable by death?'),((provide_option,assert(death_pen(Z)));(assert(checked_death_penalty),false)))).
-death_pen(X) :- always_false(X).
+death_pen(_) :- false.
 
 checked_didabet :- false.
 didabet(X,Y) :- didab(X,Y);(not(checked_didabet),(write('Did '),write(X),write(' abet '),write(Y),write('?'),((provide_option,assert(didab(X,Y)));(assert(checked_didabet),false)))).
-didab(X,_) :- always_false(X).
+didab(_,_) :- false.
 
 unlawful(Assem) :- lawmustbechecked(8,141),size(Assem,Y),(Y >= 5), (intention(Assem,assault);intention(Assem,resist_law);intention(Assem,mischief);intention(Assem,robbery);intention(Assem,abet)).
 
@@ -340,11 +343,11 @@ rioting(X) :-  lawmustbechecked(8,146),violent(Assem),unlawful(Assem),memberof(X
 incite_class_hatred(X) :-  publishes_class_traitor(X);publishes_class_inhuman(X);publishes_class_disharmony(X).
 
 affray(X,Y) :-  afry(X);(fight(X,Y),in(X,Z),in(Y,Z),public_place(Z),disturb_the_peace(X,Y),assert(afry(X))).
-afry(X) :- always_false(X).
+afry(_) :- false.
 
 instigates(X) :- inst(X);(willful(X),(concealment(X,_);misrepresentation(X)),assert(inst(X))).
 instigates(X) :- inst(X);(lawmustbechecked(5,107),write('Has '),write(X), write(' instigated anyone to commit the crime?'),provide_option,assert(inst(X))).
-inst(X) :- always_false(X).
+inst(_) :- false.
 
 
 /*
@@ -355,6 +358,7 @@ In lawmustbechecked(A,B), A refers to the section number, and B the number of th
 /*
 no_offence(suspect,crime).
 */
+no_offence(X,Z) :- lawmustbechecked(4,95),person(Y),not(harms(X,Y)),not(offence_ind_of_harm(Z)).
 no_offence(X,_) :- lawmustbechecked(4,76),mistake_of_fact(X),((lawmustbechecked(4,76),believes_bound_by_law(X));
 (lawmustbechecked(4,79),believes_justified_by_law(X))).
 no_offence(X,_) :- lawmustbechecked(4,77),judge(X), believes_justified_by_law(X).
@@ -369,8 +373,7 @@ no_offence(X,Z) :- lawmustbechecked(4,88),not(intention(X, murder)),consent(Y),b
 no_offence(X,Z) :- lawmustbechecked(4,89),person(Y),benefit(Y),(under12(X);crazy(X)),consent(Z),guardian(Z,Y),not(intention(X, murder);not(unknowing(X));abetment(X,Y,_),not(save_life(Y))), not(offense_ind_of_harm(Z)).
 no_offence(X,Z) :- lawmustbechecked(4,92),person(Y),benefit(Y),(consent(Y);imp_consent(Y)),not(intention(X, murder)),(unknowing(X);save_life(Y)),not(abetment(_,_,Z)).
 no_offence(X,_) :- lawmustbechecked(4,93),person(Y),communicate(X,Y),benefit(Y).
-no_offence(X,Z) :- lawmustbechecked(4,94),not(isamurder(X)),not(death_penalty(Z)),death_threat(X),not(intention(X,Z)).
-no_offence(X,_) :- lawmustbechecked(4,95),person(Y),not(harms(X,Y)).
+no_offence(X,Z) :- lawmustbechecked(4,94),not(isamurder(Z)),not(death_penalty(Z)),death_threat(X),not(intention(X,Z)).
 no_offence(X,_) :- lawmustbechecked(4,96),person(Y),private_def(X,Y).
 
 /*
@@ -402,10 +405,9 @@ offence(X,Z) :- lawmustbechecked(5,110),abettor(X,Z).
 offence(X,Z) :- (lawmustbechecked(5,111);lawmustbechecked(5,112)),someone(Y),abetment(X,Y,Z), is_offence(P),didoffence(Y,P), (P \= Z).
 offence(X,P) :- lawmustbechecked(5,113),abetment(X,Y,Z), didoffence(Y,P),is_a_consequence(P,Z), not(unknowing(X)).
 offence(X,Z) :- lawmustbechecked(5,113),abettor(X,Z), isPresent(X,Z).
-offence(X,Z) :- offence_ind_of_harm(Z),not(no_offense(X,Z)).
-offence(X,Y) :- intoxicated(X), not(intoxicated_against_will(X)), off_req_intent(Y).
+offence(X,Y) :- lawmustbechecked(4,86),intoxicated(X), not(intoxicated_against_will(X)), off_req_intent(Y).
 offence(Y,Z) :- lawmustbechecked(8,149),unlawful(Assem),memberof(X,Assem),didoffence(X,Z),memberof(Y,Assem),intention(Assem,Z).
-offence(X,Crime) :- write('Did '),write(X),write('commit the crime: '),write(Crime),write("?"),provide_option.
+%offence(X,Crime) :- write('Did '),write(X),write(' commit the crime: '),write(Crime),write("?"),provide_option.
 
 /*
 abc_imprisonment(suspect,crime).
@@ -475,11 +477,11 @@ imprisonment(Y,affray,0.08333,100) :-  lawmustbechecked(8,160),someone(X),affray
 imprisonment(X, Z, 777, 0) :- half_imprisonment(X,Z).
 imprisonment(X, Z, 888, 0) :- quart_imprisonment(X,Z).
 imprisonment(X, Z, 999, 0) :- eighth_imprisonment(X,Z).
-imprisonment(X, Z, 15, 0) :- offence(X,Z).
 imprisonment(X, Z, 1111, 0) :- death_penalty(X,Z).
+imprisonment(X, Z, 15, 0) :- offence(X,Z).
 
 /*
 death_penalty(suspect,crime).
 */
-death_penalty(X,war) :- lawmustbechecked(6,121),abetment(X,_,war) ; success_crime(war).
-death_penalty(X,mutiny) :- lawmustbechecked(7,132),abetment(X,Y, mutiny),soldier(Y),success_crime(mutiny),not(soldier(X)).
+death_penalty(X,war) :- lawmustbechecked(6,121),success_crime(war);(person(Y),abetment(X,Y)).
+death_penalty(X,mutiny) :- lawmustbechecked(7,132),person(Y),didabet(X,Y),soldier(Y),success_crime(mutiny),not(soldier(X)).

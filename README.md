@@ -14,15 +14,18 @@ Three member team: Implemented Sections 4-8 of the IPC.
 
 Our assignment submission contains the following:
 
-1. README.txt
+1. README.md
 2. Main code (test.pl)
 3. Laws (laws.pl)
 4. Database (db.pl)
+5. Examples (samples.md)
 
 The 'test.pl' file contains the starter code and is where the main program runs. It contains the commands to load the other files.
 The 'laws.pl' file contains most of the predicates pertaining to the IPC. In case new laws need to be added, they can be added to this file.
 The 'db.pl' file contains a few facts and an *endprogram* predicate, which clears the facts asserted during the execution of the program. As of now, the facts are very rudimentary. However, this section can be expanded to modify definitions of predicates.
+For purposes of illustration, placeholders like someone, anyone and victim have been added. For a specific case, more details will need to be added to the database.
 The separation of these files is purely to make the code more compartmentalized and readable, they can technically all be in a single file.
+The 'sample.md' contain a few example runs of the program.
 
 ##Description of Program:
 
@@ -30,7 +33,7 @@ The program aims to interpret the laws and determine the punishment for a certai
 It is interactive and will query the user for inputs, to determine the judgement.
 As of now, the program implements the laws described in Chapters IV, V, VA, VI, VII, and VIII of the IPC with the exception of the following laws:
 
-86,102,105,114,150,157
+102,105,114,150,157
 
 These laws have not been explicitly made into prolog statements, either because they are very similar to previous laws, or because we did not fully understand them.
 
@@ -55,68 +58,12 @@ Entering '1.' will be interpreted as an affirmative. **All other inputs will res
 
 When the program determines the judgement, it will print it out on the console.  
 
-Sample Run:
-?- start.
-This program operates in three modes.
-Mode 1 will use all
- laws in the Indian Penal Code Sections 4-8.
-Mode 2 will allow you to choose
- specific sections.
-Mode 3 allows you to select specific laws in the range 76-160(inclusive),
-  to use.
-Which mode would you like to use?
- Please remember to put a full-stop
-  at the end of your selection.
-|: 2.
-
-You have selected Mode Two.
-What law sections do you want to check?
-Please enter a number between 4 and 8 (inclusive)
-Note: Inputs need to end with a full-stop.
-
-|: 6.
-
-Do you want to add one more?
-Please enter a number between 4 and 8 (inclusive)
-Enter 0 if you have finished choosing.
-Note: Inputs need to end with a full-stop
-
-|: 0.
-
-You have selected
-[6]
-What is the name of the suspect?
-DO NOT USE UPPER CASE
-Remember to put a full-stop at the end.
-|: jay.
-
-What is the crime?
-DO NOT USE UPPER CASE
-Remember to put a full-stop at the end.
-|: murder.
-Has jay received any plundered property?
-Enter 1. for yes anything else for no.
-Remember to put a full-stop at the end.
-|: 0.
-
-Was jay intoxicated?
-Enter 1. for yes anything else for no.
-Remember to put a full-stop at the end.
-|: 1.
-
-Was jay intoxicated against his/her will?
-Enter 1. for yes anything else for no.
-Remember to put a full-stop at the end.
-|: 0.
-
-The punishment for jay, for the crime, murder
-is a prison sentence of up to 15 years or suitable fine
-true .
-
-At the end of judgement, if the decision does not seem correct, it is possible that the relevant laws required for correct judgement may not have been included. Please ensure that all relevant laws are included, when executing, if a specific punishment is expected. It is possible that the values default to pre-determined constants, which act as catch-alls.
+At the end of judgement, if the decision does not seem correct, it is possible that the relevant laws required for correct judgement may not have been included. Please ensure that all relevant laws are included, when executing, if a specific punishment is expected. It is possible that the values default to pre-determined constants, which act as catch-alls, namely a punishment of 15 years.
 
 Improper termination of the program can result in an unstable state. Please re-run prolog to retry the program.
 It is advisable to restart (reload) the program after every execution, for optimum performance.
+
+Although we have attempted to debug the code as far as possible, the extensive nature of the codebase makes it difficult for us to do it exhaustively. We apologise for any unchecked bugs that you may encounter.
 
 This program was tested on:
 - Ubuntu 16.04 (64-bit), SWI Prolog version 7.2.3
