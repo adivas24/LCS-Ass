@@ -1,8 +1,12 @@
 % Database
 
+/*
+Some basic facts being established. These are rudimentary and only for demonstration. An actual program of this sort will require a more elaborate database of facts.
+*/
+
 is_assem(assembly).
 off_req_intent(murder).
-place('the place').
+place(the_place).
 prop_theft(robbery).
 prop_theft(theivery).
 prop_theft(stealing).
@@ -11,13 +15,17 @@ person(anyone).
 anotherperson(another_person).
 victim(victim).
 someone(someone).
-
+ship(ship).
 isRobbery(stealing).
 isRobbery(robbery).
 isRobbery(theft).
 isRobbery(loot).
 isamurder(murder).
 is_offence(offence).
+
+/*
+The endprogram predicate retracts all asserted variables and makes the program resuable
+*/
 
 endprogram :-
 retractall(checked_mistake_of_fact),

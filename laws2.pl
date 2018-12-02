@@ -1,3 +1,9 @@
+
+/*
+Auxiliary Statements for law evaluation.  In most cases they prompt the user for specific inputs.
+The structure of these statements has been designed so that the program need not prompt the user the same query twice.
+*/
+
 always_false(_) :- false.
 
 provide_option :- write('\nPress y for yes anything else for no.\nPlease put only one character, no full-stops.\n'),get(Y),nl,((Y is 89);(Y is 121)).
@@ -341,6 +347,14 @@ instigates(X) :- inst(X);(lawmustbechecked(5,107),write('Has '),write(X), write(
 inst(X) :- always_false(X).
 
 
+/*
+The predicates which follow are the actual encoding of the Indian Penal Code.
+In lawmustbechecked(A,B), A refers to the section number, and B the number of the law.
+*/
+
+/*
+no_offence(suspect,crime).
+*/
 no_offence(X,_) :- lawmustbechecked(4,76),mistake_of_fact(X),((lawmustbechecked(4,76),believes_bound_by_law(X));
 (lawmustbechecked(4,79),believes_justified_by_law(X))).
 no_offence(X,_) :- lawmustbechecked(4,77),judge(X), believes_justified_by_law(X).
@@ -359,6 +373,9 @@ no_offence(X,Z) :- lawmustbechecked(4,94),not(isamurder(X)),not(death_penalty(Z)
 no_offence(X,_) :- lawmustbechecked(4,95),person(Y),not(harms(X,Y)).
 no_offence(X,_) :- lawmustbechecked(4,96),person(Y),private_def(X,Y).
 
+/*
+private_def(Y,X). Y is defending himself or his property from X.
+*/
 private_def(Y,X) :- lawmustbechecked(4,97),(harms(X,Y);didoffence(X,robbery)),not(cond_for_no_private_defense(X,Y)).
 private_def(Y,X) :- lawmustbechecked(4,98),not(didoffence(X)),(under12(X);immature(X);crazy(X);intoxicated(X);mistake_of_fact(X)),not(cond_for_no_private_defense(X,Y)).
 private_def(Y,X) :- lawmustbechecked(4,101),murder(Y,X),cond1(X,Y).
@@ -367,6 +384,9 @@ private_def(Y,X) :- lawmustbechecked(4,104),not(murder(Y,X)),didoffence(X,Z),pro
 cond1(X,Y) :- ((lawmustbechecked(4,100),(death_threat(Y);rape(X,Y);kidnapping(X,Y);confinement(X,Y);acid(X,Y);(didoffence(X,robbery)))); (lawmustbechecked(4,103),arson(Y))).
 cond_for_no_private_defense(X,Y) :- not(harms(X,Y));(lawmustbechecked(4,99),public_servant(X),believes_justified_by_law(X));following_judgement(X);(lawmustbechecked(4,106),murder(Y,X),not(cond1(X,Y))).
 
+/*
+abetment(abettor,abetted,crime).
+*/
 abetment(X,Y,_) :- lawmustbechecked(5,107),instigates(X);(person(Y),conspires(X,Y));not(unknowing(X)).
 abetment(X,_,Z) :- lawmustbechecked(5,120),criminal_conspiracy(X,Z), death_penalty(Z).
 abetment(X,Z,_) :- lawmustbechecked(5,108),person(Y),didabet(X,Y),anotherperson(Z),didabet(Y,Z).
@@ -374,6 +394,9 @@ abetment(X,Y,Z) :- write('Did '),write(X),write(' abet '),write(Y),write(' in co
 
 abettor(X,Z):-   lawmustbechecked(5,108),not(under7(X)), not(crazy(X)), not(immature(X)), abetment(X,_,Z).
 
+/*
+offence(suspect,crime).
+*/
 offence(X,Z):- lawmustbechecked(5,109),abetment(X,_,Z).
 offence(X,Z) :- lawmustbechecked(5,110),abettor(X,Z).
 offence(X,Z) :- (lawmustbechecked(5,111);lawmustbechecked(5,112)),someone(Y),abetment(X,Y,Z), is_offence(P),didoffence(Y,P), (P \= Z).
@@ -384,6 +407,9 @@ offence(X,Y) :- intoxicated(X), not(intoxicated_against_will(X)), off_req_intent
 offence(Y,Z) :- lawmustbechecked(8,149),unlawful(Assem),memberof(X,Assem),didoffence(X,Z),memberof(Y,Assem),intention(Assem,Z).
 offence(X,Crime) :- write('Did '),write(X),write('commit the crime: '),write(Crime),write("?"),provide_option.
 
+/*
+abc_imprisonment(suspect,crime).
+*/
 quart_imprisonment(X,Z) :- lawmustbechecked(5,116),abetment(X,Y,Z), not(success_crime(Z)), not(public_servant(X)), not(public_servant(Y)).
 quart_imprisonment(X,Z) :- lawmustbechecked(5,119),person(Y),misleads(X,Y,Z), public_servant(X),not(success_crime(Z)), not(death_penalty(Z)).
 quart_imprisonment(X,Z) :- lawmustbechecked(5,120),person(Y),misleads(X,Y,Z), success_crime(Z), not(death_penalty(Z)).
@@ -395,6 +421,10 @@ criminal_conspiracy(X,Z) :- lawmustbechecked(5,120),person(Y),agreement(X,Y,Z), 
 half_imprisonment(X,Z) :- lawmustbechecked(5,116),abetment(X,Y,Z), not(success_crime(Z)), (public_servant(X);public_servant(Y)).
 half_imprisonment(X,Z) :- lawmustbechecked(5,119),person(Y),misleads(X,Y,Z), public_servant(X), success_crime(Z), not(death_penalty(Z)).
 
+
+/*
+imprisonment(suspect,crime,years,fine).
+*/
 imprisonment(X,Z,10,0) :- lawmustbechecked(5,113),person(Y),misleads(X,Y,Z), public_servant(X), success_crime(Z), death_penalty(Z).
 imprisonment(X,Z,7,0) :- lawmustbechecked(5,115),abetment(X,Y,Z), death_penalty(Z), not(success_crime(Z)), not(harms(Y,_)).
 imprisonment(X,Z,14,0) :- lawmustbechecked(5,115),abetment(X,Y,Z), death_penalty(Z), not(success_crime(Z)), harms(Y,_).
@@ -418,7 +448,7 @@ imprisonment(X,abetment,3,0) :-  lawmustbechecked(7,133),someone(Y),abetment(X,Y
 imprisonment(X,abetment,7,0) :-  lawmustbechecked(7,134),someone(Y),abetment(X,Y, assault),soldier(Y),assaults(Y,Z),superior(Z,Y),success_crime(assault),not(soldier(X)).
 imprisonment(X,abetment,2,0) :-  lawmustbechecked(7,135),someone(Y),abetment(X,Y, desertion),soldier(Y),not(soldier(X)).
 imprisonment(X,harboring,2,0) :-  lawmustbechecked(7,136),someone(Y),soldier(Y),deserted(Y),custody(X,Y),not(husband(X,Y)),not(soldier(X)).
-imprisonment(X,negligence,0,500) :-  lawmustbechecked(7,137),is_ship(V),owner(X, V),someone(Y),in(Y,V),soldier(Y),deserted(Y),unknowing(X,Y),not(soldier(X)).
+imprisonment(X,negligence,0,500) :-  lawmustbechecked(7,137),ship(V),owner(X, V),someone(Y),in(Y,V),soldier(Y),deserted(Y),unknowing(X,Y),not(soldier(X)).
 imprisonment(X,insubordination,0.5,0) :-  lawmustbechecked(7,138),someone(Y),didabet(X,Y),soldier(Y),success_crime(insubordination),not(soldier(X)).
 imprisonment(X,wearing_military_token,0.25,500) :-  lawmustbechecked(8,140),not(soldier(X)),wears_military_token(X).
 imprisonment(X,assembling,0.5,0) :-  lawmustbechecked(8,143),is_assem(Assem),unlawful_Assem_mem(X,Assem),not(armed(X)).
@@ -448,5 +478,8 @@ imprisonment(X, Z, 999, 0) :- eighth_imprisonment(X,Z).
 imprisonment(X, Z, 15, 0) :- offence(X,Z).
 imprisonment(X, Z, 1111, 0) :- death_penalty(X,Z).
 
+/*
+death_penalty(suspect,crime).
+*/
 death_penalty(X,war) :- lawmustbechecked(6,121),abetment(X,_,war) ; success_crime(war).
 death_penalty(X,mutiny) :- lawmustbechecked(7,132),abetment(X,Y, mutiny),soldier(Y),success_crime(mutiny),not(soldier(X)).

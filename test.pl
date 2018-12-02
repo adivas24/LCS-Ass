@@ -1,4 +1,9 @@
 
+/*
+The following lines are for starting the program and prompting initial input.
+*/
+
+
 start :- ['db'],write("This program operates in three modes.\nMode 1 will use all
  laws in the Indian Penal Code Sections 4-8.\nMode 2 will allow you to choose
  specific sections.\nMode 3 allows you to select specific laws in the range 76-160(inclusive),
@@ -47,6 +52,9 @@ get_data :- write('\nWhat is the name of the suspect?\nDO NOT USE UPPER CASE\nRe
 read(X),write('\nWhat is the crime?\nDO NOT USE UPPER CASE\nRemember to put a full-stop at the end.\n'),read(Y),
 ['laws2'],determine_punishment(X,Y).
 
+/*
+Determine punishment is the predicate that calls for the predicates related to specific laws, and prints the judgement to the console.
+*/
 
 determine_punishment(X,Y):- no_offence(X,Y),nl,write('As per law, no offence has been committed'),endprogram,nl.
 
@@ -57,6 +65,10 @@ write('is one-fourth of the usual prison sentence'));((A is 999),write('is one-e
 ((B is 0),write('or suitable fine'));(write(', or a fine of Rs. '),write(B))),write(', or both.'),endprogram,nl.
 
 determine_punishment(_,_) :- write('\nUnable to determine result.\nLaw may not be defined in current scope.\nExiting.'),endprogram,nl.
+
+/*
+Setting predicates to dynamic so that they can be asserted and retracted by the program.
+*/
 
 :- dynamic checked_mistake_of_fact/0.
 :- dynamic checked_agreement/0.
